@@ -82,28 +82,28 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
   z-index: 100;
-  padding: 8px 16px;
+  padding: 8px 12px;
   padding-bottom: max(8px, env(safe-area-inset-bottom));
 }
 
 .nav-btn {
   flex: 1;
-  max-width: 160px;
+  max-width: 130px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 3px;
-  padding: 8px 12px;
+  padding: 8px 6px;
   background: transparent;
   border: none;
   border-radius: 12px;
   color: var(--muted);
   cursor: pointer;
   font-family: inherit;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.3px;
   transition: all 0.2s;
@@ -123,7 +123,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   top: -8px;
   left: 50%;
   transform: translateX(-50%);
-  width: 24px;
+  width: 20px;
   height: 3px;
   background: var(--accent-2);
   border-radius: 0 0 4px 4px;
@@ -131,7 +131,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 }
 
 .nav-icon {
-  font-size: 22px;
+  font-size: 20px;
   line-height: 1;
   transition: transform 0.2s;
 }
@@ -245,7 +245,6 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   z-index: 1;
 }
 
-/* ===== ДОСТИЖЕНИЯ (мини-панель под стриком) ===== */
 .achievements-mini {
   margin-bottom: 20px;
   background: var(--card);
@@ -308,7 +307,6 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 
 .ach-mini-more:hover { color: var(--text); background: rgba(255,255,255,0.07); }
 
-/* ===== СТРАНИЦА ДОСТИЖЕНИЙ ===== */
 .ach-section {
   background: var(--card);
   border: 1px solid var(--border);
@@ -395,9 +393,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   overflow: hidden;
 }
 
-.ach-card.locked {
-  opacity: 0.55;
-}
+.ach-card.locked { opacity: 0.55; }
 
 .ach-card.unlocked {
   background: linear-gradient(135deg, rgba(255,159,67,0.1), rgba(255,107,107,0.06));
@@ -471,11 +467,8 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   font-weight: 600;
 }
 
-.ach-card.unlocked .ach-progress-text {
-  color: var(--gold);
-}
+.ach-card.unlocked .ach-progress-text { color: var(--gold); }
 
-/* ===== НАСТРОЙКИ / НАПОМИНАНИЯ ===== */
 .settings-section {
   background: var(--card);
   border: 1px solid var(--border);
@@ -624,7 +617,6 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 }
 
 .test-notif-btn:hover { background: var(--accent); color: white; }
-
 .test-notif-btn:active { transform: scale(0.98); }
 
 .notif-permission-warning {
@@ -651,7 +643,6 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   font-family: inherit;
 }
 
-/* Статистика */
 .stats-section {
   background: var(--card);
   border: 1px solid var(--border);
@@ -886,7 +877,6 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   line-height: 1.6;
 }
 
-/* Форма */
 .add-form {
   background: var(--card);
   border: 1px solid var(--border);
@@ -1440,7 +1430,6 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 }
 
 .counter-btn:active:not(:disabled) { transform: scale(0.94); }
-.counter-btn:disabled { opacity: 0.25; cursor: not-allowed; }
 
 .counter-btn.plus5 {
   background: rgba(255,159,67,0.12);
@@ -1466,6 +1455,8 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   opacity: 0;
   z-index: 2;
 }
+
+.counter-display.over .plus-popup { color: var(--gold); }
 
 .counter-display .plus-popup.animate {
   animation: plusFly 0.6s ease-out;
@@ -1679,7 +1670,6 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 .empty-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.5; }
 .empty p { font-size: 15px; line-height: 1.6; }
 
-/* ===== ВСПЛЫВАЮЩЕЕ УВЕДОМЛЕНИЕ О ДОСТИЖЕНИИ ===== */
 .ach-toast {
   position: fixed;
   top: 20px;
@@ -1712,10 +1702,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   flex-shrink: 0;
 }
 
-.ach-toast-text {
-  font-size: 14px;
-  line-height: 1.3;
-}
+.ach-toast-text { font-size: 14px; line-height: 1.3; }
 
 .ach-toast-text strong {
   display: block;
@@ -1763,7 +1750,6 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
     <div class="date-badge" id="todayDate"></div>
   </header>
 
-  <!-- ====== СЕГОДНЯ ====== -->
   <section class="tab-panel active" id="tab-today">
     <div class="global-streak" id="globalStreak">
       <div class="gs-flame">🔥</div>
@@ -1831,7 +1817,6 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
     <div class="habits" id="habitsList"></div>
   </section>
 
-  <!-- ====== ДОСТИЖЕНИЯ ====== -->
   <section class="tab-panel" id="tab-achievements">
     <div class="ach-section">
       <div class="ach-header">
@@ -1849,7 +1834,6 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
     </div>
   </section>
 
-  <!-- ====== СТАТИСТИКА ====== -->
   <section class="tab-panel" id="tab-stats">
     <div class="stats-section">
       <div class="stats-head">
@@ -1865,15 +1849,12 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
     </div>
   </section>
 
-  <!-- ====== НАСТРОЙКИ ====== -->
   <section class="tab-panel" id="tab-settings">
     <div class="settings-section">
       <div class="settings-title">🔔 Напоминания</div>
-
       <div id="notifPermissionWarning" style="display:none;" class="notif-permission-warning">
         Уведомления не разрешены в браузере. <button id="requestPermBtn">Разрешить</button>
       </div>
-
       <div class="notif-row" id="notifEnabledRow">
         <div class="notif-toggle"></div>
         <div class="notif-info">
@@ -1881,12 +1862,10 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
           <div class="notif-sub">Скажу вечером, если ты забыл отметить привычки</div>
         </div>
       </div>
-
       <div class="time-picker">
         <div class="time-picker-label">🕐 Время напоминания</div>
         <input type="time" id="notifTime" value="21:00">
       </div>
-
       <button class="test-notif-btn" id="testNotifBtn">📬 Проверить уведомление</button>
     </div>
 
@@ -1934,7 +1913,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   </button>
   <button class="nav-btn" data-tab="settings">
     <span class="nav-icon">⚙️</span>
-    <span>Настройки</span>
+    <span>Ещё</span>
   </button>
 </nav>
 
@@ -1952,9 +1931,7 @@ var activeTab = localStorage.getItem(ACTIVE_TAB_KEY) || 'today';
 var editingHabitId = null;
 var achCategory = 'all';
 
-// Настройки уведомлений
 var notifSettings = loadNotifSettings();
-// Разблокированные достижения (id)
 var unlockedAch = loadUnlockedAch();
 
 function dateKey(d) {
@@ -1989,7 +1966,6 @@ function loadState() {
 function saveState() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
-
 function loadNotifSettings() {
   try {
     var raw = localStorage.getItem(NOTIF_KEY);
@@ -2000,7 +1976,6 @@ function loadNotifSettings() {
 function saveNotifSettings() {
   localStorage.setItem(NOTIF_KEY, JSON.stringify(notifSettings));
 }
-
 function loadUnlockedAch() {
   try {
     var raw = localStorage.getItem(ACH_KEY);
@@ -2034,13 +2009,15 @@ function getHabitPercentCapped(habit, key) {
 function wasCompletedOn(habit, key) {
   return getProgress(habit, key) >= getGoal(habit);
 }
+
+// ❗ ГЛАВНОЕ ИСПРАВЛЕНИЕ — теперь НЕ обрезаем по цели
 function setProgress(habit, key, value) {
   if (!habit.progress) habit.progress = {};
   if (value <= 0) {
     delete habit.progress[key];
   } else {
     if (value > MAX_PROGRESS) value = MAX_PROGRESS;
-    habit.progress[key] = value;
+    habit.progress[key] = value; // ← можно больше цели
   }
 }
 
@@ -2065,6 +2042,7 @@ function pulseCounter(habitId, amount) {
   }
 }
 
+// ❗ ГЛАВНОЕ ИСПРАВЛЕНИЕ — убрана проверка current >= goal
 function incrementHabit(id, amount) {
   amount = amount || 1;
   var habit = state.habits.find(function(h) { return h.id === id; });
@@ -2075,13 +2053,14 @@ function incrementHabit(id, amount) {
   var newValue = current + amount;
   if (newValue > MAX_PROGRESS) newValue = MAX_PROGRESS;
   if (newValue === current) return;
+
   setProgress(habit, today, newValue);
   saveState();
   vibrate(10);
   checkAchievements();
   render();
   pulseCounter(id, amount);
-  // Проверяем закрытие дня
+
   if (!wasComplete && wasCompletedOn(habit, today)) {
     checkDayCompleted();
   }
@@ -2142,6 +2121,7 @@ function closeCounterModal() {
   editingHabitId = null;
 }
 
+// ❗ ГЛАВНОЕ ИСПРАВЛЕНИЕ — убрано обрезание по goal
 function saveCounterModal() {
   if (!editingHabitId) return;
   var habit = state.habits.find(function(h) { return h.id === editingHabitId; });
@@ -2150,6 +2130,7 @@ function saveCounterModal() {
   var value = parseInt(input.value, 10) || 0;
   if (value < 0) value = 0;
   if (value > MAX_PROGRESS) value = MAX_PROGRESS;
+
   var wasComplete = wasCompletedOn(habit, todayKey());
   setProgress(habit, todayKey(), value);
   saveState();
@@ -2157,6 +2138,7 @@ function saveCounterModal() {
   vibrate(15);
   checkAchievements();
   render();
+
   if (!wasComplete && wasCompletedOn(habit, todayKey())) {
     checkDayCompleted();
   }
@@ -2239,32 +2221,23 @@ function isHabitRequiredToday(habit) {
 // ============ ДОСТИЖЕНИЯ ============
 
 var ACHIEVEMENTS = [
-  // === Стрики ===
   { id: 'streak_3', cat: 'streak', icon: '🌱', name: 'Первый росток', desc: '3 дня подряд', check: function(ctx) { return ctx.globalStreak >= 3; }, progress: function(ctx) { return { cur: ctx.globalStreak, max: 3 }; } },
   { id: 'streak_7', cat: 'streak', icon: '🔥', name: 'Неделя огня', desc: '7 дней подряд', check: function(ctx) { return ctx.globalStreak >= 7; }, progress: function(ctx) { return { cur: ctx.globalStreak, max: 7 }; } },
   { id: 'streak_14', cat: 'streak', icon: '⚡', name: 'Две недели', desc: '14 дней подряд', check: function(ctx) { return ctx.globalStreak >= 14; }, progress: function(ctx) { return { cur: ctx.globalStreak, max: 14 }; } },
   { id: 'streak_30', cat: 'streak', icon: '💎', name: 'Месяц силы', desc: '30 дней подряд', check: function(ctx) { return ctx.globalStreak >= 30; }, progress: function(ctx) { return { cur: ctx.globalStreak, max: 30 }; } },
   { id: 'streak_100', cat: 'streak', icon: '👑', name: 'Сотка', desc: '100 дней подряд', check: function(ctx) { return ctx.globalStreak >= 100; }, progress: function(ctx) { return { cur: ctx.globalStreak, max: 100 }; } },
   { id: 'streak_365', cat: 'streak', icon: '🏆', name: 'Год дисциплины', desc: '365 дней подряд', check: function(ctx) { return ctx.globalStreak >= 365; }, progress: function(ctx) { return { cur: ctx.globalStreak, max: 365 }; } },
-
-  // === Количество ===
   { id: 'total_10', cat: 'count', icon: '📌', name: 'Начало', desc: '10 выполнений', check: function(ctx) { return ctx.totalCompletions >= 10; }, progress: function(ctx) { return { cur: ctx.totalCompletions, max: 10 }; } },
   { id: 'total_50', cat: 'count', icon: '📈', name: 'Пятьдесят', desc: '50 выполнений', check: function(ctx) { return ctx.totalCompletions >= 50; }, progress: function(ctx) { return { cur: ctx.totalCompletions, max: 50 }; } },
   { id: 'total_100', cat: 'count', icon: '💯', name: 'Сто', desc: '100 выполнений', check: function(ctx) { return ctx.totalCompletions >= 100; }, progress: function(ctx) { return { cur: ctx.totalCompletions, max: 100 }; } },
   { id: 'total_500', cat: 'count', icon: '🚀', name: 'Пятьсот', desc: '500 выполнений', check: function(ctx) { return ctx.totalCompletions >= 500; }, progress: function(ctx) { return { cur: ctx.totalCompletions, max: 500 }; } },
   { id: 'total_1000', cat: 'count', icon: '🌟', name: 'Тысяча', desc: '1000 выполнений', check: function(ctx) { return ctx.totalCompletions >= 1000; }, progress: function(ctx) { return { cur: ctx.totalCompletions, max: 1000 }; } },
-
-  // === Перевыполнение ===
   { id: 'over_first', cat: 'over', icon: '⚡', name: 'Сверх нормы', desc: 'Впервые перевыполнил цель', check: function(ctx) { return ctx.overDays >= 1; }, progress: function(ctx) { return { cur: ctx.overDays, max: 1 }; } },
   { id: 'over_10', cat: 'over', icon: '🎯', name: 'Снайпер', desc: '10 дней с перевыполнением', check: function(ctx) { return ctx.overDays >= 10; }, progress: function(ctx) { return { cur: ctx.overDays, max: 10 }; } },
   { id: 'over_50', cat: 'over', icon: '💪', name: 'Машина', desc: '50 дней с перевыполнением', check: function(ctx) { return ctx.overDays >= 50; }, progress: function(ctx) { return { cur: ctx.overDays, max: 50 }; } },
   { id: 'over_huge', cat: 'over', icon: '🔥', name: 'Больше чем надо', desc: 'Сделал 200%+ от цели за день', check: function(ctx) { return ctx.maxOverPercent >= 200; }, progress: function(ctx) { return { cur: Math.min(ctx.maxOverPercent, 200), max: 200 }; } },
-
-  // === Возвращение ===
   { id: 'comeback_1', cat: 'comeback', icon: '🔄', name: 'Снова в строю', desc: 'Вернулся после срыва', check: function(ctx) { return ctx.hadBreak; }, progress: function(ctx) { return { cur: ctx.hadBreak ? 1 : 0, max: 1 }; } },
   { id: 'comeback_5', cat: 'comeback', icon: '💫', name: 'Не сдаюсь', desc: '5 возвращений после срывов', check: function(ctx) { return ctx.comebackCount >= 5; }, progress: function(ctx) { return { cur: ctx.comebackCount, max: 5 }; } },
-
-  // === Особые ===
   { id: 'perfect_week', cat: 'streak', icon: '🌞', name: 'Идеальная неделя', desc: '7 дней подряд со 100%', check: function(ctx) { return ctx.globalStreak >= 7; }, progress: function(ctx) { return { cur: Math.min(ctx.globalStreak, 7), max: 7 }; } },
 ];
 
@@ -2272,10 +2245,6 @@ function getAchievementContext() {
   var totalCompletions = 0;
   var overDays = 0;
   var maxOverPercent = 0;
-  var habitIds = {};
-  state.habits.forEach(function(h) { habitIds[h.id] = true; });
-
-  // Считаем все дни с момента появления первой привычки
   var allDates = {};
   state.habits.forEach(function(h) {
     Object.keys(h.progress || {}).forEach(function(k) { allDates[k] = true; });
@@ -2285,7 +2254,6 @@ function getAchievementContext() {
   dates.forEach(function(key) {
     var required = state.habits.filter(function(h) { return isHabitRequiredOn(h, key); });
     if (required.length === 0) return;
-
     var dayOver = false;
     required.forEach(function(h) {
       var pct = getHabitPercent(h, key);
@@ -2298,23 +2266,19 @@ function getAchievementContext() {
     if (dayOver) overDays++;
   });
 
-  // Возвращения после срыва: смотрим, был ли разрыв в стрике
   var hadBreak = false;
   var comebackCount = 0;
   var requiredForAll = state.habits.filter(function(h) { return isHabitRequiredOn(h, todayKey()); }).length;
 
   if (requiredForAll > 0) {
-    // Строим карту дней "полный/не полный" за последние 2 года
     var daysArr = [];
     var cursor = todayKey();
     for (var i = 0; i < 730; i++) {
       daysArr.push({ key: cursor, complete: isDayComplete(cursor) });
       cursor = shiftKey(cursor, -1);
     }
-    // Ищем разрывы: complete потом не complete потом complete
     for (var j = 1; j < daysArr.length - 1; j++) {
       if (!daysArr[j].complete && daysArr[j-1].complete) {
-        // нашли конец полного стрика, ищем возвращение
         for (var k = j + 1; k < daysArr.length; k++) {
           if (daysArr[k].complete) {
             comebackCount++;
@@ -2340,7 +2304,6 @@ function getAchievementContext() {
 function checkAchievements() {
   var ctx = getAchievementContext();
   var newUnlocks = [];
-
   ACHIEVEMENTS.forEach(function(a) {
     if (unlockedAch[a.id]) return;
     try {
@@ -2350,10 +2313,8 @@ function checkAchievements() {
       }
     } catch (e) {}
   });
-
   if (newUnlocks.length > 0) {
     saveUnlockedAch();
-    // Показываем тосты по очереди
     newUnlocks.forEach(function(a, idx) {
       setTimeout(function() { showAchToast(a); }, idx * 1500);
     });
@@ -2375,10 +2336,8 @@ function renderAchievements() {
   var list = ACHIEVEMENTS.filter(function(a) {
     return achCategory === 'all' || a.cat === achCategory;
   });
-
   var unlockedCount = ACHIEVEMENTS.filter(function(a) { return unlockedAch[a.id]; }).length;
   document.getElementById('achCounter').textContent = unlockedCount + ' / ' + ACHIEVEMENTS.length;
-
   var grid = document.getElementById('achGrid');
   grid.innerHTML = list.map(function(a) {
     var unlocked = !!unlockedAch[a.id];
@@ -2802,13 +2761,12 @@ function escapeHtml(str) {
 }
 
 function checkDayCompleted() {
-  // если день только что стал полным — проверяем достижения
   if (isDayComplete(todayKey())) {
     checkAchievements();
   }
 }
 
-// ============ НАСТРОЙКИ И УВЕДОМЛЕНИЯ ============
+// ============ НАСТРОЙКИ ============
 
 function renderSettings() {
   var row = document.getElementById('notifEnabledRow');
@@ -2863,29 +2821,22 @@ function checkAndSendReminder() {
 
   if (nowMinutes < targetMinutes) return;
 
-  // уже прошло время напоминания
   var requiredToday = state.habits.filter(isHabitRequiredToday);
   if (requiredToday.length === 0) return;
 
   var doneCount = requiredToday.filter(isDoneToday).length;
-  var allDone = doneCount === requiredToday.length;
-
-  if (allDone) return;
+  if (doneCount === requiredToday.length) return;
 
   var percent = Math.round(getDayPercent(today) * 100);
   var title = '🔥 Напоминание о привычках';
-  var body = allDone
-    ? 'Отличная работа!'
-    : 'Выполнено ' + percent + '%. Осталось ' + (requiredToday.length - doneCount) + '. Не разорви цепочку!';
+  var body = 'Выполнено ' + percent + '%. Осталось ' + (requiredToday.length - doneCount) + '. Не разорви цепочку!';
 
   showTestNotification(title, body);
   notifSettings.lastNotifiedDate = today;
   saveNotifSettings();
 }
 
-// Периодическая проверка времени (раз в минуту)
 setInterval(checkAndSendReminder, 60000);
-// Проверка сразу при загрузке
 setTimeout(checkAndSendReminder, 5000);
 
 // ============ ЭКСПОРТ / ИМПОРТ ============
@@ -3043,7 +2994,6 @@ document.getElementById('statsPeriod').addEventListener('click', function(e) {
   renderStats();
 });
 
-// Категории достижений
 document.getElementById('achCategories').addEventListener('click', function(e) {
   var btn = e.target.closest('.ach-cat-btn');
   if (!btn) return;
@@ -3058,7 +3008,6 @@ document.getElementById('achMiniMore').addEventListener('click', function() {
   switchTab('achievements');
 });
 
-// Настройки уведомлений
 document.getElementById('notifEnabledRow').addEventListener('click', function() {
   notifSettings.enabled = !notifSettings.enabled;
   saveNotifSettings();
@@ -3082,7 +3031,6 @@ document.getElementById('testNotifBtn').addEventListener('click', function() {
   }
 });
 
-// Экспорт / импорт
 document.getElementById('exportBtn').addEventListener('click', exportData);
 document.getElementById('importBtn').addEventListener('click', function() {
   document.getElementById('importFile').click();
@@ -3094,7 +3042,6 @@ document.getElementById('importFile').addEventListener('change', function(e) {
   }
 });
 
-// Навигация
 document.querySelector('.bottom-nav').addEventListener('click', function(e) {
   var btn = e.target.closest('.nav-btn');
   if (!btn) return;
@@ -3121,7 +3068,6 @@ document.addEventListener('visibilitychange', function() {
   }
 });
 
-// Инициализация
 render();
 switchTab(activeTab);
 checkAchievements();
