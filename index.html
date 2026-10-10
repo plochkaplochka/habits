@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
 <title>Трекер привычек</title>
-<meta name="description" content="Отслеживай привычки, не разрывай стрик">
 <meta name="theme-color" content="#0f1117">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
@@ -380,10 +379,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   gap: 12px;
 }
 
-.add-form-row {
-  display: flex;
-  gap: 10px;
-}
+.add-form-row { display: flex; gap: 10px; }
 
 .add-form input[type="text"] {
   flex: 1;
@@ -510,11 +506,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   letter-spacing: 0.5px;
 }
 
-.goal-input-row {
-  display: flex;
-  align-items: stretch;
-  gap: 8px;
-}
+.goal-input-row { display: flex; align-items: stretch; gap: 8px; }
 
 .goal-stepper {
   display: flex;
@@ -585,11 +577,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   white-space: nowrap;
 }
 
-.goal-presets {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-}
+.goal-presets { display: flex; gap: 6px; flex-wrap: wrap; }
 
 .goal-presets button {
   flex: 1;
@@ -627,12 +615,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   flex-shrink: 0;
 }
 
-.weight-buttons {
-  display: flex;
-  gap: 4px;
-  flex: 1;
-  justify-content: flex-end;
-}
+.weight-buttons { display: flex; gap: 4px; flex: 1; justify-content: flex-end; }
 
 .weight-btn {
   width: 32px;
@@ -708,11 +691,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   background: linear-gradient(90deg, rgba(76,201,240,0.1), var(--card));
 }
 
-.habit-top {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
+.habit-top { display: flex; align-items: center; gap: 12px; }
 
 .habit-info { flex: 1; min-width: 0; }
 
@@ -750,12 +729,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 
 .counter-block { display: flex; flex-direction: column; gap: 10px; }
 
-.counter-main {
-  display: flex;
-  align-items: stretch;
-  gap: 8px;
-  height: 48px;
-}
+.counter-main { display: flex; align-items: stretch; gap: 8px; height: 48px; }
 
 .counter-minus {
   flex-shrink: 0;
@@ -811,11 +785,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   100% { transform: scale(1); }
 }
 
-.counter-bg {
-  position: absolute;
-  inset: 0;
-  background: rgba(255,255,255,0.03);
-}
+.counter-bg { position: absolute; inset: 0; background: rgba(255,255,255,0.03); }
 
 .counter-bg-fill {
   height: 100%;
@@ -917,9 +887,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 
 .counter-display.over .plus-popup { color: var(--gold); }
 
-.counter-display .plus-popup.animate {
-  animation: plusFly 0.6s ease-out;
-}
+.counter-display .plus-popup.animate { animation: plusFly 0.6s ease-out; }
 
 @keyframes plusFly {
   0% { opacity: 1; transform: translateY(-50%) translateX(0); }
@@ -950,12 +918,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   color: white;
 }
 
-.habit-actions {
-  display: flex;
-  gap: 4px;
-  flex-shrink: 0;
-  align-items: center;
-}
+.habit-actions { display: flex; gap: 4px; flex-shrink: 0; align-items: center; }
 
 .freeze-btn {
   width: 30px;
@@ -986,10 +949,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   color: var(--freeze);
 }
 
-.freeze-btn.used {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
+.freeze-btn.used { opacity: 0.3; cursor: not-allowed; }
 
 .streak-widget {
   flex-shrink: 0;
@@ -1076,43 +1036,48 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 .empty-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.5; }
 .empty p { font-size: 15px; line-height: 1.6; }
 
-/* ====== КАЛЕНДАРЬ (ОТДЕЛЬНАЯ ВКЛАДКА) ====== */
+/* ==================== КАЛЕНДАРЬ ==================== */
+.calendar-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+
 .calendar-page {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 20px;
   padding: 16px;
-  margin-bottom: 20px;
+  width: 100%;
+  max-width: 400px;
 }
 
 .cal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
+  gap: 8px;
 }
 
 .cal-month {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--text);
 }
 
-.cal-nav {
-  display: flex;
-  gap: 6px;
-}
+.cal-nav { display: flex; gap: 4px; }
 
 .cal-nav button {
   background: rgba(255,255,255,0.05);
   border: 1px solid var(--border);
   color: var(--text);
-  width: 34px;
-  height: 34px;
-  border-radius: 9px;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
   cursor: pointer;
   font-family: inherit;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -1129,7 +1094,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 4px;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .cal-weekdays div {
@@ -1138,7 +1103,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   color: var(--muted);
   font-weight: 700;
   text-transform: uppercase;
-  padding: 4px 0;
+  padding: 3px 0;
 }
 
 .cal-grid {
@@ -1148,7 +1113,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 }
 
 .cal-cell {
-  aspect-ratio: 1;
+  height: 40px;
   border-radius: 8px;
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,255,255,0.04);
@@ -1195,21 +1160,25 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 .cal-cell.lvl-1 { background: rgba(108,92,231,0.25); color: rgba(255,255,255,0.75); }
 .cal-cell.lvl-2 { background: rgba(108,92,231,0.45); color: white; }
 .cal-cell.lvl-3 { background: rgba(108,92,231,0.7); color: white; }
+
 .cal-cell.complete {
   background: linear-gradient(135deg, var(--success), #00d9a3);
   color: white;
   box-shadow: 0 0 8px rgba(0,184,148,0.4);
 }
+
 .cal-cell.over {
   background: linear-gradient(135deg, var(--gold), #ffb84d);
   color: white;
   box-shadow: 0 0 8px rgba(255,159,67,0.4);
 }
+
 .cal-cell.frozen {
   background: linear-gradient(135deg, var(--freeze), #48cae4);
   color: white;
   box-shadow: 0 0 8px rgba(76,201,240,0.4);
 }
+
 .cal-cell.frozen::after {
   content: '❄';
   position: absolute;
@@ -1221,9 +1190,9 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 .cal-legend {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 16px;
-  padding-top: 16px;
+  gap: 5px;
+  margin-top: 14px;
+  padding-top: 14px;
   border-top: 1px solid var(--border);
   font-size: 10px;
   color: var(--muted);
@@ -1232,16 +1201,16 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 .cal-legend-item {
   display: flex;
   align-items: center;
-  gap: 5px;
-  padding: 4px 8px;
+  gap: 4px;
+  padding: 3px 7px;
   background: rgba(255,255,255,0.03);
-  border-radius: 8px;
+  border-radius: 7px;
   border: 1px solid var(--border);
 }
 
 .cal-legend-dot {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 3px;
   border: 1px solid rgba(255,255,255,0.1);
   flex-shrink: 0;
@@ -1254,28 +1223,27 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 .cal-legend-dot.over { background: var(--gold); }
 .cal-legend-dot.frozen { background: var(--freeze); }
 
-/* Мини-статистика месяца */
 .cal-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin-top: 16px;
+  gap: 6px;
+  margin-top: 14px;
 }
 
 .cal-stat {
   background: rgba(255,255,255,0.03);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 12px;
+  border-radius: 10px;
+  padding: 10px 6px;
   text-align: center;
 }
 
 .cal-stat-value {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 800;
   color: var(--text);
   line-height: 1.1;
-  margin-bottom: 3px;
+  margin-bottom: 2px;
 }
 
 .cal-stat-value.success { color: var(--success); }
@@ -1283,10 +1251,10 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 .cal-stat-value.freeze { color: var(--freeze); }
 
 .cal-stat-label {
-  font-size: 10px;
+  font-size: 9px;
   color: var(--muted);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
   font-weight: 600;
 }
 
@@ -1349,11 +1317,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 
 .modal-input:focus { border-color: var(--accent); }
 
-.modal-buttons {
-  display: flex;
-  gap: 10px;
-  margin-top: 16px;
-}
+.modal-buttons { display: flex; gap: 10px; margin-top: 16px; }
 
 .modal-buttons button {
   flex: 1;
@@ -1767,11 +1731,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   margin-bottom: 4px;
 }
 
-.ph-row {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
+.ph-row { display: flex; flex-direction: column; gap: 6px; }
 
 .ph-head {
   display: flex;
@@ -2147,10 +2107,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   flex-shrink: 0;
 }
 
-.share-preview-buttons {
-  display: flex;
-  gap: 10px;
-}
+.share-preview-buttons { display: flex; gap: 10px; }
 
 .share-preview-buttons button {
   flex: 1;
@@ -2202,17 +2159,18 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   .ach-icon { font-size: 36px; }
   .nav-btn { font-size: 8px; padding: 6px 1px; }
   .nav-icon { font-size: 16px; }
-  .cal-cell { font-size: 11px; }
+  .cal-cell { height: 36px; font-size: 11px; }
   .cal-cell.frozen::after { font-size: 8px; }
   .cal-month { font-size: 14px; }
-  .cal-nav button { width: 30px; height: 30px; font-size: 15px; }
+  .cal-nav button { width: 28px; height: 28px; font-size: 14px; }
   .weight-btn { width: 28px; height: 28px; font-size: 12px; }
   .freeze-btn { width: 28px; height: 28px; font-size: 12px; }
   .habit-actions { gap: 3px; }
-  .cal-stats { gap: 6px; }
-  .cal-stat { padding: 10px 6px; }
-  .cal-stat-value { font-size: 17px; }
-  .cal-stat-label { font-size: 9px; }
+  .cal-stats { gap: 5px; }
+  .cal-stat { padding: 8px 4px; }
+  .cal-stat-value { font-size: 16px; }
+  .cal-stat-label { font-size: 8px; }
+  .calendar-page { padding: 12px; }
 }
 </style>
 </head>
@@ -2223,7 +2181,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
     <div class="date-badge" id="todayDate"></div>
   </header>
 
-  <!-- ============ СЕГОДНЯ ============ -->
+  <!-- СЕГОДНЯ -->
   <section class="tab-panel active" id="tab-today">
     <div class="global-streak" id="globalStreak">
       <div class="gs-flame">🔥</div>
@@ -2304,36 +2262,38 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
     <div class="habits" id="habitsList"></div>
   </section>
 
-  <!-- ============ КАЛЕНДАРЬ ============ -->
+  <!-- КАЛЕНДАРЬ -->
   <section class="tab-panel" id="tab-calendar">
-    <div class="calendar-page">
-      <div class="cal-header">
-        <div class="cal-month" id="calMonth"></div>
-        <div class="cal-nav">
-          <button id="calPrev" title="Назад">‹</button>
-          <button id="calToday" title="Сегодня" style="width:auto; padding:0 12px; font-size:13px;">Сегодня</button>
-          <button id="calNext" title="Вперёд">›</button>
+    <div class="calendar-wrap">
+      <div class="calendar-page">
+        <div class="cal-header">
+          <div class="cal-month" id="calMonth"></div>
+          <div class="cal-nav">
+            <button id="calPrev" title="Назад">‹</button>
+            <button id="calToday" title="Сегодня" style="width:auto; padding:0 10px; font-size:12px;">Сегодня</button>
+            <button id="calNext" title="Вперёд">›</button>
+          </div>
         </div>
-      </div>
-      <div class="cal-weekdays">
-        <div>Пн</div><div>Вт</div><div>Ср</div><div>Чт</div><div>Пт</div><div>Сб</div><div>Вс</div>
-      </div>
-      <div class="cal-grid" id="calGrid"></div>
+        <div class="cal-weekdays">
+          <div>Пн</div><div>Вт</div><div>Ср</div><div>Чт</div><div>Пт</div><div>Сб</div><div>Вс</div>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
 
-      <div class="cal-legend">
-        <div class="cal-legend-item"><div class="cal-legend-dot lvl-1"></div>1–25%</div>
-        <div class="cal-legend-item"><div class="cal-legend-dot lvl-2"></div>25–50%</div>
-        <div class="cal-legend-item"><div class="cal-legend-dot lvl-3"></div>50–99%</div>
-        <div class="cal-legend-item"><div class="cal-legend-dot complete"></div>100%</div>
-        <div class="cal-legend-item"><div class="cal-legend-dot over"></div>сверх</div>
-        <div class="cal-legend-item"><div class="cal-legend-dot frozen"></div>❄ заморозка</div>
-      </div>
+        <div class="cal-legend">
+          <div class="cal-legend-item"><div class="cal-legend-dot lvl-1"></div>1–25%</div>
+          <div class="cal-legend-item"><div class="cal-legend-dot lvl-2"></div>25–50%</div>
+          <div class="cal-legend-item"><div class="cal-legend-dot lvl-3"></div>50–99%</div>
+          <div class="cal-legend-item"><div class="cal-legend-dot complete"></div>100%</div>
+          <div class="cal-legend-item"><div class="cal-legend-dot over"></div>сверх</div>
+          <div class="cal-legend-item"><div class="cal-legend-dot frozen"></div>❄</div>
+        </div>
 
-      <div class="cal-stats" id="calStats"></div>
+        <div class="cal-stats" id="calStats"></div>
+      </div>
     </div>
   </section>
 
-  <!-- ============ ДОСТИЖЕНИЯ ============ -->
+  <!-- ДОСТИЖЕНИЯ -->
   <section class="tab-panel" id="tab-achievements">
     <div class="ach-section">
       <div class="ach-header">
@@ -2361,7 +2321,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
     </div>
   </section>
 
-  <!-- ============ СТАТИСТИКА ============ -->
+  <!-- СТАТИСТИКА -->
   <section class="tab-panel" id="tab-stats">
     <div class="stats-section">
       <div class="stats-head">
@@ -2377,7 +2337,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
     </div>
   </section>
 
-  <!-- ============ НАСТРОЙКИ ============ -->
+  <!-- НАСТРОЙКИ -->
   <section class="tab-panel" id="tab-settings">
     <div class="settings-section">
       <div class="settings-title">❄ Заморозки</div>
@@ -3183,18 +3143,9 @@ function renderCalendar() {
   document.getElementById('calGrid').innerHTML = html;
   var pct = monthTracked > 0 ? Math.round((monthComplete / monthTracked) * 100) : 0;
   document.getElementById('calStats').innerHTML =
-    '<div class="cal-stat">' +
-      '<div class="cal-stat-value success">' + monthComplete + '</div>' +
-      '<div class="cal-stat-label">Дней 100%</div>' +
-    '</div>' +
-    '<div class="cal-stat">' +
-      '<div class="cal-stat-value">' + pct + '%</div>' +
-      '<div class="cal-stat-label">Месяц</div>' +
-    '</div>' +
-    '<div class="cal-stat">' +
-      '<div class="cal-stat-value freeze">' + monthFrozen + '</div>' +
-      '<div class="cal-stat-label">Заморозок</div>' +
-    '</div>';
+    '<div class="cal-stat"><div class="cal-stat-value success">' + monthComplete + '</div><div class="cal-stat-label">Дней 100%</div></div>' +
+    '<div class="cal-stat"><div class="cal-stat-value">' + pct + '%</div><div class="cal-stat-label">Месяц</div></div>' +
+    '<div class="cal-stat"><div class="cal-stat-value freeze">' + monthFrozen + '</div><div class="cal-stat-label">Заморозок</div></div>';
 }
 
 function openDayModal(dateK) {
