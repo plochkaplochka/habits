@@ -307,6 +307,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 
 .ach-mini-more:hover { color: var(--text); background: rgba(255,255,255,0.07); }
 
+/* ===== ДОСТИЖЕНИЯ ===== */
 .ach-section {
   background: var(--card);
   border: 1px solid var(--border);
@@ -342,6 +343,42 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   font-weight: 600;
 }
 
+/* Общий прогресс */
+.ach-total-progress {
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, rgba(255,159,67,0.08), rgba(255,107,107,0.05));
+  border: 1px solid rgba(255,159,67,0.25);
+  border-radius: 14px;
+}
+
+.ach-total-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 8px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ach-total-bar {
+  height: 8px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.ach-total-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), #ffb84d);
+  border-radius: 4px;
+  width: 0%;
+  transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 0 15px rgba(255,159,67,0.4);
+}
+
 .ach-categories {
   display: flex;
   gap: 6px;
@@ -366,6 +403,9 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   transition: all 0.15s;
   font-family: inherit;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .ach-cat-btn:hover { color: var(--text); background: rgba(255,255,255,0.06); }
@@ -375,6 +415,16 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   border-color: var(--accent);
   color: white;
 }
+
+.ach-cat-count {
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.15);
+  font-weight: 700;
+}
+
+.ach-cat-btn.active .ach-cat-count { background: rgba(255,255,255,0.25); }
 
 .ach-grid {
   display: grid;
@@ -391,9 +441,12 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   transition: all 0.2s;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
 }
 
-.ach-card.locked { opacity: 0.55; }
+.ach-card.locked { opacity: 0.6; }
+
+.ach-card.locked:hover { opacity: 0.85; }
 
 .ach-card.unlocked {
   background: linear-gradient(135deg, rgba(255,159,67,0.1), rgba(255,107,107,0.06));
@@ -403,7 +456,30 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 
 .ach-card.unlocked:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 25px rgba(255,159,67,0.2);
+  box-shadow: 0 6px 25px rgba(255,159,67,0.25);
+}
+
+.ach-card.unlocked::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 32px 32px 0;
+  border-color: transparent var(--gold) transparent transparent;
+}
+
+.ach-card.unlocked::after {
+  content: '✓';
+  position: absolute;
+  top: 3px;
+  right: 4px;
+  color: white;
+  font-size: 12px;
+  font-weight: 900;
+  z-index: 1;
 }
 
 .ach-icon {
@@ -439,6 +515,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   font-size: 11px;
   color: var(--muted);
   line-height: 1.4;
+  min-height: 28px;
 }
 
 .ach-progress {
@@ -469,180 +546,159 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 
 .ach-card.unlocked .ach-progress-text { color: var(--gold); }
 
-.settings-section {
+/* Модалка детали достижения */
+.ach-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 250;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.2s ease;
+}
+
+.ach-modal.active { display: flex; }
+
+.ach-modal-box {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 20px;
-  margin-bottom: 20px;
-}
-
-.settings-title {
-  font-size: 15px;
-  font-weight: 600;
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.notif-row {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 16px;
-  background: rgba(255,255,255,0.02);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  user-select: none;
-  transition: all 0.2s;
-}
-
-.notif-row:hover {
-  background: rgba(108,92,231,0.06);
-  border-color: rgba(108,92,231,0.4);
-}
-
-.notif-row.active {
-  background: rgba(108,92,231,0.1);
-  border-color: var(--accent);
-}
-
-.notif-toggle {
-  flex-shrink: 0;
-  width: 50px;
-  height: 30px;
-  border-radius: 15px;
-  background: rgba(255,255,255,0.08);
-  border: 2px solid var(--border);
+  border-radius: 24px;
+  padding: 32px 24px 24px;
+  width: 100%;
+  max-width: 340px;
+  text-align: center;
   position: relative;
-  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: hidden;
 }
 
-.notif-toggle::after {
+.ach-modal-box.unlocked {
+  border-color: rgba(255,159,67,0.5);
+  background: linear-gradient(135deg, rgba(255,159,67,0.08), var(--card));
+}
+
+.ach-modal-box.unlocked::before {
   content: '';
   position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: var(--muted);
-  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(255,159,67,0.25), transparent 60%);
+  pointer-events: none;
 }
 
-.notif-row.active .notif-toggle {
-  background: var(--accent);
-  border-color: var(--accent);
+.ach-modal-icon {
+  font-size: 80px;
+  line-height: 1;
+  margin-bottom: 16px;
+  filter: grayscale(1) opacity(0.4);
+  transition: filter 0.3s;
+  position: relative;
+  z-index: 1;
 }
 
-.notif-row.active .notif-toggle::after {
-  left: 22px;
-  background: white;
-  box-shadow: 0 0 10px rgba(255,255,255,0.5);
+.ach-modal-box.unlocked .ach-modal-icon {
+  filter: none;
+  animation: achPop 0.6s ease;
+  text-shadow: 0 0 40px rgba(255,159,67,0.6);
 }
 
-.notif-info { flex: 1; min-width: 0; }
-
-.notif-title {
-  font-size: 15px;
-  font-weight: 600;
+.ach-modal-title {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 8px;
   color: var(--text);
-  margin-bottom: 3px;
+  position: relative;
+  z-index: 1;
 }
 
-.notif-row.active .notif-title { color: var(--accent-2); }
+.ach-modal-box.unlocked .ach-modal-title { color: var(--gold); }
 
-.notif-sub {
-  font-size: 12px;
-  color: var(--muted);
-  line-height: 1.4;
-}
-
-.time-picker {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 16px;
-  background: rgba(255,255,255,0.02);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  margin-bottom: 12px;
-}
-
-.time-picker-label {
+.ach-modal-desc {
   font-size: 14px;
-  font-weight: 600;
-  color: var(--text);
-  flex: 1;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
 }
 
-.time-picker input[type="time"] {
-  background: rgba(255,255,255,0.05);
-  border: 2px solid var(--border);
-  border-radius: 10px;
-  padding: 8px 12px;
-  color: var(--text);
-  font-size: 18px;
+.ach-modal-status {
+  font-size: 12px;
   font-weight: 700;
-  font-family: inherit;
-  outline: none;
-  transition: border-color 0.2s;
-  -webkit-appearance: none;
-  appearance: none;
-  min-width: 110px;
-  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
 }
 
-.time-picker input[type="time"]:focus { border-color: var(--accent); }
-.time-picker input[type="time"]::-webkit-calendar-picker-indicator {
-  filter: invert(0.7);
-  cursor: pointer;
+.ach-modal-status.unlocked {
+  background: rgba(255,159,67,0.15);
+  color: var(--gold);
+  border: 1px solid rgba(255,159,67,0.4);
 }
 
-.test-notif-btn {
+.ach-modal-status.locked {
+  background: rgba(255,255,255,0.05);
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+
+.ach-modal-progress {
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.ach-modal-progress-bar {
+  height: 8px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.ach-modal-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  border-radius: 4px;
+  transition: width 0.6s;
+}
+
+.ach-modal-box.unlocked .ach-modal-progress-fill {
+  background: linear-gradient(90deg, var(--gold), #ffb84d);
+}
+
+.ach-modal-progress-text {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.ach-modal-close {
   width: 100%;
   padding: 14px;
-  background: rgba(108,92,231,0.12);
-  border: 1px solid var(--accent);
   border-radius: 12px;
-  color: var(--accent-2);
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: inherit;
-  transition: all 0.15s;
-}
-
-.test-notif-btn:hover { background: var(--accent); color: white; }
-.test-notif-btn:active { transform: scale(0.98); }
-
-.notif-permission-warning {
-  padding: 12px 14px;
-  background: rgba(255,107,107,0.1);
-  border: 1px solid rgba(255,107,107,0.3);
-  border-radius: 12px;
-  font-size: 12px;
-  color: #ffb0b0;
-  margin-bottom: 12px;
-  line-height: 1.5;
-}
-
-.notif-permission-warning button {
-  background: var(--danger);
   border: none;
+  background: var(--accent);
   color: white;
-  padding: 6px 12px;
-  border-radius: 8px;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 700;
   cursor: pointer;
-  margin-left: 8px;
   font-family: inherit;
+  transition: background 0.15s;
+  position: relative;
+  z-index: 1;
 }
 
+.ach-modal-close:hover { background: var(--accent-2); }
+
+/* ===== СТАТИСТИКА ===== */
 .stats-section {
   background: var(--card);
   border: 1px solid var(--border);
@@ -877,6 +933,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   line-height: 1.6;
 }
 
+/* ===== ФОРМА ===== */
 .add-form {
   background: var(--card);
   border: 1px solid var(--border);
@@ -1670,6 +1727,180 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 .empty-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.5; }
 .empty p { font-size: 15px; line-height: 1.6; }
 
+.settings-section {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.settings-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.notif-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s;
+}
+
+.notif-row:hover {
+  background: rgba(108,92,231,0.06);
+  border-color: rgba(108,92,231,0.4);
+}
+
+.notif-row.active {
+  background: rgba(108,92,231,0.1);
+  border-color: var(--accent);
+}
+
+.notif-toggle {
+  flex-shrink: 0;
+  width: 50px;
+  height: 30px;
+  border-radius: 15px;
+  background: rgba(255,255,255,0.08);
+  border: 2px solid var(--border);
+  position: relative;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.notif-toggle::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--muted);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.notif-row.active .notif-toggle {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.notif-row.active .notif-toggle::after {
+  left: 22px;
+  background: white;
+  box-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+.notif-info { flex: 1; min-width: 0; }
+
+.notif-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+
+.notif-row.active .notif-title { color: var(--accent-2); }
+
+.notif-sub {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.time-picker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  margin-bottom: 12px;
+}
+
+.time-picker-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  flex: 1;
+}
+
+.time-picker input[type="time"] {
+  background: rgba(255,255,255,0.05);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 12px;
+  color: var(--text);
+  font-size: 18px;
+  font-weight: 700;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
+  min-width: 110px;
+  text-align: center;
+}
+
+.time-picker input[type="time"]:focus { border-color: var(--accent); }
+.time-picker input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.7);
+  cursor: pointer;
+}
+
+.test-notif-btn {
+  width: 100%;
+  padding: 14px;
+  background: rgba(108,92,231,0.12);
+  border: 1px solid var(--accent);
+  border-radius: 12px;
+  color: var(--accent-2);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+
+.test-notif-btn:hover { background: var(--accent); color: white; }
+.test-notif-btn:active { transform: scale(0.98); }
+
+.notif-permission-warning {
+  padding: 12px 14px;
+  background: rgba(255,107,107,0.1);
+  border: 1px solid rgba(255,107,107,0.3);
+  border-radius: 12px;
+  font-size: 12px;
+  color: #ffb0b0;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.notif-permission-warning button {
+  background: var(--danger);
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: 8px;
+  font-family: inherit;
+}
+
 .ach-toast {
   position: fixed;
   top: 20px;
@@ -1714,6 +1945,15 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   font-size: 12px;
   opacity: 0.9;
   font-weight: 500;
+}
+
+/* Отладка */
+.debug-info {
+  font-size: 11px;
+  color: var(--muted);
+  text-align: center;
+  padding: 12px;
+  opacity: 0.5;
 }
 
 @media (max-width: 600px) {
@@ -1823,13 +2063,25 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
         <div class="ach-title">🏆 Достижения</div>
         <div class="ach-counter" id="achCounter">0 / 0</div>
       </div>
-      <div class="ach-categories" id="achCategories">
-        <button class="ach-cat-btn active" data-cat="all">Все</button>
-        <button class="ach-cat-btn" data-cat="streak">Стрики</button>
-        <button class="ach-cat-btn" data-cat="count">Количество</button>
-        <button class="ach-cat-btn" data-cat="over">Перевыполнение</button>
-        <button class="ach-cat-btn" data-cat="comeback">Возвращение</button>
+
+      <div class="ach-total-progress">
+        <div class="ach-total-head">
+          <span>Общий прогресс</span>
+          <span id="achTotalPercent">0%</span>
+        </div>
+        <div class="ach-total-bar">
+          <div class="ach-total-fill" id="achTotalFill"></div>
+        </div>
       </div>
+
+      <div class="ach-categories" id="achCategories">
+        <button class="ach-cat-btn active" data-cat="all">Все <span class="ach-cat-count" id="cntAll">0</span></button>
+        <button class="ach-cat-btn" data-cat="streak">🔥 Стрики <span class="ach-cat-count" id="cntStreak">0</span></button>
+        <button class="ach-cat-btn" data-cat="count">📈 Количество <span class="ach-cat-count" id="cntCount">0</span></button>
+        <button class="ach-cat-btn" data-cat="over">⚡ Сверх нормы <span class="ach-cat-count" id="cntOver">0</span></button>
+        <button class="ach-cat-btn" data-cat="comeback">🔄 Возвращение <span class="ach-cat-count" id="cntComeback">0</span></button>
+      </div>
+
       <div class="ach-grid" id="achGrid"></div>
     </div>
   </section>
@@ -1875,6 +2127,12 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
       <button class="test-notif-btn" id="importBtn">📤 Загрузить из файла</button>
       <input type="file" id="importFile" accept=".json" style="display:none;">
     </div>
+
+    <div class="settings-section">
+      <div class="settings-title">🛠 Обслуживание</div>
+      <button class="test-notif-btn" id="hardResetBtn" style="background:rgba(255,107,107,0.12); border-color:rgba(255,107,107,0.4); color:#ffb0b0;">🗑 Полный сброс (удалить всё)</button>
+      <div class="debug-info" id="debugInfo"></div>
+    </div>
   </section>
 </div>
 
@@ -1887,6 +2145,22 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
       <button id="counterModalCancel">Отмена</button>
       <button class="primary" id="counterModalSave">Сохранить</button>
     </div>
+  </div>
+</div>
+
+<div class="ach-modal" id="achModal">
+  <div class="ach-modal-box" id="achModalBox">
+    <div class="ach-modal-icon" id="achModalIcon">🏆</div>
+    <div class="ach-modal-title" id="achModalTitle">Достижение</div>
+    <div class="ach-modal-desc" id="achModalDesc"></div>
+    <div class="ach-modal-status locked" id="achModalStatus">Не получено</div>
+    <div class="ach-modal-progress">
+      <div class="ach-modal-progress-bar">
+        <div class="ach-modal-progress-fill" id="achModalProgressFill"></div>
+      </div>
+      <div class="ach-modal-progress-text" id="achModalProgressText"></div>
+    </div>
+    <button class="ach-modal-close" id="achModalClose">Закрыть</button>
   </div>
 </div>
 
@@ -1918,7 +2192,11 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 </nav>
 
 <script>
-var STORAGE_KEY = 'habit-tracker-v3';
+// ============================================================
+//  ВАЖНО: повышаем версию хранилища до v4, чтобы старая
+//  закешированная логика не мешала перевыполнению
+// ============================================================
+var STORAGE_KEY = 'habit-tracker-v4';
 var STATS_PERIOD_KEY = 'habit-tracker-stats-period';
 var ACTIVE_TAB_KEY = 'habit-tracker-active-tab';
 var NOTIF_KEY = 'habit-tracker-notif';
@@ -1930,6 +2208,7 @@ var statsDays = parseInt(localStorage.getItem(STATS_PERIOD_KEY) || '7', 10);
 var activeTab = localStorage.getItem(ACTIVE_TAB_KEY) || 'today';
 var editingHabitId = null;
 var achCategory = 'all';
+var achModalId = null;
 
 var notifSettings = loadNotifSettings();
 var unlockedAch = loadUnlockedAch();
@@ -1956,11 +2235,32 @@ function weekdayIndex(key) {
 }
 var WEEKDAYS_SHORT = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
 
+// Миграция со старых версий (v3, v2, v1)
 function loadState() {
-  try {
-    var raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) return JSON.parse(raw);
-  } catch (e) {}
+  var keys = ['habit-tracker-v4', 'habit-tracker-v3', 'habit-tracker-v2', 'habit-tracker-v1'];
+  for (var i = 0; i < keys.length; i++) {
+    try {
+      var raw = localStorage.getItem(keys[i]);
+      if (raw) {
+        var parsed = JSON.parse(raw);
+        // Нормализуем привычки
+        if (parsed.habits) {
+          parsed.habits.forEach(function(h) {
+            if (h.goal === undefined) h.goal = 1;
+            if (!h.progress) h.progress = {};
+            // Миграция completions (старый формат) → progress
+            if (h.completions && h.completions.length) {
+              h.completions.forEach(function(d) {
+                if (!h.progress[d]) h.progress[d] = 1;
+              });
+              delete h.completions;
+            }
+          });
+        }
+        return parsed;
+      }
+    } catch (e) {}
+  }
   return { habits: [], bestStreak: 0 };
 }
 function saveState() {
@@ -1991,7 +2291,8 @@ function saveUnlockedAch() {
 
 function getProgress(habit, key) {
   if (!habit.progress) return 0;
-  return habit.progress[key] || 0;
+  var v = habit.progress[key];
+  return typeof v === 'number' ? v : 0;
 }
 function getGoal(habit) {
   return habit.goal || 1;
@@ -2010,14 +2311,15 @@ function wasCompletedOn(habit, key) {
   return getProgress(habit, key) >= getGoal(habit);
 }
 
-// ❗ ГЛАВНОЕ ИСПРАВЛЕНИЕ — теперь НЕ обрезаем по цели
+// КЛЮЧЕВОЕ: НЕ обрезаем по цели. Просто записываем значение.
 function setProgress(habit, key, value) {
   if (!habit.progress) habit.progress = {};
+  value = Math.floor(Number(value) || 0);
   if (value <= 0) {
     delete habit.progress[key];
   } else {
     if (value > MAX_PROGRESS) value = MAX_PROGRESS;
-    habit.progress[key] = value; // ← можно больше цели
+    habit.progress[key] = value; // ← может быть больше goal
   }
 }
 
@@ -2042,7 +2344,7 @@ function pulseCounter(habitId, amount) {
   }
 }
 
-// ❗ ГЛАВНОЕ ИСПРАВЛЕНИЕ — убрана проверка current >= goal
+// КЛЮЧЕВОЕ: без проверки current >= goal
 function incrementHabit(id, amount) {
   amount = amount || 1;
   var habit = state.habits.find(function(h) { return h.id === id; });
@@ -2121,7 +2423,7 @@ function closeCounterModal() {
   editingHabitId = null;
 }
 
-// ❗ ГЛАВНОЕ ИСПРАВЛЕНИЕ — убрано обрезание по goal
+// КЛЮЧЕВОЕ: не обрезаем по goal
 function saveCounterModal() {
   if (!editingHabitId) return;
   var habit = state.habits.find(function(h) { return h.id === editingHabitId; });
@@ -2333,17 +2635,51 @@ function showAchToast(a) {
 
 function renderAchievements() {
   var ctx = getAchievementContext();
+
+  // Счётчики по категориям
+  var counts = { all: 0, streak: 0, count: 0, over: 0, comeback: 0 };
+  var unlockedByCat = { all: 0, streak: 0, count: 0, over: 0, comeback: 0 };
+  ACHIEVEMENTS.forEach(function(a) {
+    counts.all++;
+    counts[a.cat]++;
+    if (unlockedAch[a.id]) {
+      unlockedByCat.all++;
+      unlockedByCat[a.cat]++;
+    }
+  });
+  document.getElementById('cntAll').textContent = unlockedByCat.all + '/' + counts.all;
+  document.getElementById('cntStreak').textContent = unlockedByCat.streak + '/' + counts.streak;
+  document.getElementById('cntCount').textContent = unlockedByCat.count + '/' + counts.count;
+  document.getElementById('cntOver').textContent = unlockedByCat.over + '/' + counts.over;
+  document.getElementById('cntComeback').textContent = unlockedByCat.comeback + '/' + counts.comeback;
+
+  // Общий счётчик
+  document.getElementById('achCounter').textContent = unlockedByCat.all + ' / ' + counts.all;
+
+  // Общий прогресс (по всем достижениям — среднее)
+  var totalProgress = 0;
+  ACHIEVEMENTS.forEach(function(a) {
+    if (unlockedAch[a.id]) {
+      totalProgress += 100;
+    } else {
+      var prog = a.progress(ctx);
+      totalProgress += Math.min(100, (prog.cur / prog.max) * 100);
+    }
+  });
+  var avgProgress = ACHIEVEMENTS.length > 0 ? Math.round(totalProgress / ACHIEVEMENTS.length) : 0;
+  document.getElementById('achTotalPercent').textContent = avgProgress + '%';
+  document.getElementById('achTotalFill').style.width = avgProgress + '%';
+
+  // Список
   var list = ACHIEVEMENTS.filter(function(a) {
     return achCategory === 'all' || a.cat === achCategory;
   });
-  var unlockedCount = ACHIEVEMENTS.filter(function(a) { return unlockedAch[a.id]; }).length;
-  document.getElementById('achCounter').textContent = unlockedCount + ' / ' + ACHIEVEMENTS.length;
   var grid = document.getElementById('achGrid');
   grid.innerHTML = list.map(function(a) {
     var unlocked = !!unlockedAch[a.id];
     var prog = a.progress(ctx);
     var pct = Math.min(100, Math.round((prog.cur / prog.max) * 100));
-    return '<div class="ach-card ' + (unlocked ? 'unlocked' : 'locked') + '">' +
+    return '<div class="ach-card ' + (unlocked ? 'unlocked' : 'locked') + '" data-ach-id="' + a.id + '">' +
       '<div class="ach-icon">' + a.icon + '</div>' +
       '<div class="ach-name">' + escapeHtml(a.name) + '</div>' +
       '<div class="ach-desc">' + escapeHtml(a.desc) + '</div>' +
@@ -2351,6 +2687,44 @@ function renderAchievements() {
       '<div class="ach-progress-text">' + (unlocked ? '✓ Получено' : prog.cur + ' / ' + prog.max) + '</div>' +
     '</div>';
   }).join('');
+}
+
+function openAchModal(achId) {
+  var a = ACHIEVEMENTS.find(function(x) { return x.id === achId; });
+  if (!a) return;
+  achModalId = achId;
+  var ctx = getAchievementContext();
+  var unlocked = !!unlockedAch[a.id];
+  var prog = a.progress(ctx);
+  var pct = Math.min(100, Math.round((prog.cur / prog.max) * 100));
+
+  var box = document.getElementById('achModalBox');
+  box.classList.toggle('unlocked', unlocked);
+  document.getElementById('achModalIcon').textContent = a.icon;
+  document.getElementById('achModalTitle').textContent = a.name;
+  document.getElementById('achModalDesc').textContent = a.desc;
+
+  var statusEl = document.getElementById('achModalStatus');
+  if (unlocked) {
+    var when = new Date(unlockedAch[a.id]);
+    statusEl.textContent = '✓ Получено ' + when.toLocaleDateString('ru-RU');
+    statusEl.className = 'ach-modal-status unlocked';
+  } else {
+    statusEl.textContent = 'Не получено';
+    statusEl.className = 'ach-modal-status locked';
+  }
+
+  document.getElementById('achModalProgressFill').style.width = (unlocked ? 100 : pct) + '%';
+  document.getElementById('achModalProgressText').textContent = unlocked
+    ? 'Максимум достигнут'
+    : 'Прогресс: ' + prog.cur + ' / ' + prog.max + ' (' + pct + '%)';
+
+  document.getElementById('achModal').classList.add('active');
+}
+
+function closeAchModal() {
+  document.getElementById('achModal').classList.remove('active');
+  achModalId = null;
 }
 
 function renderAchievementsMini() {
@@ -2363,7 +2737,7 @@ function renderAchievementsMini() {
   mini.style.display = 'flex';
   var recent = unlocked.slice(-5);
   document.getElementById('achMiniBadges').innerHTML = recent.map(function(a) {
-    return '<div class="ach-mini-badge" title="' + escapeHtml(a.name) + '">' + a.icon + '</div>';
+    return '<div class="ach-mini-badge" data-ach-id="' + a.id + '" title="' + escapeHtml(a.name) + '">' + a.icon + '</div>';
   }).join('');
 }
 
@@ -2779,6 +3153,15 @@ function renderSettings() {
   } else {
     warning.style.display = 'none';
   }
+
+  // Дебаг информация
+  var totalHabits = state.habits.length;
+  var totalProgressEntries = 0;
+  state.habits.forEach(function(h) {
+    totalProgressEntries += Object.keys(h.progress || {}).length;
+  });
+  document.getElementById('debugInfo').textContent =
+    'Версия хранилища: v4 · Привычек: ' + totalHabits + ' · Записей прогресса: ' + totalProgressEntries;
 }
 
 function requestNotificationPermission() {
@@ -2843,7 +3226,7 @@ setTimeout(checkAndSendReminder, 5000);
 
 function exportData() {
   var data = {
-    version: 3,
+    version: 4,
     exportedAt: new Date().toISOString(),
     state: state,
     notifSettings: notifSettings,
@@ -2883,6 +3266,29 @@ function importData(file) {
     }
   };
   reader.readAsText(file);
+}
+
+function hardReset() {
+  if (!confirm('УДАЛИТЬ ВСЕ ДАННЫЕ? Это необратимо.')) return;
+  if (!confirm('Точно? Привычки, история и достижения будут стёрты.')) return;
+  localStorage.removeItem('habit-tracker-v4');
+  localStorage.removeItem('habit-tracker-v3');
+  localStorage.removeItem('habit-tracker-v2');
+  localStorage.removeItem('habit-tracker-v1');
+  localStorage.removeItem(ACH_KEY);
+  localStorage.removeItem(NOTIF_KEY);
+  // Сбрасываем Service Worker и кэш (если есть от старых версий)
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then(function(regs) {
+      regs.forEach(function(r) { r.unregister(); });
+    });
+  }
+  if ('caches' in window) {
+    caches.keys().then(function(names) {
+      names.forEach(function(name) { caches.delete(name); });
+    });
+  }
+  location.reload();
 }
 
 // ============ СОБЫТИЯ ============
@@ -3004,8 +3410,25 @@ document.getElementById('achCategories').addEventListener('click', function(e) {
   renderAchievements();
 });
 
+document.getElementById('achGrid').addEventListener('click', function(e) {
+  var card = e.target.closest('[data-ach-id]');
+  if (!card) return;
+  openAchModal(card.dataset.achId);
+});
+
+document.getElementById('achMiniBadges').addEventListener('click', function(e) {
+  var badge = e.target.closest('[data-ach-id]');
+  if (!badge) return;
+  openAchModal(badge.dataset.achId);
+});
+
 document.getElementById('achMiniMore').addEventListener('click', function() {
   switchTab('achievements');
+});
+
+document.getElementById('achModalClose').addEventListener('click', closeAchModal);
+document.getElementById('achModal').addEventListener('click', function(e) {
+  if (e.target.id === 'achModal') closeAchModal();
 });
 
 document.getElementById('notifEnabledRow').addEventListener('click', function() {
@@ -3041,6 +3464,7 @@ document.getElementById('importFile').addEventListener('change', function(e) {
     e.target.value = '';
   }
 });
+document.getElementById('hardResetBtn').addEventListener('click', hardReset);
 
 document.querySelector('.bottom-nav').addEventListener('click', function(e) {
   var btn = e.target.closest('.nav-btn');
@@ -3053,6 +3477,8 @@ document.querySelectorAll('#statsPeriod button').forEach(function(b) {
 });
 
 document.addEventListener('backbutton', function(e) {
+  if (achModalId) { closeAchModal(); return; }
+  if (editingHabitId) { closeCounterModal(); return; }
   if (activeTab !== 'today') switchTab('today');
   else if (navigator.app && navigator.app.exitApp) navigator.app.exitApp();
 }, false);
