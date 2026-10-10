@@ -145,7 +145,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   border: 1px solid var(--border);
   border-radius: 20px;
   padding: 22px;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   display: flex;
   align-items: center;
   gap: 22px;
@@ -275,7 +275,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 }
 
 .achievements-mini {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 14px;
@@ -336,12 +336,12 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 
 .ach-mini-more:hover { color: var(--text); background: rgba(255,255,255,0.07); }
 
-/* ====== ХИТМАП КАЛЕНДАРЬ (КОМПАКТНЫЙ) ====== */
+/* ====== ХИТМАП (НОВЫЙ КОМПАКТНЫЙ) ====== */
 .heatmap-section {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 16px;
-  padding: 12px 14px;
+  padding: 12px;
   margin-bottom: 16px;
 }
 
@@ -353,9 +353,11 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 }
 
 .heatmap-title {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .heatmap-nav {
@@ -368,9 +370,9 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   background: rgba(255,255,255,0.04);
   border: 1px solid var(--border);
   color: var(--text);
-  width: 26px;
-  height: 26px;
-  border-radius: 7px;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
   cursor: pointer;
   font-family: inherit;
   font-size: 14px;
@@ -380,6 +382,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   justify-content: center;
   transition: all 0.15s;
   padding: 0;
+  line-height: 1;
 }
 
 .heatmap-nav button:hover { background: var(--accent); border-color: var(--accent); }
@@ -388,15 +391,19 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   font-size: 12px;
   font-weight: 600;
   color: var(--text);
-  min-width: 92px;
+  min-width: 96px;
   text-align: center;
 }
 
+/* Фиксированная компактная сетка */
 .heatmap-weekdays {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 3px;
   margin-bottom: 3px;
+  max-width: 340px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .heatmap-weekdays div {
@@ -405,29 +412,33 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   color: var(--muted);
   font-weight: 600;
   text-transform: uppercase;
+  line-height: 1;
 }
 
 .heatmap-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 3px;
+  max-width: 340px;
+  margin: 0 auto;
 }
 
 .heat-cell {
   aspect-ratio: 1;
-  border-radius: 5px;
+  border-radius: 4px;
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,255,255,0.04);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 10px;
+  font-size: 9px;
   color: var(--muted);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.15s;
   position: relative;
   user-select: none;
+  line-height: 1;
 }
 
 .heat-cell:hover {
@@ -457,7 +468,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 .heat-cell.future:hover { transform: none; border-color: rgba(255,255,255,0.04); }
 
 .heat-cell.lvl-0 { background: rgba(255,255,255,0.03); }
-.heat-cell.lvl-1 { background: rgba(108,92,231,0.25); color: rgba(255,255,255,0.6); }
+.heat-cell.lvl-1 { background: rgba(108,92,231,0.25); color: rgba(255,255,255,0.7); }
 .heat-cell.lvl-2 { background: rgba(108,92,231,0.45); color: white; }
 .heat-cell.lvl-3 { background: rgba(108,92,231,0.7); color: white; }
 .heat-cell.complete {
@@ -478,9 +489,9 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 .heat-cell.frozen::after {
   content: '❄';
   position: absolute;
-  font-size: 8px;
-  top: -1px;
-  right: 0px;
+  font-size: 7px;
+  top: -2px;
+  right: -1px;
 }
 
 .heatmap-legend {
@@ -488,9 +499,10 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   align-items: center;
   gap: 6px;
   margin-top: 10px;
-  font-size: 10px;
+  font-size: 9px;
   color: var(--muted);
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .legend-item {
@@ -500,9 +512,9 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 }
 
 .legend-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 3px;
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
   border: 1px solid rgba(255,255,255,0.1);
 }
 
@@ -2035,31 +2047,83 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 
 .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
+/* ====== ШАРИНГ ====== */
 .share-preview {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.85);
+  background: rgba(0,0,0,0.9);
   z-index: 400;
   display: none;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 16px;
   overflow-y: auto;
 }
 
 .share-preview.active { display: flex; }
 
 .share-preview-content {
-  max-width: 480px;
+  max-width: 420px;
   width: 100%;
   text-align: center;
+  margin: auto 0;
 }
 
 .share-preview-img {
   width: 100%;
   border-radius: 16px;
   box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-  margin-bottom: 16px;
+  margin-bottom: 14px;
+  display: block;
+}
+
+/* Переключатель тем */
+.share-themes {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 4px 0;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.share-themes::-webkit-scrollbar { display: none; }
+
+.share-theme-btn {
+  flex-shrink: 0;
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 2px solid var(--border);
+  background: rgba(255,255,255,0.04);
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.share-theme-btn:hover { background: rgba(255,255,255,0.08); }
+
+.share-theme-btn.active {
+  border-color: var(--accent-2);
+  background: rgba(108,92,231,0.2);
+  color: white;
+  transform: scale(1.05);
+}
+
+.share-theme-swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.2);
+  flex-shrink: 0;
 }
 
 .share-preview-buttons {
@@ -2117,13 +2181,14 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   .ach-icon { font-size: 36px; }
   .nav-btn { font-size: 8.5px; padding: 6px 2px; }
   .nav-icon { font-size: 17px; }
-  .heatmap-section { padding: 10px 12px; }
-  .heatmap-title { font-size: 12px; }
-  .heatmap-month { font-size: 11px; min-width: 84px; }
-  .heatmap-nav button { width: 24px; height: 24px; font-size: 13px; }
-  .heat-cell { font-size: 9px; border-radius: 4px; }
-  .heatmap-legend { font-size: 9px; gap: 5px; }
-  .legend-dot { width: 9px; height: 9px; }
+  .heatmap-section { padding: 10px; }
+  .heatmap-title { font-size: 11px; }
+  .heatmap-month { font-size: 11px; min-width: 88px; }
+  .heatmap-nav button { width: 22px; height: 22px; font-size: 13px; }
+  .heat-cell { font-size: 8px; }
+  .heatmap-weekdays div { font-size: 8px; }
+  .heatmap-legend { font-size: 8px; gap: 4px; }
+  .legend-dot { width: 8px; height: 8px; }
   .weight-btn { width: 28px; height: 28px; font-size: 12px; }
   .freeze-btn { width: 28px; height: 28px; font-size: 12px; }
   .habit-actions { gap: 3px; }
@@ -2137,7 +2202,6 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
     <div class="date-badge" id="todayDate"></div>
   </header>
 
-  <!-- ============ СЕГОДНЯ ============ -->
   <section class="tab-panel active" id="tab-today">
     <div class="global-streak" id="globalStreak">
       <div class="gs-flame">🔥</div>
@@ -2152,14 +2216,13 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
       <div class="gs-best" id="gsBest">Рекорд: 0</div>
     </div>
 
-    <!-- ХИТМАП КОМПАКТНЫЙ -->
     <div class="heatmap-section">
       <div class="heatmap-header">
         <div class="heatmap-title">📅 Календарь</div>
         <div class="heatmap-nav">
-          <button id="hmPrev" title="Назад">‹</button>
+          <button id="hmPrev">‹</button>
           <div class="heatmap-month" id="hmMonth"></div>
-          <button id="hmNext" title="Вперёд">›</button>
+          <button id="hmNext">›</button>
         </div>
       </div>
       <div class="heatmap-weekdays">
@@ -2242,7 +2305,6 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
     <div class="habits" id="habitsList"></div>
   </section>
 
-  <!-- ============ ДОСТИЖЕНИЯ ============ -->
   <section class="tab-panel" id="tab-achievements">
     <div class="ach-section">
       <div class="ach-header">
@@ -2270,7 +2332,6 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
     </div>
   </section>
 
-  <!-- ============ СТАТИСТИКА ============ -->
   <section class="tab-panel" id="tab-stats">
     <div class="stats-section">
       <div class="stats-head">
@@ -2286,12 +2347,11 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
     </div>
   </section>
 
-  <!-- ============ НАСТРОЙКИ ============ -->
   <section class="tab-panel" id="tab-settings">
     <div class="settings-section">
       <div class="settings-title">❄ Заморозки</div>
       <div class="freeze-info">
-        Даётся <strong>1 заморозка в месяц</strong> на каждую привычку. Использование заморозки не рвёт стрик — день считается «пропущенным по уважительной причине».
+        Даётся <strong>1 заморозка в месяц</strong> на каждую привычку. Использование заморозки не рвёт стрик.
       </div>
       <div id="freezeList"></div>
     </div>
@@ -2329,7 +2389,6 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   </section>
 </div>
 
-<!-- Модалка ввода значения счётчика -->
 <div class="modal-overlay" id="counterModal">
   <div class="modal-box">
     <div class="modal-title">Введи значение</div>
@@ -2342,7 +2401,6 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   </div>
 </div>
 
-<!-- Модалка заметки -->
 <div class="modal-overlay" id="noteModal">
   <div class="modal-box">
     <div class="modal-title" id="noteModalTitle">📝 Заметка к дню</div>
@@ -2356,7 +2414,6 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   </div>
 </div>
 
-<!-- Модалка дня -->
 <div class="modal-overlay" id="dayModal">
   <div class="modal-box">
     <div class="modal-title" id="dayModalTitle">День</div>
@@ -2369,7 +2426,6 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   </div>
 </div>
 
-<!-- Модалка достижения -->
 <div class="modal-overlay" id="achModal">
   <div class="modal-box" id="achModalBox" style="text-align:center;">
     <div class="ach-modal-icon" id="achModalIcon" style="font-size:70px;line-height:1;margin-bottom:12px;">🏆</div>
@@ -2388,10 +2444,11 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   </div>
 </div>
 
-<!-- Превью шаринга -->
+<!-- ШАРИНГ С ПЕРЕКЛЮЧАТЕЛЕМ ТЕМ -->
 <div class="share-preview" id="sharePreview">
   <div class="share-preview-content">
     <img class="share-preview-img" id="sharePreviewImg" alt="Мой прогресс">
+    <div class="share-themes" id="shareThemes"></div>
     <div class="share-preview-buttons">
       <button id="shareClose">Закрыть</button>
       <button class="primary" id="shareDownload">📥 Скачать</button>
@@ -2434,8 +2491,9 @@ var STATS_PERIOD_KEY = 'habit-tracker-stats-period';
 var ACTIVE_TAB_KEY = 'habit-tracker-active-tab';
 var NOTIF_KEY = 'habit-tracker-notif';
 var ACH_KEY = 'habit-tracker-achievements';
-var FREEZE_PER_MONTH = 1; // ← ИЗМЕНЕНО: было 7, стало 1
+var FREEZE_PER_MONTH = 1;
 var MAX_PROGRESS = 99999;
+var SHARE_THEME_KEY = 'habit-tracker-share-theme';
 
 var state = loadState();
 var statsDays = parseInt(localStorage.getItem(STATS_PERIOD_KEY) || '7', 10);
@@ -2447,6 +2505,7 @@ var achCategory = 'all';
 var achModalId = null;
 var currentWeight = 3;
 var hmYear, hmMonth;
+var currentShareTheme = localStorage.getItem(SHARE_THEME_KEY) || 'sunset';
 
 var notifSettings = loadNotifSettings();
 var unlockedAch = loadUnlockedAch();
@@ -2456,6 +2515,87 @@ var unlockedAch = loadUnlockedAch();
   hmYear = now.getFullYear();
   hmMonth = now.getMonth();
 })();
+
+// ============ ТЕМЫ ДЛЯ ШАРИНГА ============
+var SHARE_THEMES = {
+  sunset: {
+    name: 'Закат',
+    emoji: '🌅',
+    swatch: 'linear-gradient(135deg, #ff9f43, #ff6b6b)',
+    bg: ['#2d1b3d', '#1a0f2e'],
+    accent: '#ff9f43',
+    accent2: '#ff6b6b',
+    text: '#ffe8d6',
+    muted: 'rgba(255,232,214,0.55)',
+    glow: 'rgba(255,159,67,0.4)',
+    cardBg: 'rgba(255,159,67,0.08)',
+    cardBorder: 'rgba(255,159,67,0.35)',
+    streakGrad: ['#ffb84d', '#ff6b6b', '#c44569'],
+    titleText: 'МОЙ ПРОГРЕСС'
+  },
+  space: {
+    name: 'Космос',
+    emoji: '🌌',
+    swatch: 'linear-gradient(135deg, #6c5ce7, #4cc9f0)',
+    bg: ['#0a0a1f', '#050510'],
+    accent: '#6c5ce7',
+    accent2: '#4cc9f0',
+    text: '#e0e7ff',
+    muted: 'rgba(224,231,255,0.5)',
+    glow: 'rgba(108,92,231,0.45)',
+    cardBg: 'rgba(108,92,231,0.1)',
+    cardBorder: 'rgba(108,92,231,0.4)',
+    streakGrad: ['#a29bfe', '#6c5ce7', '#4cc9f0'],
+    titleText: 'КОСМИЧЕСКИЙ ПРОГРЕСС',
+    stars: true
+  },
+  neon: {
+    name: 'Неон',
+    emoji: '⚡',
+    swatch: 'linear-gradient(135deg, #ff006e, #00f5ff)',
+    bg: ['#0d0221', '#1a0033'],
+    accent: '#ff006e',
+    accent2: '#00f5ff',
+    text: '#ffffff',
+    muted: 'rgba(255,255,255,0.5)',
+    glow: 'rgba(255,0,110,0.5)',
+    cardBg: 'rgba(255,0,110,0.1)',
+    cardBorder: 'rgba(0,245,255,0.5)',
+    streakGrad: ['#00f5ff', '#ff006e', '#ff00ff'],
+    titleText: 'NEON HABITS'
+  },
+  mint: {
+    name: 'Мята',
+    emoji: '🌿',
+    swatch: 'linear-gradient(135deg, #00b894, #00d9a3)',
+    bg: ['#0a1f1a', '#041210'],
+    accent: '#00b894',
+    accent2: '#00d9a3',
+    text: '#d1fae5',
+    muted: 'rgba(209,250,229,0.5)',
+    glow: 'rgba(0,184,148,0.4)',
+    cardBg: 'rgba(0,184,148,0.08)',
+    cardBorder: 'rgba(0,184,148,0.35)',
+    streakGrad: ['#00d9a3', '#00b894', '#009975'],
+    titleText: 'СВЕЖИЙ СТАРТ'
+  },
+  minimal: {
+    name: 'Минимал',
+    emoji: '◻️',
+    swatch: 'linear-gradient(135deg, #ffffff, #8b90a0)',
+    bg: ['#f5f7fa', '#e4e9f0'],
+    accent: '#1a1d27',
+    accent2: '#6c5ce7',
+    text: '#1a1d27',
+    muted: 'rgba(26,29,39,0.5)',
+    glow: 'rgba(108,92,231,0.15)',
+    cardBg: 'rgba(26,29,39,0.04)',
+    cardBorder: 'rgba(26,29,39,0.15)',
+    streakGrad: ['#6c5ce7', '#1a1d27', '#0f1117'],
+    titleText: 'МОЙ ПРОГРЕСС',
+    light: true
+  }
+};
 
 function dateKey(d) {
   return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
@@ -2478,7 +2618,6 @@ function weekdayIndex(key) {
   return (day + 6) % 7;
 }
 var MONTH_NAMES = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
-var WEEKDAYS_SHORT = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
 
 function loadState() {
   var keys = ['habit-tracker-v5', 'habit-tracker-v4', 'habit-tracker-v3', 'habit-tracker-v2', 'habit-tracker-v1'];
@@ -2495,12 +2634,6 @@ function loadState() {
           if (h.weight === undefined) h.weight = 3;
           if (!h.progress) h.progress = {};
           if (!h.frozen) h.frozen = {};
-          if (h.completions && h.completions.length) {
-            h.completions.forEach(function(d) {
-              if (!h.progress[d]) h.progress[d] = 1;
-            });
-            delete h.completions;
-          }
         });
         return parsed;
       }
@@ -2533,9 +2666,7 @@ function getFreezesUsed(habit, dateK) {
   if (!state.freezes[habit.id]) state.freezes[habit.id] = {};
   return state.freezes[habit.id][mk] || 0;
 }
-function getFreezesLeft(habit, dateK) {
-  return Math.max(0, FREEZE_PER_MONTH - getFreezesUsed(habit, dateK));
-}
+function getFreezesLeft(habit, dateK) { return Math.max(0, FREEZE_PER_MONTH - getFreezesUsed(habit, dateK)); }
 function addFreeze(habit, dateK) {
   var mk = getMonthKeyForDate(dateK);
   if (!state.freezes[habit.id]) state.freezes[habit.id] = {};
@@ -2606,10 +2737,7 @@ function incrementHabit(id, amount) {
   var habit = state.habits.find(function(h) { return h.id === id; });
   if (!habit) return;
   var today = todayKey();
-  if (isFrozen(habit, today)) {
-    removeFreeze(habit, today);
-    showToast('❄ Заморозка снята');
-  }
+  if (isFrozen(habit, today)) { removeFreeze(habit, today); showToast('❄ Заморозка снята'); }
   var current = getProgress(habit, today);
   var wasComplete = wasCompletedOn(habit, today);
   var newValue = current + amount;
@@ -2789,18 +2917,13 @@ function getGlobalStreak() {
   for (var i = 0; i < 3650; i++) {
     var required = state.habits.filter(function(h) { return isHabitRequiredOn(h, cursor); });
     if (required.length === 0) break;
-    if (isDayComplete(cursor)) {
-      streak++;
-      cursor = shiftKey(cursor, -1);
-    } else break;
+    if (isDayComplete(cursor)) { streak++; cursor = shiftKey(cursor, -1); }
+    else break;
   }
   return streak;
 }
 function updateBestStreak(current) {
-  if (current > (state.bestStreak || 0)) {
-    state.bestStreak = current;
-    saveState();
-  }
+  if (current > (state.bestStreak || 0)) { state.bestStreak = current; saveState(); }
 }
 function getHabitStreak(habit) {
   var today = todayKey();
@@ -2811,10 +2934,8 @@ function getHabitStreak(habit) {
   else return 0;
   var streak = 0;
   for (var i = 0; i < 3650; i++) {
-    if (wasCompletedOn(habit, cursor)) {
-      streak++;
-      cursor = shiftKey(cursor, -1);
-    } else break;
+    if (wasCompletedOn(habit, cursor)) { streak++; cursor = shiftKey(cursor, -1); }
+    else break;
   }
   return streak;
 }
@@ -2827,18 +2948,16 @@ var ACHIEVEMENTS = [
   { id: 'streak_14', cat: 'streak', icon: '⚡', name: 'Две недели', desc: '14 дней подряд', check: function(c) { return c.globalStreak >= 14; }, progress: function(c) { return { cur: c.globalStreak, max: 14 }; } },
   { id: 'streak_30', cat: 'streak', icon: '💎', name: 'Месяц силы', desc: '30 дней подряд', check: function(c) { return c.globalStreak >= 30; }, progress: function(c) { return { cur: c.globalStreak, max: 30 }; } },
   { id: 'streak_100', cat: 'streak', icon: '👑', name: 'Сотка', desc: '100 дней подряд', check: function(c) { return c.globalStreak >= 100; }, progress: function(c) { return { cur: c.globalStreak, max: 100 }; } },
-  { id: 'streak_365', cat: 'streak', icon: '🏆', name: 'Год дисциплины', desc: '365 дней подряд', check: function(c) { return c.globalStreak >= 365; }, progress: function(c) { return { cur: c.globalStreak, max: 365 }; } },
   { id: 'total_10', cat: 'count', icon: '📌', name: 'Начало', desc: '10 выполнений', check: function(c) { return c.totalCompletions >= 10; }, progress: function(c) { return { cur: c.totalCompletions, max: 10 }; } },
   { id: 'total_50', cat: 'count', icon: '📈', name: 'Пятьдесят', desc: '50 выполнений', check: function(c) { return c.totalCompletions >= 50; }, progress: function(c) { return { cur: c.totalCompletions, max: 50 }; } },
   { id: 'total_100', cat: 'count', icon: '💯', name: 'Сто', desc: '100 выполнений', check: function(c) { return c.totalCompletions >= 100; }, progress: function(c) { return { cur: c.totalCompletions, max: 100 }; } },
   { id: 'total_500', cat: 'count', icon: '🚀', name: 'Пятьсот', desc: '500 выполнений', check: function(c) { return c.totalCompletions >= 500; }, progress: function(c) { return { cur: c.totalCompletions, max: 500 }; } },
-  { id: 'over_first', cat: 'over', icon: '⚡', name: 'Сверх нормы', desc: 'Впервые перевыполнил цель', check: function(c) { return c.overDays >= 1; }, progress: function(c) { return { cur: c.overDays, max: 1 }; } },
-  { id: 'over_10', cat: 'over', icon: '🎯', name: 'Снайпер', desc: '10 дней с перевыполнением', check: function(c) { return c.overDays >= 10; }, progress: function(c) { return { cur: c.overDays, max: 10 }; } },
-  { id: 'over_50', cat: 'over', icon: '💪', name: 'Машина', desc: '50 дней с перевыполнением', check: function(c) { return c.overDays >= 50; }, progress: function(c) { return { cur: c.overDays, max: 50 }; } },
+  { id: 'over_first', cat: 'over', icon: '⚡', name: 'Сверх нормы', desc: 'Впервые перевыполнил', check: function(c) { return c.overDays >= 1; }, progress: function(c) { return { cur: c.overDays, max: 1 }; } },
+  { id: 'over_10', cat: 'over', icon: '🎯', name: 'Снайпер', desc: '10 дней сверх нормы', check: function(c) { return c.overDays >= 10; }, progress: function(c) { return { cur: c.overDays, max: 10 }; } },
+  { id: 'over_50', cat: 'over', icon: '💪', name: 'Машина', desc: '50 дней сверх нормы', check: function(c) { return c.overDays >= 50; }, progress: function(c) { return { cur: c.overDays, max: 50 }; } },
   { id: 'over_huge', cat: 'over', icon: '🌟', name: 'Больше чем надо', desc: 'Сделал 200%+ от цели', check: function(c) { return c.maxOverPercent >= 200; }, progress: function(c) { return { cur: Math.min(c.maxOverPercent, 200), max: 200 }; } },
   { id: 'comeback_1', cat: 'comeback', icon: '🔄', name: 'Снова в строю', desc: 'Вернулся после срыва', check: function(c) { return c.hadBreak; }, progress: function(c) { return { cur: c.hadBreak ? 1 : 0, max: 1 }; } },
   { id: 'comeback_5', cat: 'comeback', icon: '💫', name: 'Не сдаюсь', desc: '5 возвращений', check: function(c) { return c.comebackCount >= 5; }, progress: function(c) { return { cur: c.comebackCount, max: 5 }; } },
-  { id: 'perfect_week', cat: 'streak', icon: '🌞', name: 'Идеальная неделя', desc: '7 дней со 100%', check: function(c) { return c.globalStreak >= 7; }, progress: function(c) { return { cur: Math.min(c.globalStreak, 7), max: 7 }; } },
   { id: 'freeze_first', cat: 'freeze', icon: '❄️', name: 'Передышка', desc: 'Первая заморозка', check: function(c) { return c.totalFreezes >= 1; }, progress: function(c) { return { cur: c.totalFreezes, max: 1 }; } },
   { id: 'freeze_5', cat: 'freeze', icon: '🧊', name: 'Айсберг', desc: '5 заморозок', check: function(c) { return c.totalFreezes >= 5; }, progress: function(c) { return { cur: c.totalFreezes, max: 5 }; } },
   { id: 'note_first', cat: 'count', icon: '📝', name: 'Дневник', desc: 'Первая заметка', check: function(c) { return c.totalNotes >= 1; }, progress: function(c) { return { cur: c.totalNotes, max: 1 }; } },
@@ -2944,7 +3063,6 @@ function renderAchievements() {
   document.getElementById('cntComeback').textContent = unlockedByCat.comeback + '/' + counts.comeback;
   document.getElementById('cntFreeze').textContent = unlockedByCat.freeze + '/' + counts.freeze;
   document.getElementById('achCounter').textContent = unlockedByCat.all + ' / ' + counts.all;
-
   var totalProgress = 0;
   ACHIEVEMENTS.forEach(function(a) {
     if (unlockedAch[a.id]) totalProgress += 100;
@@ -2956,7 +3074,6 @@ function renderAchievements() {
   var avg = ACHIEVEMENTS.length > 0 ? Math.round(totalProgress / ACHIEVEMENTS.length) : 0;
   document.getElementById('achTotalPercent').textContent = avg + '%';
   document.getElementById('achTotalFill').style.width = avg + '%';
-
   var list = ACHIEVEMENTS.filter(function(a) { return achCategory === 'all' || a.cat === achCategory; });
   document.getElementById('achGrid').innerHTML = list.map(function(a) {
     var unlocked = !!unlockedAch[a.id];
@@ -3091,7 +3208,6 @@ function closeDayModal() {
   viewingDayKey = null;
 }
 
-// ФОРМАТ
 function formatDateLong(key) {
   var p = key.split('-').map(Number);
   var d = new Date(p[0], p[1]-1, p[2]);
@@ -3118,11 +3234,7 @@ function getPeriodKeys(days) {
     var earliest = state.habits.map(function(h) { return h.createdAt || today; }).sort()[0];
     var cursor = earliest;
     var safety = 0;
-    while (cursor <= today && safety < 730) {
-      keys.push(cursor);
-      cursor = shiftKey(cursor, 1);
-      safety++;
-    }
+    while (cursor <= today && safety < 730) { keys.push(cursor); cursor = shiftKey(cursor, 1); safety++; }
   } else {
     for (var i = days - 1; i >= 0; i--) keys.push(shiftKey(today, -i));
   }
@@ -3214,7 +3326,6 @@ function renderStats() {
     '<div class="per-habit"><div class="per-habit-title">По привычкам</div>' + perHabitHtml + '</div>';
 }
 
-// ДЕЙСТВИЯ
 function deleteHabit(id) {
   if (!confirm('Удалить привычку?')) return;
   state.habits = state.habits.filter(function(h) { return h.id !== id; });
@@ -3256,7 +3367,6 @@ function switchTab(tab) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// РЕНДЕР
 function render() {
   var list = document.getElementById('habitsList');
   document.getElementById('todayDate').textContent = new Date().toLocaleDateString('ru-RU', {
@@ -3269,7 +3379,6 @@ function render() {
   document.getElementById('gsUnit').textContent = pluralDays(globalStreak);
   document.getElementById('gsBest').textContent = 'Рекорд: ' + (state.bestStreak || 0);
   gsEl.classList.remove('active', 'at-risk');
-
   var requiredToday = state.habits.filter(isHabitRequiredToday);
   var totalToday = requiredToday.length;
   var dayPercent = getDayPercent(todayKey());
@@ -3287,7 +3396,6 @@ function render() {
       if (p > 0 && p < 1) partialCount++;
     }
   });
-
   var gsStatus = document.getElementById('gsStatus');
   if (state.habits.length === 0) {
     gsStatus.textContent = 'Добавь привычки, чтобы начать';
@@ -3317,13 +3425,10 @@ function render() {
       gsStatus.className = 'gs-status';
     }
   }
-
   document.getElementById('progressText').textContent = dayPercentInt + '%' + (totalToday > 0 ? ' (' + doneCount + '/' + totalToday + ')' : '');
   document.getElementById('progressFill').style.width = (dayPercent * 100) + '%';
-
   renderHeatmap();
   renderAchievementsMini();
-
   if (state.habits.length === 0) {
     list.innerHTML = '<div class="empty"><div class="empty-icon">🌱</div><p>Пока нет привычек.<br>Добавь первую!</p></div>';
   } else {
@@ -3341,9 +3446,7 @@ function render() {
       var isPartial = percent > 0 && percent < 1;
       var required = isHabitRequiredToday(habit);
       var startsTomorrow = !required && habit.mustCompleteFrom === shiftKey(today, 1);
-      var freezesLeft = getFreezesLeft(habit, today);
       var freezeUsedThisMonth = getFreezesUsed(habit, today) > 0;
-
       var topControl;
       if (frozen) {
         topControl = '<div style="flex-shrink:0;width:40px;height:40px;border-radius:10px;background:rgba(76,201,240,0.2);border:2px solid var(--freeze);display:flex;align-items:center;justify-content:center;font-size:20px;">❄</div>';
@@ -3358,7 +3461,6 @@ function render() {
       } else {
         topControl = '<button class="check-btn" data-action="toggle">✓</button>';
       }
-
       var counterHtml = '';
       if (hasCounter && !frozen) {
         var percentFill = Math.min(100, percent * 100);
@@ -3378,14 +3480,12 @@ function render() {
               '</div>' +
             '</div></div>';
       }
-
       var habitClass = frozen ? 'frozen' : (isOver ? 'over' : (done ? 'done' : (isPartial ? 'partial' : '')));
       var weightBadge = weight !== 3 ? '<span class="weight-badge">⚖ ' + weight + '</span>' : '';
       var streakMeta = streak > 0 ? '<span>🔥 ' + streak + ' ' + pluralDays(streak) + ' подряд</span>' : '';
       var overMeta = isOver && !frozen ? '<span style="color:var(--gold);font-weight:700">⚡ ' + Math.round(percent * 100) + '%</span>' : '';
       var freezeMeta = frozen ? '<span style="color:var(--freeze);font-weight:700">❄ Заморожено</span>' : '';
       var freezeBtnClass = 'freeze-btn' + (frozen ? ' active' : '') + (!frozen && freezeUsedThisMonth ? ' used' : '');
-
       return '<div class="habit ' + habitClass + '" data-id="' + habit.id + '">' +
         '<div class="habit-top">' + topControl +
           '<div class="habit-info">' +
@@ -3409,13 +3509,10 @@ function render() {
       '</div>';
     }).join('');
   }
-
   if (activeTab === 'stats') renderStats();
   if (activeTab === 'achievements') renderAchievements();
 }
-
 function checkDayCompleted() { if (isDayComplete(todayKey())) checkAchievements(); }
-
 function renderSettings() {
   var row = document.getElementById('notifEnabledRow');
   row.classList.toggle('active', notifSettings.enabled);
@@ -3438,7 +3535,6 @@ function renderSettings() {
     }).join('');
   }
 }
-
 function requestNotificationPermission() {
   if (!('Notification' in window)) { alert('Браузер не поддерживает'); return; }
   Notification.requestPermission().then(function(perm) {
@@ -3525,76 +3621,170 @@ function hardReset() {
   location.reload();
 }
 
-function generateShareImage() {
+// ============ ШАРИНГ ============
+
+function generateShareImage(themeId) {
+  var theme = SHARE_THEMES[themeId] || SHARE_THEMES.sunset;
   var canvas = document.createElement('canvas');
-  var W = 600, H = 800;
+  var W = 600, H = 900;
   canvas.width = W;
   canvas.height = H;
   var ctx = canvas.getContext('2d');
+
+  // Фон — вертикальный градиент
   var bgGrad = ctx.createLinearGradient(0, 0, 0, H);
-  bgGrad.addColorStop(0, '#1a1d27');
-  bgGrad.addColorStop(1, '#0f1117');
+  bgGrad.addColorStop(0, theme.bg[0]);
+  bgGrad.addColorStop(1, theme.bg[1]);
   ctx.fillStyle = bgGrad;
   ctx.fillRect(0, 0, W, H);
+
+  // Радиальное свечение сверху
   var glow = ctx.createRadialGradient(W/2, 0, 0, W/2, 0, W);
-  glow.addColorStop(0, 'rgba(108,92,231,0.35)');
-  glow.addColorStop(1, 'rgba(108,92,231,0)');
+  glow.addColorStop(0, theme.glow);
+  glow.addColorStop(1, 'rgba(0,0,0,0)');
   ctx.fillStyle = glow;
-  ctx.fillRect(0, 0, W, 400);
-  ctx.font = 'bold 28px -apple-system, sans-serif';
-  ctx.fillStyle = '#8b90a0';
+  ctx.fillRect(0, 0, W, 500);
+
+  // Звёзды для космической темы
+  if (theme.stars) {
+    ctx.fillStyle = 'rgba(255,255,255,0.6)';
+    for (var i = 0; i < 80; i++) {
+      var sx = Math.random() * W;
+      var sy = Math.random() * 400;
+      var sr = Math.random() * 1.5 + 0.3;
+      ctx.globalAlpha = Math.random() * 0.7 + 0.3;
+      ctx.beginPath();
+      ctx.arc(sx, sy, sr, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  // Заголовок
+  ctx.font = 'bold 22px -apple-system, BlinkMacSystemFont, sans-serif';
+  ctx.fillStyle = theme.muted;
   ctx.textAlign = 'center';
-  ctx.fillText('🔥 ТРЕКЕР ПРИВЫЧЕК', W/2, 60);
+  ctx.fillText(theme.titleText, W/2, 60);
+
+  // Большое пламя
+  ctx.font = '110px -apple-system, sans-serif';
+  ctx.fillText('🔥', W/2, 220);
+
+  // Цифра стрика
   var streak = getGlobalStreak();
-  var dayPercent = Math.round(getDayPercent(todayKey()) * 100);
-  ctx.font = '120px -apple-system, sans-serif';
-  ctx.fillText('🔥', W/2, 230);
-  ctx.font = 'bold 140px -apple-system, sans-serif';
-  var streakGrad = ctx.createLinearGradient(0, 280, 0, 420);
-  streakGrad.addColorStop(0, '#ff9f43');
-  streakGrad.addColorStop(1, '#ff6b6b');
+  var streakGrad = ctx.createLinearGradient(0, 250, 0, 420);
+  streakGrad.addColorStop(0, theme.streakGrad[0]);
+  streakGrad.addColorStop(0.5, theme.streakGrad[1]);
+  streakGrad.addColorStop(1, theme.streakGrad[2]);
+  ctx.font = 'bold 160px -apple-system, BlinkMacSystemFont, sans-serif';
   ctx.fillStyle = streakGrad;
   ctx.fillText(String(streak), W/2, 400);
-  ctx.font = 'bold 32px -apple-system, sans-serif';
-  ctx.fillStyle = '#e8eaf0';
-  ctx.fillText(pluralDays(streak).toUpperCase() + ' ПОДРЯД', W/2, 450);
-  var cardY = 500;
-  ctx.fillStyle = 'rgba(255,255,255,0.04)';
-  roundRect(ctx, 60, cardY, W - 120, 130, 20);
+
+  // Подпись
+  ctx.font = 'bold 26px -apple-system, sans-serif';
+  ctx.fillStyle = theme.text;
+  ctx.fillText(pluralDays(streak).toUpperCase() + ' ПОДРЯД', W/2, 445);
+
+  // Карточка с прогрессом
+  var cardY = 490;
+  var cardH = 150;
+  ctx.fillStyle = theme.cardBg;
+  roundRect(ctx, 50, cardY, W - 100, cardH, 24);
   ctx.fill();
-  ctx.strokeStyle = 'rgba(108,92,231,0.3)';
+  ctx.strokeStyle = theme.cardBorder;
   ctx.lineWidth = 2;
-  roundRect(ctx, 60, cardY, W - 120, 130, 20);
+  roundRect(ctx, 50, cardY, W - 100, cardH, 24);
   ctx.stroke();
-  ctx.font = 'bold 20px -apple-system, sans-serif';
-  ctx.fillStyle = '#8b90a0';
+
+  var dayPercent = Math.round(getDayPercent(todayKey()) * 100);
+
+  ctx.font = 'bold 15px -apple-system, sans-serif';
+  ctx.fillStyle = theme.muted;
   ctx.textAlign = 'left';
-  ctx.fillText('ПРОГРЕСС СЕГОДНЯ', 90, cardY + 40);
-  ctx.font = 'bold 44px -apple-system, sans-serif';
-  ctx.fillStyle = dayPercent >= 100 ? '#00b894' : '#a29bfe';
-  ctx.fillText(dayPercent + '%', 90, cardY + 100);
-  var barX = 90, barY = cardY + 110, barW = W - 180, barH = 8;
-  ctx.fillStyle = 'rgba(255,255,255,0.08)';
-  roundRect(ctx, barX, barY, barW, barH, 4);
+  ctx.fillText('ПРОГРЕСС СЕГОДНЯ', 80, cardY + 38);
+
+  ctx.font = 'bold 56px -apple-system, sans-serif';
+  ctx.fillStyle = dayPercent >= 100 ? theme.accent : theme.accent2;
+  ctx.fillText(dayPercent + '%', 80, cardY + 105);
+
+  // Прогресс-бар
+  var barX = 80, barY = cardY + 120;
+  var barW = W - 160, barH = 10;
+  ctx.fillStyle = 'rgba(255,255,255,0.12)';
+  roundRect(ctx, barX, barY, barW, barH, 5);
   ctx.fill();
-  var fillW = (dayPercent / 100) * barW;
+  var fillW = Math.min((dayPercent / 100) * barW, barW);
   var barGrad = ctx.createLinearGradient(barX, 0, barX + barW, 0);
-  barGrad.addColorStop(0, '#6c5ce7');
-  barGrad.addColorStop(1, '#00b894');
+  barGrad.addColorStop(0, theme.accent);
+  barGrad.addColorStop(1, theme.accent2);
   ctx.fillStyle = barGrad;
-  roundRect(ctx, barX, barY, Math.min(fillW, barW), barH, 4);
+  roundRect(ctx, barX, barY, fillW, barH, 5);
   ctx.fill();
+
+  // Достижения
   var unlockedCount = Object.keys(unlockedAch).length;
-  ctx.font = 'bold 18px -apple-system, sans-serif';
-  ctx.fillStyle = '#8b90a0';
+  var totalAch = ACHIEVEMENTS.length;
+
+  var statsY = 690;
+  ctx.font = 'bold 14px -apple-system, sans-serif';
+  ctx.fillStyle = theme.muted;
   ctx.textAlign = 'center';
-  ctx.fillText('🏆 ' + unlockedCount + ' ДОСТИЖЕНИЙ', W/2, cardY + 180);
-  ctx.font = '16px -apple-system, sans-serif';
-  ctx.fillStyle = '#8b90a0';
-  ctx.fillText('Рекорд: ' + (state.bestStreak || 0) + ' ' + pluralDays(state.bestStreak || 0), W/2, cardY + 215);
-  ctx.font = '14px -apple-system, sans-serif';
-  ctx.fillStyle = 'rgba(139,144,160,0.6)';
+
+  // 3 колонки со статистикой
+  var colW = W / 3;
+  // Достижения
+  ctx.font = 'bold 32px -apple-system, sans-serif';
+  ctx.fillStyle = theme.accent;
+  ctx.fillText(String(unlockedCount), colW * 0.5, statsY);
+  ctx.font = 'bold 11px -apple-system, sans-serif';
+  ctx.fillStyle = theme.muted;
+  ctx.fillText('ДОСТИЖЕНИЙ', colW * 0.5, statsY + 22);
+  ctx.font = '10px -apple-system, sans-serif';
+  ctx.fillStyle = theme.muted;
+  ctx.globalAlpha = 0.6;
+  ctx.fillText('из ' + totalAch, colW * 0.5, statsY + 38);
+  ctx.globalAlpha = 1;
+
+  // Рекорд
+  ctx.font = 'bold 32px -apple-system, sans-serif';
+  ctx.fillStyle = theme.accent;
+  ctx.fillText(String(state.bestStreak || 0), colW * 1.5, statsY);
+  ctx.font = 'bold 11px -apple-system, sans-serif';
+  ctx.fillStyle = theme.muted;
+  ctx.fillText('РЕКОРД', colW * 1.5, statsY + 22);
+  ctx.font = '10px -apple-system, sans-serif';
+  ctx.globalAlpha = 0.6;
+  ctx.fillText(pluralDays(state.bestStreak || 0), colW * 1.5, statsY + 38);
+  ctx.globalAlpha = 1;
+
+  // Привычки
+  var activeToday = state.habits.filter(isHabitRequiredToday);
+  var doneToday = activeToday.filter(isDoneToday).length;
+  ctx.font = 'bold 32px -apple-system, sans-serif';
+  ctx.fillStyle = theme.accent;
+  ctx.fillText(doneToday + '/' + activeToday.length, colW * 2.5, statsY);
+  ctx.font = 'bold 11px -apple-system, sans-serif';
+  ctx.fillStyle = theme.muted;
+  ctx.fillText('СЕГОДНЯ', colW * 2.5, statsY + 22);
+  ctx.font = '10px -apple-system, sans-serif';
+  ctx.globalAlpha = 0.6;
+  ctx.fillText('выполнено', colW * 2.5, statsY + 38);
+  ctx.globalAlpha = 1;
+
+  // Финальная плашка с датой
+  ctx.font = '12px -apple-system, sans-serif';
+  ctx.fillStyle = theme.muted;
+  ctx.globalAlpha = 0.5;
   ctx.fillText(new Date().toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' }), W/2, H - 40);
+  ctx.globalAlpha = 1;
+
+  // Подпись бренда
+  ctx.font = 'bold 11px -apple-system, sans-serif';
+  ctx.fillStyle = theme.muted;
+  ctx.globalAlpha = 0.4;
+  ctx.fillText('🔥 ТРЕКЕР ПРИВЫЧЕК', W/2, H - 20);
+  ctx.globalAlpha = 1;
+
   return canvas.toDataURL('image/png');
 }
 function roundRect(ctx, x, y, w, h, r) {
@@ -3606,18 +3796,33 @@ function roundRect(ctx, x, y, w, h, r) {
   ctx.arcTo(x, y, x + w, y, r);
   ctx.closePath();
 }
-function openSharePreview() {
-  var dataUrl = generateShareImage();
+function renderShareThemes() {
+  var container = document.getElementById('shareThemes');
+  container.innerHTML = Object.keys(SHARE_THEMES).map(function(id) {
+    var t = SHARE_THEMES[id];
+    var active = id === currentShareTheme;
+    return '<button class="share-theme-btn ' + (active ? 'active' : '') + '" data-theme="' + id + '">' +
+      '<span class="share-theme-swatch" style="background:' + t.swatch + '"></span>' +
+      '<span>' + t.emoji + ' ' + t.name + '</span>' +
+    '</button>';
+  }).join('');
+}
+function updateShareImage() {
+  var dataUrl = generateShareImage(currentShareTheme);
   document.getElementById('sharePreviewImg').src = dataUrl;
-  document.getElementById('sharePreview').classList.add('active');
   document.getElementById('sharePreview')._dataUrl = dataUrl;
+}
+function openSharePreview() {
+  renderShareThemes();
+  updateShareImage();
+  document.getElementById('sharePreview').classList.add('active');
 }
 function downloadShareImage() {
   var dataUrl = document.getElementById('sharePreview')._dataUrl;
   if (!dataUrl) return;
   var a = document.createElement('a');
   a.href = dataUrl;
-  a.download = 'habits-progress-' + todayKey() + '.png';
+  a.download = 'habits-' + currentShareTheme + '-' + todayKey() + '.png';
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
@@ -3820,6 +4025,15 @@ document.getElementById('shareClose').addEventListener('click', function() {
 document.getElementById('shareDownload').addEventListener('click', downloadShareImage);
 document.getElementById('sharePreview').addEventListener('click', function(e) {
   if (e.target.id === 'sharePreview') this.classList.remove('active');
+});
+document.getElementById('shareThemes').addEventListener('click', function(e) {
+  var btn = e.target.closest('.share-theme-btn');
+  if (!btn) return;
+  currentShareTheme = btn.dataset.theme;
+  localStorage.setItem(SHARE_THEME_KEY, currentShareTheme);
+  renderShareThemes();
+  updateShareImage();
+  vibrate(10);
 });
 document.querySelector('.bottom-nav').addEventListener('click', function(e) {
   var btn = e.target.closest('.nav-btn');
