@@ -138,6 +138,120 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 
 .nav-btn.active .nav-icon { transform: scale(1.1); }
 
+/* ====== ПАНЕЛЬ ВЫБОРА ДАТЫ ====== */
+.date-selector {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.date-selector.past {
+  border-color: rgba(255,159,67,0.4);
+  background: linear-gradient(90deg, rgba(255,159,67,0.06), var(--card));
+}
+
+.date-nav-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.03);
+  color: var(--text);
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+  font-family: inherit;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.date-nav-btn:hover:not(:disabled) {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.date-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.date-display {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.date-display-label {
+  font-size: 10px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+.date-display-value {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.date-selector.past .date-display-label { color: var(--gold); }
+.date-selector.past .date-display-value { color: var(--gold); }
+
+.date-today-btn {
+  padding: 8px 12px;
+  border-radius: 9px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.03);
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.date-today-btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
+.date-today-btn.hidden { display: none; }
+
+.date-hint {
+  width: 100%;
+  font-size: 11px;
+  color: var(--gold);
+  text-align: center;
+  line-height: 1.4;
+  padding-top: 4px;
+  border-top: 1px solid rgba(255,159,67,0.2);
+  margin-top: 4px;
+  display: none;
+}
+
+.date-selector.past .date-hint { display: block; }
+
 /* ====== ОБЩИЙ СТРИК ====== */
 .global-streak {
   background: var(--card);
@@ -335,7 +449,6 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 
 .ach-mini-more:hover { color: var(--text); background: rgba(255,255,255,0.07); }
 
-/* ====== ПРОГРЕСС ДНЯ ====== */
 .day-progress {
   margin-bottom: 16px;
   background: var(--card);
@@ -1037,11 +1150,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 .empty p { font-size: 15px; line-height: 1.6; }
 
 /* ==================== КАЛЕНДАРЬ ==================== */
-.calendar-wrap {
-  display: flex;
-  justify-content: center;
-  padding: 0;
-}
+.calendar-wrap { display: flex; justify-content: center; }
 
 .calendar-page {
   background: var(--card);
@@ -1060,11 +1169,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   gap: 8px;
 }
 
-.cal-month {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--text);
-}
+.cal-month { font-size: 15px; font-weight: 700; color: var(--text); }
 
 .cal-nav { display: flex; gap: 4px; }
 
@@ -1136,12 +1241,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   box-shadow: 0 0 12px rgba(108,92,231,0.3);
 }
 
-.cal-cell.empty {
-  cursor: default;
-  background: transparent;
-  border-color: transparent;
-}
-
+.cal-cell.empty { cursor: default; background: transparent; border-color: transparent; }
 .cal-cell.empty:hover { transform: none; box-shadow: none; }
 
 .cal-cell.today {
@@ -1149,11 +1249,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   box-shadow: 0 0 10px rgba(162,155,254,0.5);
 }
 
-.cal-cell.future {
-  opacity: 0.3;
-  cursor: default;
-}
-
+.cal-cell.future { opacity: 0.3; cursor: default; }
 .cal-cell.future:hover { transform: none; box-shadow: none; border-color: rgba(255,255,255,0.04); }
 
 .cal-cell.lvl-0 { background: rgba(255,255,255,0.03); }
@@ -1258,6 +1354,226 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   font-weight: 600;
 }
 
+/* ====== МОДАЛКА ДНЯ ==================== */
+.day-modal-box { max-width: 420px; }
+
+.day-modal-header {
+  margin-bottom: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.day-modal-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.day-modal-date {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.day-modal-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  padding: 10px 14px;
+  background: rgba(108,92,231,0.08);
+  border: 1px solid rgba(108,92,231,0.3);
+  border-radius: 12px;
+}
+
+.day-modal-summary-label {
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  font-weight: 600;
+}
+
+.day-modal-summary-value {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--accent-2);
+}
+
+.day-modal-summary-value.complete { color: var(--success); }
+.day-modal-summary-value.over { color: var(--gold); }
+
+.day-habits-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 14px 0;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.day-habit-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  transition: all 0.15s;
+}
+
+.day-habit-item:hover { background: rgba(255,255,255,0.04); }
+.day-habit-item.done { background: rgba(0,184,148,0.08); border-color: rgba(0,184,148,0.4); }
+.day-habit-item.over { background: rgba(255,159,67,0.1); border-color: rgba(255,159,67,0.5); }
+.day-habit-item.frozen { background: rgba(76,201,240,0.1); border-color: rgba(76,201,240,0.5); }
+.day-habit-item.partial { background: rgba(255,159,67,0.06); border-color: rgba(255,159,67,0.35); }
+
+.day-habit-info { flex: 1; min-width: 0; }
+
+.day-habit-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 3px;
+  word-break: break-word;
+}
+
+.day-habit-meta {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.day-habit-status {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.day-habit-status.done { color: var(--success); }
+.day-habit-status.over { color: var(--gold); }
+.day-habit-status.frozen { color: var(--freeze); }
+
+.day-habit-toggle {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  border: 2px solid var(--border);
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: transparent;
+  transition: all 0.2s;
+  font-family: inherit;
+  padding: 0;
+}
+
+.day-habit-toggle:hover { border-color: var(--success); }
+.day-habit-item.done .day-habit-toggle {
+  background: var(--success);
+  border-color: var(--success);
+  color: white;
+}
+
+.day-habit-controls {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+  align-items: center;
+}
+
+.day-habit-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.03);
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+  font-family: inherit;
+  padding: 0;
+}
+
+.day-habit-btn:hover { background: var(--accent); border-color: var(--accent); color: white; }
+
+.day-habit-btn.freeze {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.day-habit-btn.freeze:hover {
+  background: rgba(76,201,240,0.15);
+  border-color: var(--freeze);
+  color: var(--freeze);
+}
+
+.day-habit-btn.freeze.active {
+  background: rgba(76,201,240,0.2);
+  border-color: var(--freeze);
+  color: var(--freeze);
+}
+
+.day-modal-actions {
+  display: flex;
+  gap: 8px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.day-modal-actions button {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+
+.day-modal-actions button:hover { background: rgba(255,255,255,0.05); }
+
+.day-modal-actions button.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
+.day-modal-actions button.primary:hover { background: var(--accent-2); }
+
+.day-note-display {
+  margin-top: 12px;
+  padding: 12px;
+  background: rgba(108,92,231,0.08);
+  border: 1px solid rgba(108,92,231,0.3);
+  border-radius: 12px;
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.day-note-display::before {
+  content: '📝 ';
+  opacity: 0.7;
+}
+
 /* ====== МОДАЛКИ ====== */
 .modal-overlay {
   position: fixed;
@@ -1347,55 +1663,6 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   background: rgba(255,107,107,0.15);
   border-color: rgba(255,107,107,0.4);
   color: var(--danger);
-}
-
-.day-detail-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 0;
-  border-bottom: 1px solid var(--border);
-  font-size: 13px;
-}
-
-.day-detail-row:last-child { border-bottom: none; }
-
-.day-detail-name {
-  color: var(--text);
-  font-weight: 500;
-  flex: 1;
-  min-width: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.day-detail-status {
-  color: var(--muted);
-  font-weight: 600;
-  margin-left: 8px;
-  flex-shrink: 0;
-}
-
-.day-detail-status.done { color: var(--success); }
-.day-detail-status.partial { color: var(--gold); }
-.day-detail-status.frozen { color: var(--freeze); }
-
-.day-note-display {
-  margin-top: 14px;
-  padding: 12px;
-  background: rgba(108,92,231,0.08);
-  border: 1px solid rgba(108,92,231,0.3);
-  border-radius: 12px;
-  font-size: 13px;
-  color: var(--text);
-  line-height: 1.5;
-  white-space: pre-wrap;
-  word-break: break-word;
-}
-
-.day-note-display::before {
-  content: '📝 ';
-  opacity: 0.7;
 }
 
 /* ====== ДОСТИЖЕНИЯ ====== */
@@ -1716,11 +1983,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   font-weight: 600;
 }
 
-.per-habit {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
+.per-habit { display: flex; flex-direction: column; gap: 12px; }
 
 .per-habit-title {
   font-size: 12px;
@@ -2171,6 +2434,11 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   .cal-stat-value { font-size: 16px; }
   .cal-stat-label { font-size: 8px; }
   .calendar-page { padding: 12px; }
+  .date-nav-btn { width: 32px; height: 32px; font-size: 16px; }
+  .date-display-value { font-size: 14px; }
+  .day-modal-title { font-size: 16px; }
+  .day-habit-toggle { width: 32px; height: 32px; font-size: 16px; }
+  .day-habit-btn { width: 28px; height: 28px; font-size: 14px; }
 }
 </style>
 </head>
@@ -2181,8 +2449,19 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
     <div class="date-badge" id="todayDate"></div>
   </header>
 
-  <!-- СЕГОДНЯ -->
   <section class="tab-panel active" id="tab-today">
+    <!-- ВЫБОР ДАТЫ -->
+    <div class="date-selector" id="dateSelector">
+      <button class="date-nav-btn" id="datePrev" title="Предыдущий день">‹</button>
+      <div class="date-display" id="dateDisplay">
+        <div class="date-display-label" id="dateLabel">Сегодня</div>
+        <div class="date-display-value" id="dateValue">11 октября</div>
+      </div>
+      <button class="date-nav-btn" id="dateNext" title="Следующий день">›</button>
+      <button class="date-today-btn hidden" id="dateToday">Сегодня</button>
+      <div class="date-hint" id="dateHint">✏️ Редактирование прошлого дня. Изменения сохраняются.</div>
+    </div>
+
     <div class="global-streak" id="globalStreak">
       <div class="gs-flame">🔥</div>
       <div class="gs-info">
@@ -2204,7 +2483,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 
     <div class="day-progress">
       <div class="progress-head">
-        <span>Прогресс сегодня</span>
+        <span id="progressLabel">Прогресс сегодня</span>
         <span id="progressText">0%</span>
       </div>
       <div class="progress-bar">
@@ -2262,7 +2541,6 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
     <div class="habits" id="habitsList"></div>
   </section>
 
-  <!-- КАЛЕНДАРЬ -->
   <section class="tab-panel" id="tab-calendar">
     <div class="calendar-wrap">
       <div class="calendar-page">
@@ -2293,7 +2571,6 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
     </div>
   </section>
 
-  <!-- ДОСТИЖЕНИЯ -->
   <section class="tab-panel" id="tab-achievements">
     <div class="ach-section">
       <div class="ach-header">
@@ -2321,7 +2598,6 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
     </div>
   </section>
 
-  <!-- СТАТИСТИКА -->
   <section class="tab-panel" id="tab-stats">
     <div class="stats-section">
       <div class="stats-head">
@@ -2337,7 +2613,6 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
     </div>
   </section>
 
-  <!-- НАСТРОЙКИ -->
   <section class="tab-panel" id="tab-settings">
     <div class="settings-section">
       <div class="settings-title">❄ Заморозки</div>
@@ -2380,7 +2655,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   </section>
 </div>
 
-<!-- Модалки -->
+<!-- Модалка счётчика -->
 <div class="modal-overlay" id="counterModal">
   <div class="modal-box">
     <div class="modal-title">Введи значение</div>
@@ -2393,6 +2668,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   </div>
 </div>
 
+<!-- Модалка заметки -->
 <div class="modal-overlay" id="noteModal">
   <div class="modal-box">
     <div class="modal-title" id="noteModalTitle">📝 Заметка к дню</div>
@@ -2406,18 +2682,28 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   </div>
 </div>
 
+<!-- Модалка дня (расширенная) -->
 <div class="modal-overlay" id="dayModal">
-  <div class="modal-box">
-    <div class="modal-title" id="dayModalTitle">День</div>
-    <div class="modal-subtitle" id="dayModalDate"></div>
-    <div id="dayModalContent"></div>
-    <div class="modal-buttons">
+  <div class="modal-box day-modal-box">
+    <div class="day-modal-header">
+      <div class="day-modal-title" id="dayModalTitle">День</div>
+      <div class="day-modal-date" id="dayModalDate"></div>
+      <div class="day-modal-summary" id="dayModalSummary" style="display:none;">
+        <div class="day-modal-summary-label">Прогресс дня</div>
+        <div class="day-modal-summary-value" id="dayModalPercent">0%</div>
+      </div>
+    </div>
+    <div class="day-habits-list" id="dayHabitsList"></div>
+    <div id="dayNoteContainer"></div>
+    <div class="day-modal-actions">
       <button id="dayModalClose">Закрыть</button>
-      <button class="primary" id="dayModalNote">📝 Заметка</button>
+      <button id="dayModalNote">📝 Заметка</button>
+      <button class="primary" id="dayModalEdit">✏️ Редактировать</button>
     </div>
   </div>
 </div>
 
+<!-- Модалка достижения -->
 <div class="modal-overlay" id="achModal">
   <div class="modal-box" id="achModalBox" style="text-align:center;">
     <div class="ach-modal-icon" id="achModalIcon" style="font-size:70px;line-height:1;margin-bottom:12px;">🏆</div>
@@ -2501,6 +2787,8 @@ var achModalId = null;
 var currentWeight = 3;
 var calYear, calMonth;
 var currentShareTheme = localStorage.getItem(SHARE_THEME_KEY) || 'sunset';
+// ← КЛЮЧЕВАЯ ПЕРЕМЕННАЯ: выбранная дата для редактирования (по умолчанию сегодня)
+var selectedDate = todayKey();
 
 var notifSettings = loadNotifSettings();
 var unlockedAch = loadUnlockedAch();
@@ -2512,63 +2800,11 @@ var unlockedAch = loadUnlockedAch();
 })();
 
 var SHARE_THEMES = {
-  sunset: {
-    name: 'Закат', emoji: '🌅',
-    swatch: 'linear-gradient(135deg, #ff9f43, #ff6b6b)',
-    bg: ['#2d1b3d', '#1a0f2e'],
-    accent: '#ff9f43', accent2: '#ff6b6b',
-    text: '#ffe8d6', muted: 'rgba(255,232,214,0.55)',
-    glow: 'rgba(255,159,67,0.4)',
-    cardBg: 'rgba(255,159,67,0.08)', cardBorder: 'rgba(255,159,67,0.35)',
-    streakGrad: ['#ffb84d', '#ff6b6b', '#c44569'],
-    titleText: 'МОЙ ПРОГРЕСС'
-  },
-  space: {
-    name: 'Космос', emoji: '🌌',
-    swatch: 'linear-gradient(135deg, #6c5ce7, #4cc9f0)',
-    bg: ['#0a0a1f', '#050510'],
-    accent: '#6c5ce7', accent2: '#4cc9f0',
-    text: '#e0e7ff', muted: 'rgba(224,231,255,0.5)',
-    glow: 'rgba(108,92,231,0.45)',
-    cardBg: 'rgba(108,92,231,0.1)', cardBorder: 'rgba(108,92,231,0.4)',
-    streakGrad: ['#a29bfe', '#6c5ce7', '#4cc9f0'],
-    titleText: 'КОСМИЧЕСКИЙ ПРОГРЕСС',
-    stars: true
-  },
-  neon: {
-    name: 'Неон', emoji: '⚡',
-    swatch: 'linear-gradient(135deg, #ff006e, #00f5ff)',
-    bg: ['#0d0221', '#1a0033'],
-    accent: '#ff006e', accent2: '#00f5ff',
-    text: '#ffffff', muted: 'rgba(255,255,255,0.5)',
-    glow: 'rgba(255,0,110,0.5)',
-    cardBg: 'rgba(255,0,110,0.1)', cardBorder: 'rgba(0,245,255,0.5)',
-    streakGrad: ['#00f5ff', '#ff006e', '#ff00ff'],
-    titleText: 'NEON HABITS'
-  },
-  mint: {
-    name: 'Мята', emoji: '🌿',
-    swatch: 'linear-gradient(135deg, #00b894, #00d9a3)',
-    bg: ['#0a1f1a', '#041210'],
-    accent: '#00b894', accent2: '#00d9a3',
-    text: '#d1fae5', muted: 'rgba(209,250,229,0.5)',
-    glow: 'rgba(0,184,148,0.4)',
-    cardBg: 'rgba(0,184,148,0.08)', cardBorder: 'rgba(0,184,148,0.35)',
-    streakGrad: ['#00d9a3', '#00b894', '#009975'],
-    titleText: 'СВЕЖИЙ СТАРТ'
-  },
-  minimal: {
-    name: 'Минимал', emoji: '◻️',
-    swatch: 'linear-gradient(135deg, #ffffff, #8b90a0)',
-    bg: ['#f5f7fa', '#e4e9f0'],
-    accent: '#1a1d27', accent2: '#6c5ce7',
-    text: '#1a1d27', muted: 'rgba(26,29,39,0.5)',
-    glow: 'rgba(108,92,231,0.15)',
-    cardBg: 'rgba(26,29,39,0.04)', cardBorder: 'rgba(26,29,39,0.15)',
-    streakGrad: ['#6c5ce7', '#1a1d27', '#0f1117'],
-    titleText: 'МОЙ ПРОГРЕСС',
-    light: true
-  }
+  sunset: { name: 'Закат', emoji: '🌅', swatch: 'linear-gradient(135deg, #ff9f43, #ff6b6b)', bg: ['#2d1b3d', '#1a0f2e'], accent: '#ff9f43', accent2: '#ff6b6b', text: '#ffe8d6', muted: 'rgba(255,232,214,0.55)', glow: 'rgba(255,159,67,0.4)', cardBg: 'rgba(255,159,67,0.08)', cardBorder: 'rgba(255,159,67,0.35)', streakGrad: ['#ffb84d', '#ff6b6b', '#c44569'], titleText: 'МОЙ ПРОГРЕСС' },
+  space: { name: 'Космос', emoji: '🌌', swatch: 'linear-gradient(135deg, #6c5ce7, #4cc9f0)', bg: ['#0a0a1f', '#050510'], accent: '#6c5ce7', accent2: '#4cc9f0', text: '#e0e7ff', muted: 'rgba(224,231,255,0.5)', glow: 'rgba(108,92,231,0.45)', cardBg: 'rgba(108,92,231,0.1)', cardBorder: 'rgba(108,92,231,0.4)', streakGrad: ['#a29bfe', '#6c5ce7', '#4cc9f0'], titleText: 'КОСМИЧЕСКИЙ ПРОГРЕСС', stars: true },
+  neon: { name: 'Неон', emoji: '⚡', swatch: 'linear-gradient(135deg, #ff006e, #00f5ff)', bg: ['#0d0221', '#1a0033'], accent: '#ff006e', accent2: '#00f5ff', text: '#ffffff', muted: 'rgba(255,255,255,0.5)', glow: 'rgba(255,0,110,0.5)', cardBg: 'rgba(255,0,110,0.1)', cardBorder: 'rgba(0,245,255,0.5)', streakGrad: ['#00f5ff', '#ff006e', '#ff00ff'], titleText: 'NEON HABITS' },
+  mint: { name: 'Мята', emoji: '🌿', swatch: 'linear-gradient(135deg, #00b894, #00d9a3)', bg: ['#0a1f1a', '#041210'], accent: '#00b894', accent2: '#00d9a3', text: '#d1fae5', muted: 'rgba(209,250,229,0.5)', glow: 'rgba(0,184,148,0.4)', cardBg: 'rgba(0,184,148,0.08)', cardBorder: 'rgba(0,184,148,0.35)', streakGrad: ['#00d9a3', '#00b894', '#009975'], titleText: 'СВЕЖИЙ СТАРТ' },
+  minimal: { name: 'Минимал', emoji: '◻️', swatch: 'linear-gradient(135deg, #ffffff, #8b90a0)', bg: ['#f5f7fa', '#e4e9f0'], accent: '#1a1d27', accent2: '#6c5ce7', text: '#1a1d27', muted: 'rgba(26,29,39,0.5)', glow: 'rgba(108,92,231,0.15)', cardBg: 'rgba(26,29,39,0.04)', cardBorder: 'rgba(26,29,39,0.15)', streakGrad: ['#6c5ce7', '#1a1d27', '#0f1117'], titleText: 'МОЙ ПРОГРЕСС', light: true }
 };
 
 function dateKey(d) {
@@ -2592,6 +2828,8 @@ function weekdayIndex(key) {
   return (day + 6) % 7;
 }
 var MONTH_NAMES = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+var MONTH_NAMES_GEN = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+var WEEKDAY_NAMES = ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'];
 
 function loadState() {
   var keys = ['habit-tracker-v5', 'habit-tracker-v4', 'habit-tracker-v3', 'habit-tracker-v2', 'habit-tracker-v1'];
@@ -2704,145 +2942,275 @@ function pulseCounter(habitId, amount) {
     popup.classList.add('animate');
   }
 }
+
+// ============ ДЕЙСТВИЯ С ПРИВЫЧКАМИ (по selectedDate) ============
+
 function incrementHabit(id, amount) {
   amount = amount || 1;
   var habit = state.habits.find(function(h) { return h.id === id; });
   if (!habit) return;
-  var today = todayKey();
-  if (isFrozen(habit, today)) { removeFreeze(habit, today); showToast('❄ Заморозка снята'); }
-  var current = getProgress(habit, today);
-  var wasComplete = wasCompletedOn(habit, today);
+  var dk = selectedDate;
+  if (isFrozen(habit, dk)) { removeFreeze(habit, dk); showToast('❄ Заморозка снята'); }
+  var current = getProgress(habit, dk);
+  var wasComplete = wasCompletedOn(habit, dk);
   var newValue = current + amount;
   if (newValue > MAX_PROGRESS) newValue = MAX_PROGRESS;
   if (newValue === current) return;
-  setProgress(habit, today, newValue);
+  setProgress(habit, dk, newValue);
   saveState();
   vibrate(10);
   checkAchievements();
   render();
   pulseCounter(id, amount);
-  if (!wasComplete && wasCompletedOn(habit, today)) checkDayCompleted();
+  if (!wasComplete && wasCompletedOn(habit, dk) && dk === todayKey()) checkDayCompleted();
+  // Обновить модалку дня, если она открыта
+  if (viewingDayKey === dk) refreshDayModalContent();
 }
+
 function decrementHabit(id) {
   var habit = state.habits.find(function(h) { return h.id === id; });
   if (!habit) return;
-  var current = getProgress(habit, todayKey());
+  var current = getProgress(habit, selectedDate);
   if (current <= 0) return;
-  setProgress(habit, todayKey(), current - 1);
+  setProgress(habit, selectedDate, current - 1);
   saveState();
   render();
+  if (viewingDayKey === selectedDate) refreshDayModalContent();
 }
+
 function toggleHabit(id) {
   var habit = state.habits.find(function(h) { return h.id === id; });
   if (!habit) return;
-  var today = todayKey();
-  if (isFrozen(habit, today)) {
-    removeFreeze(habit, today);
+  var dk = selectedDate;
+  if (isFrozen(habit, dk)) {
+    removeFreeze(habit, dk);
     showToast('❄ Заморозка снята');
     saveState();
     render();
+    if (viewingDayKey === dk) refreshDayModalContent();
     return;
   }
-  var current = getProgress(habit, today);
+  var current = getProgress(habit, dk);
   var goal = getGoal(habit);
-  if (current >= goal) setProgress(habit, today, 0);
-  else setProgress(habit, today, goal);
+  if (current >= goal) setProgress(habit, dk, 0);
+  else setProgress(habit, dk, goal);
   saveState();
   vibrate(15);
   checkAchievements();
   render();
-  checkDayCompleted();
+  if (dk === todayKey()) checkDayCompleted();
+  if (viewingDayKey === dk) refreshDayModalContent();
 }
-function toggleFreeze(id) {
+
+function toggleFreeze(id, dateK) {
   var habit = state.habits.find(function(h) { return h.id === id; });
   if (!habit) return;
-  var today = todayKey();
-  if (isFrozen(habit, today)) {
-    removeFreeze(habit, today);
+  var dk = dateK || selectedDate;
+  if (isFrozen(habit, dk)) {
+    removeFreeze(habit, dk);
     showToast('❄ Заморозка снята');
   } else {
-    if (getFreezesLeft(habit, today) <= 0) {
+    if (getFreezesLeft(habit, dk) <= 0) {
       showToast('❄ Заморозка уже использована в этом месяце');
       return;
     }
-    addFreeze(habit, today);
+    addFreeze(habit, dk);
     showToast('❄ День заморожен');
     vibrate(20);
   }
   saveState();
   render();
+  if (viewingDayKey === dk) refreshDayModalContent();
 }
-function isDoneToday(habit) { return wasCompletedOn(habit, todayKey()); }
 
-function openCounterModal(habitId) {
-  var habit = state.habits.find(function(h) { return h.id === habitId; });
-  if (!habit) return;
-  editingHabitId = habitId;
-  var goal = getGoal(habit);
-  var current = getProgress(habit, todayKey());
-  document.getElementById('counterModalGoal').textContent = 'Цель: ' + goal + ' (можно больше)';
-  document.getElementById('counterModalInput').value = current;
-  document.getElementById('counterModal').classList.add('active');
-  setTimeout(function() {
-    var i = document.getElementById('counterModalInput');
-    i.focus();
-    i.select();
-  }, 100);
+function isDoneToday(habit) { return wasCompletedOn(habit, todayKey()); }
+function isDoneSelected(habit) { return wasCompletedOn(habit, selectedDate); }
+
+// ============ ВЫБОР ДАТЫ ============
+
+function selectDate(dk) {
+  if (dk > todayKey()) return; // нельзя в будущее
+  selectedDate = dk;
+  updateDateSelector();
+  render();
 }
-function closeCounterModal() {
-  document.getElementById('counterModal').classList.remove('active');
-  editingHabitId = null;
-}
-function saveCounterModal() {
-  if (!editingHabitId) return;
-  var habit = state.habits.find(function(h) { return h.id === editingHabitId; });
-  if (!habit) { closeCounterModal(); return; }
-  var value = parseInt(document.getElementById('counterModalInput').value, 10) || 0;
-  if (value < 0) value = 0;
-  if (value > MAX_PROGRESS) value = MAX_PROGRESS;
+
+function updateDateSelector() {
+  var dk = selectedDate;
   var today = todayKey();
-  if (isFrozen(habit, today) && value > 0) removeFreeze(habit, today);
-  var wasComplete = wasCompletedOn(habit, today);
-  setProgress(habit, today, value);
+  var isPast = dk !== today;
+  var sel = document.getElementById('dateSelector');
+  sel.classList.toggle('past', isPast);
+  var label = document.getElementById('dateLabel');
+  var value = document.getElementById('dateValue');
+  var todayBtn = document.getElementById('dateToday');
+
+  if (dk === today) {
+    label.textContent = 'Сегодня';
+    value.textContent = formatDateShort(dk);
+    todayBtn.classList.add('hidden');
+  } else if (dk === yesterdayKey()) {
+    label.textContent = 'Вчера';
+    value.textContent = formatDateShort(dk);
+    todayBtn.classList.remove('hidden');
+  } else {
+    label.textContent = 'Редактирование';
+    value.textContent = formatDateShort(dk);
+    todayBtn.classList.remove('hidden');
+  }
+
+  // Обновляем заголовок прогресса
+  document.getElementById('progressLabel').textContent = dk === today ? 'Прогресс сегодня' : 'Прогресс за день';
+}
+
+function formatDateShort(key) {
+  var p = key.split('-').map(Number);
+  return p[2] + ' ' + MONTH_NAMES_GEN[p[1]-1];
+}
+
+// ============ МОДАЛКА ДНЯ ============
+
+function openDayModal(dateK) {
+  viewingDayKey = dateK;
+  refreshDayModalContent();
+  document.getElementById('dayModal').classList.add('active');
+}
+
+function refreshDayModalContent() {
+  if (!viewingDayKey) return;
+  var dk = viewingDayKey;
+  document.getElementById('dayModalTitle').textContent = getDayTitle(dk);
+  document.getElementById('dayModalDate').textContent = formatDateLong(dk);
+
+  var required = state.habits.filter(function(h) { return isHabitRequiredOn(h, dk); });
+  var list = document.getElementById('dayHabitsList');
+  var summary = document.getElementById('dayModalSummary');
+
+  if (required.length === 0) {
+    list.innerHTML = '<div style="text-align:center;padding:20px;color:var(--muted);font-size:13px;">Нет привычек на этот день</div>';
+    summary.style.display = 'none';
+  } else {
+    summary.style.display = 'flex';
+    var dayPercent = getDayPercent(dk);
+    var dayPercentRaw = getDayPercentRaw(dk);
+    var pctEl = document.getElementById('dayModalPercent');
+    var pctVal = Math.round(dayPercent * 100);
+    pctEl.textContent = pctVal + '%';
+    pctEl.className = 'day-modal-summary-value' + (pctVal >= 100 ? ' complete' : (dayPercentRaw > 1.01 ? ' over' : ''));
+
+    list.innerHTML = required.map(function(h) {
+      var frozen = isFrozen(h, dk);
+      var done = wasCompletedOn(h, dk);
+      var goal = getGoal(h);
+      var hasCounter = goal > 1;
+      var current = getProgress(h, dk);
+      var pct = getHabitPercent(h, dk);
+      var isOver = pct > 1;
+      var isPartial = pct > 0 && pct < 1;
+
+      var itemClass = frozen ? 'frozen' : (isOver ? 'over' : (done ? 'done' : (isPartial ? 'partial' : '')));
+
+      var statusText = '';
+      var statusClass = '';
+      if (frozen) { statusText = '❄ Заморожено'; statusClass = 'frozen'; }
+      else if (isOver) { statusText = current + '/' + goal + ' 🔥'; statusClass = 'over'; }
+      else if (done) { statusText = '✓ Выполнено'; statusClass = 'done'; }
+      else if (hasCounter && current > 0) { statusText = current + '/' + goal; statusClass = ''; }
+      else { statusText = '—'; statusClass = ''; }
+
+      var controls = '';
+      if (!frozen) {
+        if (hasCounter) {
+          controls = '<div class="day-habit-controls">' +
+            '<button class="day-habit-btn" data-day-action="minus" data-day-id="' + h.id + '">−</button>' +
+            '<button class="day-habit-btn" data-day-action="plus" data-day-id="' + h.id + '">+</button>' +
+          '</div>';
+        } else {
+          controls = '<button class="day-habit-toggle" data-day-action="toggle" data-day-id="' + h.id + '">✓</button>';
+        }
+      }
+
+      var freezeBtn = '<button class="day-habit-btn freeze ' + (frozen ? 'active' : '') + '" data-day-action="freeze" data-day-id="' + h.id + '" title="Заморозка">❄</button>';
+
+      return '<div class="day-habit-item ' + itemClass + '">' +
+        '<div class="day-habit-info">' +
+          '<div class="day-habit-name">' + escapeHtml(h.name) + '</div>' +
+          '<div class="day-habit-meta">Цель: ' + goal + (hasCounter ? ' · Выполнено: ' + current : '') + '</div>' +
+        '</div>' +
+        '<div class="day-habit-status ' + statusClass + '">' + statusText + '</div>' +
+        freezeBtn +
+        controls +
+      '</div>';
+    }).join('');
+  }
+
+  // Заметка
+  var note = state.notes[dk];
+  var noteContainer = document.getElementById('dayNoteContainer');
+  noteContainer.innerHTML = note ? '<div class="day-note-display">' + escapeHtml(note) + '</div>' : '';
+}
+
+function getDayTitle(key) {
+  var today = todayKey();
+  var yest = yesterdayKey();
+  if (key === today) return '📅 Сегодня';
+  if (key === yest) return '📅 Вчера';
+  var p = key.split('-').map(Number);
+  return '📅 ' + WEEKDAY_NAMES[new Date(p[0], p[1]-1, p[2]).getDay()];
+}
+
+function closeDayModal() {
+  document.getElementById('dayModal').classList.remove('active');
+  viewingDayKey = null;
+}
+
+// Обработка кнопок в модалке дня
+document.getElementById('dayHabitsList').addEventListener('click', function(e) {
+  var btn = e.target.closest('[data-day-action]');
+  if (!btn) return;
+  var action = btn.dataset.dayAction;
+  var id = btn.dataset.dayId;
+  var dk = viewingDayKey;
+  if (!dk) return;
+
+  var habit = state.habits.find(function(h) { return h.id === id; });
+  if (!habit) return;
+
+  if (action === 'toggle') {
+    if (isFrozen(habit, dk)) { removeFreeze(habit, dk); }
+    else {
+      var current = getProgress(habit, dk);
+      var goal = getGoal(habit);
+      if (current >= goal) setProgress(habit, dk, 0);
+      else setProgress(habit, dk, goal);
+    }
+  } else if (action === 'plus') {
+    if (isFrozen(habit, dk)) removeFreeze(habit, dk);
+    var cur = getProgress(habit, dk);
+    setProgress(habit, dk, cur + 1);
+  } else if (action === 'minus') {
+    var cur2 = getProgress(habit, dk);
+    if (cur2 > 0) setProgress(habit, dk, cur2 - 1);
+  } else if (action === 'freeze') {
+    if (isFrozen(habit, dk)) {
+      removeFreeze(habit, dk);
+    } else {
+      if (getFreezesLeft(habit, dk) <= 0) {
+        showToast('❄ Заморозка уже использована в этом месяце');
+        return;
+      }
+      addFreeze(habit, dk);
+    }
+  }
+
   saveState();
-  closeCounterModal();
-  vibrate(15);
+  vibrate(10);
   checkAchievements();
   render();
-  if (!wasComplete && wasCompletedOn(habit, today)) checkDayCompleted();
-}
+  refreshDayModalContent();
+});
 
-function openNoteModal(dateK) {
-  editingNoteDate = dateK;
-  var note = state.notes[dateK] || '';
-  document.getElementById('noteModalDate').textContent = formatDateLong(dateK);
-  document.getElementById('noteInput').value = note;
-  document.getElementById('noteDelete').style.display = note ? 'block' : 'none';
-  document.getElementById('noteModal').classList.add('active');
-  setTimeout(function() { document.getElementById('noteInput').focus(); }, 100);
-}
-function closeNoteModal() {
-  document.getElementById('noteModal').classList.remove('active');
-  editingNoteDate = null;
-}
-function saveNote() {
-  if (!editingNoteDate) return;
-  var text = document.getElementById('noteInput').value.trim();
-  if (text) state.notes[editingNoteDate] = text;
-  else delete state.notes[editingNoteDate];
-  saveState();
-  closeNoteModal();
-  showToast('📝 Заметка сохранена');
-  render();
-}
-function deleteNote() {
-  if (!editingNoteDate) return;
-  delete state.notes[editingNoteDate];
-  saveState();
-  closeNoteModal();
-  showToast('📝 Заметка удалена');
-  render();
-}
+// ============ СТРИКИ ============
 
 function isHabitRequiredOn(habit, key) {
   var from = habit.mustCompleteFrom || habit.createdAt || '0000-00-00';
@@ -2911,6 +3279,8 @@ function getHabitStreak(habit) {
 }
 function isHabitRequiredToday(habit) { return isHabitRequiredOn(habit, todayKey()); }
 
+// ============ ДОСТИЖЕНИЯ ============
+
 var ACHIEVEMENTS = [
   { id: 'streak_3', cat: 'streak', icon: '🌱', name: 'Первый росток', desc: '3 дня подряд', check: function(c) { return c.globalStreak >= 3; }, progress: function(c) { return { cur: c.globalStreak, max: 3 }; } },
   { id: 'streak_7', cat: 'streak', icon: '🔥', name: 'Неделя огня', desc: '7 дней подряд', check: function(c) { return c.globalStreak >= 7; }, progress: function(c) { return { cur: c.globalStreak, max: 7 }; } },
@@ -2931,6 +3301,7 @@ var ACHIEVEMENTS = [
   { id: 'freeze_5', cat: 'freeze', icon: '🧊', name: 'Айсберг', desc: '5 заморозок', check: function(c) { return c.totalFreezes >= 5; }, progress: function(c) { return { cur: c.totalFreezes, max: 5 }; } },
   { id: 'note_first', cat: 'count', icon: '📝', name: 'Дневник', desc: 'Первая заметка', check: function(c) { return c.totalNotes >= 1; }, progress: function(c) { return { cur: c.totalNotes, max: 1 }; } },
   { id: 'note_30', cat: 'count', icon: '📖', name: 'Летописец', desc: '30 заметок', check: function(c) { return c.totalNotes >= 30; }, progress: function(c) { return { cur: c.totalNotes, max: 30 }; } },
+  { id: 'time_travel', cat: 'comeback', icon: '⏰', name: 'Путешественник', desc: 'Отметил прошлый день', check: function(c) { return c.pastEdits >= 1; }, progress: function(c) { return { cur: c.pastEdits, max: 1 }; } },
 ];
 
 function getAchievementContext() {
@@ -2946,9 +3317,14 @@ function getAchievementContext() {
     Object.keys(h.frozen || {}).forEach(function(k) { allDates[k] = true; });
   });
   var dates = Object.keys(allDates).sort();
+  var pastEdits = 0;
+  var today = todayKey();
   dates.forEach(function(key) {
     var required = state.habits.filter(function(h) { return isHabitRequiredOn(h, key); });
     if (required.length === 0) return;
+    if (key < today && required.some(function(h) { return getProgress(h, key) > 0 || isFrozen(h, key); })) {
+      // не считаем автоматически, только если реально отредактировано — упрощённо
+    }
     var dayOver = false;
     required.forEach(function(h) {
       var pct = getHabitPercent(h, key);
@@ -2960,11 +3336,14 @@ function getAchievementContext() {
     });
     if (dayOver) overDays++;
   });
+  // Считаем pastEdits по флагу
+  pastEdits = state.pastEditsCount || 0;
+
   var hadBreak = false, comebackCount = 0;
-  var requiredForAll = state.habits.filter(function(h) { return isHabitRequiredOn(h, todayKey()); }).length;
+  var requiredForAll = state.habits.filter(function(h) { return isHabitRequiredOn(h, today); }).length;
   if (requiredForAll > 0) {
     var daysArr = [];
-    var cursor = todayKey();
+    var cursor = today;
     for (var i = 0; i < 730; i++) {
       daysArr.push({ key: cursor, complete: isDayComplete(cursor) });
       cursor = shiftKey(cursor, -1);
@@ -2987,7 +3366,8 @@ function getAchievementContext() {
     hadBreak: hadBreak,
     comebackCount: comebackCount,
     totalFreezes: totalFreezes,
-    totalNotes: totalNotes
+    totalNotes: totalNotes,
+    pastEdits: pastEdits
   };
 }
 function checkAchievements() {
@@ -3104,7 +3484,8 @@ function renderAchievementsMini() {
   }).join('');
 }
 
-// КАЛЕНДАРЬ
+// ============ КАЛЕНДАРЬ ============
+
 function renderCalendar() {
   document.getElementById('calMonth').textContent = MONTH_NAMES[calMonth] + ' ' + calYear;
   var firstDay = new Date(calYear, calMonth, 1);
@@ -3148,39 +3529,6 @@ function renderCalendar() {
     '<div class="cal-stat"><div class="cal-stat-value freeze">' + monthFrozen + '</div><div class="cal-stat-label">Заморозок</div></div>';
 }
 
-function openDayModal(dateK) {
-  viewingDayKey = dateK;
-  document.getElementById('dayModalTitle').textContent = formatDateLong(dateK);
-  var required = state.habits.filter(function(h) { return isHabitRequiredOn(h, dateK); });
-  var contentHtml = '';
-  if (required.length === 0) {
-    contentHtml = '<div style="text-align:center;padding:16px;color:var(--muted);font-size:13px;">Нет привычек на этот день</div>';
-  } else {
-    contentHtml = required.map(function(h) {
-      var frozen = isFrozen(h, dateK);
-      var done = wasCompletedOn(h, dateK);
-      var pct = Math.round(getHabitPercent(h, dateK) * 100);
-      var statusText, statusClass;
-      if (frozen) { statusText = '❄ Заморожено'; statusClass = 'frozen'; }
-      else if (done) { statusText = pct > 100 ? pct + '% 🔥' : '✓ Выполнено'; statusClass = 'done'; }
-      else if (pct > 0) { statusText = pct + '%'; statusClass = 'partial'; }
-      else { statusText = '—'; statusClass = ''; }
-      return '<div class="day-detail-row">' +
-        '<div class="day-detail-name">' + escapeHtml(h.name) + '</div>' +
-        '<div class="day-detail-status ' + statusClass + '">' + statusText + '</div>' +
-      '</div>';
-    }).join('');
-  }
-  var note = state.notes[dateK];
-  var noteHtml = note ? '<div class="day-note-display">' + escapeHtml(note) + '</div>' : '';
-  document.getElementById('dayModalContent').innerHTML = contentHtml + noteHtml;
-  document.getElementById('dayModal').classList.add('active');
-}
-function closeDayModal() {
-  document.getElementById('dayModal').classList.remove('active');
-  viewingDayKey = null;
-}
-
 function formatDateLong(key) {
   var p = key.split('-').map(Number);
   var d = new Date(p[0], p[1]-1, p[2]);
@@ -3197,6 +3545,8 @@ function escapeHtml(str) {
     return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
   });
 }
+
+// ============ СТАТИСТИКА ============
 
 function getPeriodKeys(days) {
   var keys = [];
@@ -3298,12 +3648,15 @@ function renderStats() {
     '<div class="per-habit"><div class="per-habit-title">По привычкам</div>' + perHabitHtml + '</div>';
 }
 
+// ============ ДЕЙСТВИЯ ============
+
 function deleteHabit(id) {
   if (!confirm('Удалить привычку?')) return;
   state.habits = state.habits.filter(function(h) { return h.id !== id; });
   saveState();
   render();
 }
+
 function addHabit(name, goal, weight) {
   var today = todayKey();
   var requiredToday = state.habits.filter(function(h) { return isHabitRequiredToday(h); });
@@ -3322,6 +3675,7 @@ function addHabit(name, goal, weight) {
   saveState();
   render();
 }
+
 function switchTab(tab) {
   activeTab = tab;
   localStorage.setItem(ACTIVE_TAB_KEY, tab);
@@ -3346,11 +3700,16 @@ function switchTab(tab) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+// ============ РЕНДЕР ============
+
 function render() {
   var list = document.getElementById('habitsList');
   document.getElementById('todayDate').textContent = new Date().toLocaleDateString('ru-RU', {
     day: 'numeric', month: 'long', weekday: 'short'
   });
+
+  updateDateSelector();
+
   var globalStreak = getGlobalStreak();
   updateBestStreak(globalStreak);
   var gsEl = document.getElementById('globalStreak');
@@ -3358,29 +3717,35 @@ function render() {
   document.getElementById('gsUnit').textContent = pluralDays(globalStreak);
   document.getElementById('gsBest').textContent = 'Рекорд: ' + (state.bestStreak || 0);
   gsEl.classList.remove('active', 'at-risk');
-  var requiredToday = state.habits.filter(isHabitRequiredToday);
-  var totalToday = requiredToday.length;
-  var dayPercent = getDayPercent(todayKey());
-  var dayPercentRaw = getDayPercentRaw(todayKey());
+
+  // Для прогресса дня используем selectedDate (но заголовок стрика - общий)
+  var dk = selectedDate;
+  var isToday = dk === todayKey();
+  var requiredForView = state.habits.filter(function(h) { return isHabitRequiredOn(h, dk); });
+  var totalForView = requiredForView.length;
+  var dayPercent = getDayPercent(dk);
+  var dayPercentRaw = getDayPercentRaw(dk);
   var dayPercentInt = Math.round(dayPercent * 100);
-  var doneCount = requiredToday.filter(isDoneToday).length;
+  var doneCount = requiredForView.filter(function(h) { return wasCompletedOn(h, dk); }).length;
+
   var overCount = 0, partialCount = 0, frozenCount = 0;
-  requiredToday.forEach(function(h) {
-    if (isFrozen(h, todayKey())) frozenCount++;
+  requiredForView.forEach(function(h) {
+    if (isFrozen(h, dk)) frozenCount++;
     var goal = getGoal(h);
-    var cur = getProgress(h, todayKey());
+    var cur = getProgress(h, dk);
     if (goal > 1 && cur > goal) overCount++;
     else {
-      var p = getHabitPercent(h, todayKey());
+      var p = getHabitPercent(h, dk);
       if (p > 0 && p < 1) partialCount++;
     }
   });
+
   var gsStatus = document.getElementById('gsStatus');
   if (state.habits.length === 0) {
     gsStatus.textContent = 'Добавь привычки, чтобы начать';
     gsStatus.className = 'gs-status';
   } else {
-    var allDone = totalToday > 0 && doneCount === totalToday;
+    var allDone = totalForView > 0 && doneCount === totalForView;
     if (allDone && globalStreak > 0) {
       gsEl.classList.add('active');
       if (overCount > 0 || dayPercentRaw > 1.01) {
@@ -3397,35 +3762,38 @@ function render() {
       gsEl.classList.add('at-risk');
       if (frozenCount > 0) gsStatus.textContent = '❄ Есть заморозки — докончи остальное';
       else if (partialCount > 0) gsStatus.textContent = '⚠️ Прогресс ' + dayPercentInt + '% — докончи до 100%';
-      else gsStatus.textContent = '⚠️ Осталось ' + (totalToday - doneCount) + ' — не разорви цепочку!';
+      else gsStatus.textContent = '⚠️ Осталось ' + (totalForView - doneCount) + ' — не разорви цепочку!';
       gsStatus.className = 'gs-status warn';
     } else {
       gsStatus.textContent = dayPercentInt > 0 ? 'Прогресс ' + dayPercentInt + '% — доведи до 100%' : 'Выполни все привычки на 100%';
       gsStatus.className = 'gs-status';
     }
   }
-  document.getElementById('progressText').textContent = dayPercentInt + '%' + (totalToday > 0 ? ' (' + doneCount + '/' + totalToday + ')' : '');
+
+  document.getElementById('progressText').textContent = dayPercentInt + '%' + (totalForView > 0 ? ' (' + doneCount + '/' + totalForView + ')' : '');
   document.getElementById('progressFill').style.width = (dayPercent * 100) + '%';
+
   renderAchievementsMini();
   if (activeTab === 'calendar') renderCalendar();
+
   if (state.habits.length === 0) {
     list.innerHTML = '<div class="empty"><div class="empty-icon">🌱</div><p>Пока нет привычек.<br>Добавь первую!</p></div>';
   } else {
     list.innerHTML = state.habits.map(function(habit) {
-      var today = todayKey();
-      var frozen = isFrozen(habit, today);
-      var done = isDoneToday(habit);
+      var frozen = isFrozen(habit, dk);
+      var done = wasCompletedOn(habit, dk);
       var streak = getHabitStreak(habit);
       var goal = getGoal(habit);
       var weight = getWeight(habit);
       var hasCounter = goal > 1;
-      var current = getProgress(habit, today);
-      var percent = getHabitPercent(habit, today);
+      var current = getProgress(habit, dk);
+      var percent = getHabitPercent(habit, dk);
       var isOver = percent > 1;
       var isPartial = percent > 0 && percent < 1;
-      var required = isHabitRequiredToday(habit);
-      var startsTomorrow = !required && habit.mustCompleteFrom === shiftKey(today, 1);
-      var freezeUsedThisMonth = getFreezesUsed(habit, today) > 0;
+      var required = isHabitRequiredOn(habit, dk);
+      var startsTomorrow = !required && habit.mustCompleteFrom === shiftKey(dk, 1);
+      var freezeUsedThisMonth = getFreezesUsed(habit, dk) > 0;
+
       var topControl;
       if (frozen) {
         topControl = '<div style="flex-shrink:0;width:40px;height:40px;border-radius:10px;background:rgba(76,201,240,0.2);border:2px solid var(--freeze);display:flex;align-items:center;justify-content:center;font-size:20px;">❄</div>';
@@ -3440,6 +3808,7 @@ function render() {
       } else {
         topControl = '<button class="check-btn" data-action="toggle">✓</button>';
       }
+
       var counterHtml = '';
       if (hasCounter && !frozen) {
         var percentFill = Math.min(100, percent * 100);
@@ -3459,12 +3828,14 @@ function render() {
               '</div>' +
             '</div></div>';
       }
+
       var habitClass = frozen ? 'frozen' : (isOver ? 'over' : (done ? 'done' : (isPartial ? 'partial' : '')));
       var weightBadge = weight !== 3 ? '<span class="weight-badge">⚖ ' + weight + '</span>' : '';
       var streakMeta = streak > 0 ? '<span>🔥 ' + streak + ' ' + pluralDays(streak) + ' подряд</span>' : '';
       var overMeta = isOver && !frozen ? '<span style="color:var(--gold);font-weight:700">⚡ ' + Math.round(percent * 100) + '%</span>' : '';
       var freezeMeta = frozen ? '<span style="color:var(--freeze);font-weight:700">❄ Заморожено</span>' : '';
       var freezeBtnClass = 'freeze-btn' + (frozen ? ' active' : '') + (!frozen && freezeUsedThisMonth ? ' used' : '');
+
       return '<div class="habit ' + habitClass + '" data-id="' + habit.id + '">' +
         '<div class="habit-top">' + topControl +
           '<div class="habit-info">' +
@@ -3488,10 +3859,13 @@ function render() {
       '</div>';
     }).join('');
   }
+
   if (activeTab === 'stats') renderStats();
   if (activeTab === 'achievements') renderAchievements();
 }
+
 function checkDayCompleted() { if (isDayComplete(todayKey())) checkAchievements(); }
+
 function renderSettings() {
   var row = document.getElementById('notifEnabledRow');
   row.classList.toggle('active', notifSettings.enabled);
@@ -3630,7 +4004,7 @@ function generateShareImage(themeId) {
     }
     ctx.globalAlpha = 1;
   }
-  ctx.font = 'bold 22px -apple-system, BlinkMacSystemFont, sans-serif';
+  ctx.font = 'bold 22px -apple-system, sans-serif';
   ctx.fillStyle = theme.muted;
   ctx.textAlign = 'center';
   ctx.fillText(theme.titleText, W/2, 60);
@@ -3641,7 +4015,7 @@ function generateShareImage(themeId) {
   streakGrad.addColorStop(0, theme.streakGrad[0]);
   streakGrad.addColorStop(0.5, theme.streakGrad[1]);
   streakGrad.addColorStop(1, theme.streakGrad[2]);
-  ctx.font = 'bold 160px -apple-system, BlinkMacSystemFont, sans-serif';
+  ctx.font = 'bold 160px -apple-system, sans-serif';
   ctx.fillStyle = streakGrad;
   ctx.fillText(String(streak), W/2, 400);
   ctx.font = 'bold 26px -apple-system, sans-serif';
@@ -3767,6 +4141,179 @@ function downloadShareImage() {
   showToast('📥 Картинка сохранена');
 }
 
+// ============ СОБЫТИЯ ============
+
+// Выбор даты
+document.getElementById('datePrev').addEventListener('click', function() {
+  var newDate = shiftKey(selectedDate, -1);
+  selectDate(newDate);
+});
+document.getElementById('dateNext').addEventListener('click', function() {
+  var newDate = shiftKey(selectedDate, 1);
+  if (newDate > todayKey()) return;
+  selectDate(newDate);
+});
+document.getElementById('dateToday').addEventListener('click', function() {
+  selectDate(todayKey());
+});
+document.getElementById('dateDisplay').addEventListener('click', function() {
+  // Тап по центру — открыть модалку дня
+  openDayModal(selectedDate);
+});
+
+// Обновить состояние кнопок навигации по дате
+function updateDateNavButtons() {
+  var today = todayKey();
+  document.getElementById('dateNext').disabled = (selectedDate >= today);
+}
+var origSelectDate = selectDate;
+selectDate = function(dk) {
+  origSelectDate(dk);
+  updateDateNavButtons();
+};
+
+// Модалка дня
+document.getElementById('dayModalClose').addEventListener('click', closeDayModal);
+document.getElementById('dayModalNote').addEventListener('click', function() {
+  var dk = viewingDayKey || selectedDate;
+  closeDayModal();
+  openNoteModal(dk);
+});
+document.getElementById('dayModalEdit').addEventListener('click', function() {
+  // Переключаемся на выбранную дату и закрываем модалку
+  var dk = viewingDayKey;
+  closeDayModal();
+  if (dk) {
+    selectDate(dk);
+    switchTab('today');
+    showToast('✏️ Редактирование ' + formatDateShort(dk));
+  }
+});
+document.getElementById('dayModal').addEventListener('click', function(e) {
+  if (e.target.id === 'dayModal') closeDayModal();
+});
+
+// Хитмап
+document.getElementById('calPrev').addEventListener('click', function() {
+  calMonth--;
+  if (calMonth < 0) { calMonth = 11; calYear--; }
+  renderCalendar();
+});
+document.getElementById('calNext').addEventListener('click', function() {
+  calMonth++;
+  if (calMonth > 11) { calMonth = 0; calYear++; }
+  renderCalendar();
+});
+document.getElementById('calToday').addEventListener('click', function() {
+  var now = new Date();
+  calYear = now.getFullYear();
+  calMonth = now.getMonth();
+  renderCalendar();
+});
+document.getElementById('calGrid').addEventListener('click', function(e) {
+  var cell = e.target.closest('[data-day]');
+  if (!cell) return;
+  var dk = cell.dataset.day;
+  if (dk > todayKey()) return;
+  openDayModal(dk);
+});
+
+// Счётчик
+document.getElementById('counterModalCancel').addEventListener('click', closeCounterModal);
+document.getElementById('counterModalSave').addEventListener('click', saveCounterModal);
+document.getElementById('counterModal').addEventListener('click', function(e) {
+  if (e.target.id === 'counterModal') closeCounterModal();
+});
+document.getElementById('counterModalInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') saveCounterModal();
+  if (e.key === 'Escape') closeCounterModal();
+});
+
+function openCounterModal(habitId) {
+  var habit = state.habits.find(function(h) { return h.id === habitId; });
+  if (!habit) return;
+  editingHabitId = habitId;
+  var goal = getGoal(habit);
+  var current = getProgress(habit, selectedDate);
+  document.getElementById('counterModalGoal').textContent = 'Цель: ' + goal + ' (можно больше)';
+  document.getElementById('counterModalInput').value = current;
+  document.getElementById('counterModal').classList.add('active');
+  setTimeout(function() {
+    var i = document.getElementById('counterModalInput');
+    i.focus();
+    i.select();
+  }, 100);
+}
+function closeCounterModal() {
+  document.getElementById('counterModal').classList.remove('active');
+  editingHabitId = null;
+}
+function saveCounterModal() {
+  if (!editingHabitId) return;
+  var habit = state.habits.find(function(h) { return h.id === editingHabitId; });
+  if (!habit) { closeCounterModal(); return; }
+  var value = parseInt(document.getElementById('counterModalInput').value, 10) || 0;
+  if (value < 0) value = 0;
+  if (value > MAX_PROGRESS) value = MAX_PROGRESS;
+  var dk = selectedDate;
+  if (isFrozen(habit, dk) && value > 0) removeFreeze(habit, dk);
+  var wasComplete = wasCompletedOn(habit, dk);
+  setProgress(habit, dk, value);
+  saveState();
+  closeCounterModal();
+  vibrate(15);
+  // Считаем правки прошлых дней
+  if (dk < todayKey() && value > 0) {
+    state.pastEditsCount = (state.pastEditsCount || 0) + 1;
+    saveState();
+  }
+  checkAchievements();
+  render();
+  if (!wasComplete && wasCompletedOn(habit, dk) && dk === todayKey()) checkDayCompleted();
+  if (viewingDayKey === dk) refreshDayModalContent();
+}
+
+// Заметки
+function openNoteModal(dateK) {
+  editingNoteDate = dateK;
+  var note = state.notes[dateK] || '';
+  document.getElementById('noteModalDate').textContent = formatDateLong(dateK);
+  document.getElementById('noteInput').value = note;
+  document.getElementById('noteDelete').style.display = note ? 'block' : 'none';
+  document.getElementById('noteModal').classList.add('active');
+  setTimeout(function() { document.getElementById('noteInput').focus(); }, 100);
+}
+function closeNoteModal() {
+  document.getElementById('noteModal').classList.remove('active');
+  editingNoteDate = null;
+}
+function saveNote() {
+  if (!editingNoteDate) return;
+  var text = document.getElementById('noteInput').value.trim();
+  if (text) state.notes[editingNoteDate] = text;
+  else delete state.notes[editingNoteDate];
+  saveState();
+  closeNoteModal();
+  showToast('📝 Заметка сохранена');
+  render();
+  if (viewingDayKey === editingNoteDate) refreshDayModalContent();
+}
+function deleteNote() {
+  if (!editingNoteDate) return;
+  delete state.notes[editingNoteDate];
+  saveState();
+  closeNoteModal();
+  showToast('📝 Заметка удалена');
+  render();
+}
+document.getElementById('noteCancel').addEventListener('click', closeNoteModal);
+document.getElementById('noteSave').addEventListener('click', saveNote);
+document.getElementById('noteDelete').addEventListener('click', deleteNote);
+document.getElementById('noteModal').addEventListener('click', function(e) {
+  if (e.target.id === 'noteModal') closeNoteModal();
+});
+
+// Форма добавления
 function updateToggleSub() {
   var on = document.getElementById('counterToggle').checked;
   document.getElementById('toggleSub').textContent = on ? 'Считать количество повторений' : 'Сделал / не сделал';
@@ -3856,57 +4403,10 @@ document.getElementById('habitsList').addEventListener('click', function(e) {
   if (action === 'plus5') incrementHabit(id, 5);
   if (action === 'minus') decrementHabit(id);
   if (action === 'edit') openCounterModal(id);
-  if (action === 'freeze') toggleFreeze(id);
+  if (action === 'freeze') toggleFreeze(id, selectedDate);
 });
 
-document.getElementById('calPrev').addEventListener('click', function() {
-  calMonth--;
-  if (calMonth < 0) { calMonth = 11; calYear--; }
-  renderCalendar();
-});
-document.getElementById('calNext').addEventListener('click', function() {
-  calMonth++;
-  if (calMonth > 11) { calMonth = 0; calYear++; }
-  renderCalendar();
-});
-document.getElementById('calToday').addEventListener('click', function() {
-  var now = new Date();
-  calYear = now.getFullYear();
-  calMonth = now.getMonth();
-  renderCalendar();
-});
-document.getElementById('calGrid').addEventListener('click', function(e) {
-  var cell = e.target.closest('[data-day]');
-  if (!cell) return;
-  var dk = cell.dataset.day;
-  if (dk > todayKey()) return;
-  openDayModal(dk);
-});
-
-document.getElementById('counterModalCancel').addEventListener('click', closeCounterModal);
-document.getElementById('counterModalSave').addEventListener('click', saveCounterModal);
-document.getElementById('counterModal').addEventListener('click', function(e) {
-  if (e.target.id === 'counterModal') closeCounterModal();
-});
-document.getElementById('counterModalInput').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') saveCounterModal();
-  if (e.key === 'Escape') closeCounterModal();
-});
-document.getElementById('noteCancel').addEventListener('click', closeNoteModal);
-document.getElementById('noteSave').addEventListener('click', saveNote);
-document.getElementById('noteDelete').addEventListener('click', deleteNote);
-document.getElementById('noteModal').addEventListener('click', function(e) {
-  if (e.target.id === 'noteModal') closeNoteModal();
-});
-document.getElementById('dayModalClose').addEventListener('click', closeDayModal);
-document.getElementById('dayModalNote').addEventListener('click', function() {
-  var dk = viewingDayKey;
-  closeDayModal();
-  if (dk) openNoteModal(dk);
-});
-document.getElementById('dayModal').addEventListener('click', function(e) {
-  if (e.target.id === 'dayModal') closeDayModal();
-});
+// Достижения
 document.getElementById('achModalClose').addEventListener('click', closeAchModal);
 document.getElementById('achModal').addEventListener('click', function(e) {
   if (e.target.id === 'achModal') closeAchModal();
@@ -3999,11 +4499,19 @@ document.addEventListener('backbutton', function(e) {
 var lastDay = todayKey();
 document.addEventListener('visibilitychange', function() {
   if (!document.hidden) {
-    if (todayKey() !== lastDay) { lastDay = todayKey(); render(); }
+    if (todayKey() !== lastDay) {
+      lastDay = todayKey();
+      // Если были на прошлой дате — вернуть на сегодня
+      if (selectedDate !== todayKey()) {
+        selectedDate = todayKey();
+      }
+      render();
+    }
     checkAndSendReminder();
   }
 });
 
+updateDateNavButtons();
 render();
 switchTab(activeTab);
 checkAchievements();
