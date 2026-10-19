@@ -18,6 +18,7 @@
   --danger: #ff6b6b;
   --gold: #ff9f43;
   --freeze: #4cc9f0;
+  --progressive: #e84393;
   --text: #e8eaf0;
   --muted: #8b90a0;
   --border: #2a2e3d;
@@ -176,23 +177,10 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   flex-shrink: 0;
 }
 
-.date-nav-btn:hover:not(:disabled) {
-  background: var(--accent);
-  border-color: var(--accent);
-}
+.date-nav-btn:hover:not(:disabled) { background: var(--accent); border-color: var(--accent); }
+.date-nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
 
-.date-nav-btn:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
-
-.date-display {
-  flex: 1;
-  min-width: 0;
-  text-align: center;
-  cursor: pointer;
-  user-select: none;
-}
+.date-display { flex: 1; min-width: 0; text-align: center; cursor: pointer; user-select: none; }
 
 .date-display-label {
   font-size: 10px;
@@ -230,12 +218,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   white-space: nowrap;
 }
 
-.date-today-btn:hover {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: white;
-}
-
+.date-today-btn:hover { background: var(--accent); border-color: var(--accent); color: white; }
 .date-today-btn.hidden { display: none; }
 
 .date-hint {
@@ -774,6 +757,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   gap: 10px;
   transition: transform 0.15s, border-color 0.2s, background 0.2s;
   animation: slideIn 0.3s ease;
+  position: relative;
 }
 
 @keyframes slideIn {
@@ -804,6 +788,16 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   background: linear-gradient(90deg, rgba(76,201,240,0.1), var(--card));
 }
 
+.habit.has-progressive {
+  border-color: rgba(232,67,147,0.4);
+  background: linear-gradient(90deg, rgba(232,67,147,0.06), var(--card));
+}
+
+.habit.has-progressive.done {
+  border-color: rgba(0,184,148,0.5);
+  background: linear-gradient(90deg, rgba(0,184,148,0.08), var(--card));
+}
+
 .habit-top { display: flex; align-items: center; gap: 12px; }
 
 .habit-info { flex: 1; min-width: 0; }
@@ -832,12 +826,27 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   flex-shrink: 0;
 }
 
+.progressive-badge {
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: rgba(232,67,147,0.15);
+  color: var(--progressive);
+  font-weight: 700;
+  border: 1px solid rgba(232,67,147,0.4);
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
 .habit-meta {
   font-size: 12px;
   color: var(--muted);
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .counter-block { display: flex; flex-direction: column; gap: 10px; }
@@ -1050,19 +1059,29 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   padding: 0;
 }
 
-.freeze-btn:hover {
-  background: rgba(76,201,240,0.15);
-  border-color: rgba(76,201,240,0.5);
-  color: var(--freeze);
-}
-
-.freeze-btn.active {
-  background: rgba(76,201,240,0.2);
-  border-color: var(--freeze);
-  color: var(--freeze);
-}
-
+.freeze-btn:hover { background: rgba(76,201,240,0.15); border-color: rgba(76,201,240,0.5); color: var(--freeze); }
+.freeze-btn.active { background: rgba(76,201,240,0.2); border-color: var(--freeze); color: var(--freeze); }
 .freeze-btn.used { opacity: 0.3; cursor: not-allowed; }
+
+.progressive-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.03);
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  font-family: inherit;
+  padding: 0;
+}
+
+.progressive-btn:hover { background: rgba(232,67,147,0.15); border-color: rgba(232,67,147,0.5); color: var(--progressive); }
+.progressive-btn.active { background: rgba(232,67,147,0.2); border-color: var(--progressive); color: var(--progressive); }
 
 .streak-widget {
   flex-shrink: 0;
@@ -1140,6 +1159,272 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 .habit:hover .delete-btn { opacity: 1; }
 .delete-btn:hover { background: rgba(255,107,107,0.15); color: var(--danger); }
 
+/* ====== ПРОГРЕССИВНАЯ ПАНЕЛЬ В КАРТОЧКЕ ====== */
+.progressive-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 10px;
+  background: linear-gradient(135deg, rgba(232,67,147,0.1), rgba(108,92,231,0.06));
+  border: 1px solid rgba(232,67,147,0.3);
+  border-radius: 10px;
+  font-size: 12px;
+  color: var(--text);
+}
+
+.progressive-info-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.progressive-info-text {
+  flex: 1;
+  min-width: 0;
+  color: var(--muted);
+  line-height: 1.3;
+}
+
+.progressive-info-text strong {
+  color: var(--progressive);
+}
+
+.progressive-info-progress {
+  font-size: 11px;
+  color: var(--progressive);
+  font-weight: 700;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* ====== ПРОГРЕССИВНАЯ МОДАЛКА ====== */
+.progressive-modal-box {
+  max-width: 420px;
+}
+
+.progressive-current-info {
+  padding: 16px;
+  background: linear-gradient(135deg, rgba(232,67,147,0.1), rgba(108,92,231,0.08));
+  border: 1px solid rgba(232,67,147,0.3);
+  border-radius: 14px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.progressive-current-label {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.progressive-current-value {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--progressive);
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.progressive-current-value span {
+  font-size: 16px;
+  color: var(--muted);
+  margin-left: 6px;
+}
+
+.progressive-current-next {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+.progressive-current-next strong {
+  color: var(--text);
+}
+
+.progressive-step {
+  margin-bottom: 14px;
+}
+
+.progressive-step-label {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.progressive-presets {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.progressive-preset-btn {
+  padding: 14px 8px;
+  border-radius: 12px;
+  border: 2px solid var(--border);
+  background: rgba(255,255,255,0.02);
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+  user-select: none;
+}
+
+.progressive-preset-btn:hover {
+  background: rgba(232,67,147,0.1);
+  border-color: rgba(232,67,147,0.5);
+  color: var(--text);
+}
+
+.progressive-preset-btn.active {
+  background: linear-gradient(135deg, var(--progressive), #ff6b9d);
+  border-color: var(--progressive);
+  color: white;
+  transform: scale(1.03);
+  box-shadow: 0 4px 15px rgba(232,67,147,0.4);
+}
+
+.progressive-preset-emoji {
+  font-size: 20px;
+  display: block;
+  margin-bottom: 4px;
+  line-height: 1;
+}
+
+.progressive-input-row {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.progressive-input-group {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background: rgba(255,255,255,0.03);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.progressive-input-group:focus-within {
+  border-color: var(--progressive);
+}
+
+.progressive-input-group button {
+  width: 40px;
+  height: 52px;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  user-select: none;
+}
+
+.progressive-input-group button:hover { background: rgba(232,67,147,0.15); color: var(--progressive); }
+.progressive-input-group button:active { transform: scale(0.92); }
+
+.progressive-input-group input[type="number"] {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-size: 22px;
+  font-weight: 800;
+  text-align: center;
+  outline: none;
+  font-family: inherit;
+  letter-spacing: -0.5px;
+  padding: 0 4px;
+  -moz-appearance: textfield;
+}
+
+.progressive-input-group input[type="number"]::-webkit-outer-spin-button,
+.progressive-input-group input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.progressive-input-unit {
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  background: rgba(255,255,255,0.03);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.progressive-preview {
+  padding: 14px;
+  background: rgba(108,92,231,0.06);
+  border: 1px dashed rgba(108,92,231,0.4);
+  border-radius: 12px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.progressive-preview-label {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.progressive-preview-value {
+  font-size: 14px;
+  color: var(--text);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.progressive-preview-value strong {
+  color: var(--progressive);
+}
+
+.progressive-remove-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,107,107,0.4);
+  background: rgba(255,107,107,0.1);
+  color: var(--danger);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+  margin-bottom: 8px;
+}
+
+.progressive-remove-btn:hover { background: rgba(255,107,107,0.2); }
+
+/* ====== ОСТАЛЬНЫЕ СТИЛИ ====== */
+
 .empty {
   text-align: center;
   padding: 60px 20px;
@@ -1149,7 +1434,6 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 .empty-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.5; }
 .empty p { font-size: 15px; line-height: 1.6; }
 
-/* ==================== КАЛЕНДАРЬ ==================== */
 .calendar-wrap { display: flex; justify-content: center; }
 
 .calendar-page {
@@ -1354,7 +1638,6 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   font-weight: 600;
 }
 
-/* ====== МОДАЛКА ДНЯ ==================== */
 .day-modal-box { max-width: 420px; }
 
 .day-modal-header {
@@ -1508,22 +1791,9 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 
 .day-habit-btn:hover { background: var(--accent); border-color: var(--accent); color: white; }
 
-.day-habit-btn.freeze {
-  color: var(--muted);
-  font-size: 14px;
-}
-
-.day-habit-btn.freeze:hover {
-  background: rgba(76,201,240,0.15);
-  border-color: var(--freeze);
-  color: var(--freeze);
-}
-
-.day-habit-btn.freeze.active {
-  background: rgba(76,201,240,0.2);
-  border-color: var(--freeze);
-  color: var(--freeze);
-}
+.day-habit-btn.freeze { color: var(--muted); font-size: 14px; }
+.day-habit-btn.freeze:hover { background: rgba(76,201,240,0.15); border-color: var(--freeze); color: var(--freeze); }
+.day-habit-btn.freeze.active { background: rgba(76,201,240,0.2); border-color: var(--freeze); color: var(--freeze); }
 
 .day-modal-actions {
   display: flex;
@@ -1547,13 +1817,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 }
 
 .day-modal-actions button:hover { background: rgba(255,255,255,0.05); }
-
-.day-modal-actions button.primary {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: white;
-}
-
+.day-modal-actions button.primary { background: var(--accent); border-color: var(--accent); color: white; }
 .day-modal-actions button.primary:hover { background: var(--accent-2); }
 
 .day-note-display {
@@ -1574,7 +1838,6 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   opacity: 0.7;
 }
 
-/* ====== МОДАЛКИ ====== */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -1650,22 +1913,10 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 }
 
 .modal-buttons button:hover { background: rgba(255,255,255,0.05); }
-
-.modal-buttons button.primary {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: white;
-}
-
+.modal-buttons button.primary { background: var(--accent); border-color: var(--accent); color: white; }
 .modal-buttons button.primary:hover { background: var(--accent-2); }
+.modal-buttons button.danger { background: rgba(255,107,107,0.15); border-color: rgba(255,107,107,0.4); color: var(--danger); }
 
-.modal-buttons button.danger {
-  background: rgba(255,107,107,0.15);
-  border-color: rgba(255,107,107,0.4);
-  color: var(--danger);
-}
-
-/* ====== ДОСТИЖЕНИЯ ====== */
 .ach-section {
   background: var(--card);
   border: 1px solid var(--border);
@@ -1683,13 +1934,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   gap: 10px;
 }
 
-.ach-title {
-  font-size: 15px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+.ach-title { font-size: 15px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
 
 .ach-counter {
   font-size: 13px;
@@ -1892,7 +2137,6 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 
 .ach-card.unlocked .ach-progress-text { color: var(--gold); }
 
-/* ====== СТАТИСТИКА ====== */
 .stats-section {
   background: var(--card);
   border: 1px solid var(--border);
@@ -2046,7 +2290,6 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   line-height: 1.6;
 }
 
-/* ====== НАСТРОЙКИ ====== */
 .settings-section {
   background: var(--card);
   border: 1px solid var(--border);
@@ -2387,13 +2630,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 }
 
 .share-preview-buttons button:hover { background: var(--card-hover); }
-
-.share-preview-buttons button.primary {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: white;
-}
-
+.share-preview-buttons button.primary { background: var(--accent); border-color: var(--accent); color: white; }
 .share-preview-buttons button.primary:hover { background: var(--accent-2); }
 
 @media (max-width: 600px) {
@@ -2428,6 +2665,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   .cal-nav button { width: 28px; height: 28px; font-size: 14px; }
   .weight-btn { width: 28px; height: 28px; font-size: 12px; }
   .freeze-btn { width: 28px; height: 28px; font-size: 12px; }
+  .progressive-btn { width: 28px; height: 28px; font-size: 12px; }
   .habit-actions { gap: 3px; }
   .cal-stats { gap: 5px; }
   .cal-stat { padding: 8px 4px; }
@@ -2439,6 +2677,10 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   .day-modal-title { font-size: 16px; }
   .day-habit-toggle { width: 32px; height: 32px; font-size: 16px; }
   .day-habit-btn { width: 28px; height: 28px; font-size: 14px; }
+  .progressive-current-value { font-size: 32px; }
+  .progressive-presets { grid-template-columns: repeat(3, 1fr); gap: 5px; }
+  .progressive-preset-btn { padding: 12px 6px; font-size: 11px; }
+  .progressive-preset-emoji { font-size: 18px; }
 }
 </style>
 </head>
@@ -2450,7 +2692,6 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   </header>
 
   <section class="tab-panel active" id="tab-today">
-    <!-- ВЫБОР ДАТЫ -->
     <div class="date-selector" id="dateSelector">
       <button class="date-nav-btn" id="datePrev" title="Предыдущий день">‹</button>
       <div class="date-display" id="dateDisplay">
@@ -2556,7 +2797,6 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
           <div>Пн</div><div>Вт</div><div>Ср</div><div>Чт</div><div>Пт</div><div>Сб</div><div>Вс</div>
         </div>
         <div class="cal-grid" id="calGrid"></div>
-
         <div class="cal-legend">
           <div class="cal-legend-item"><div class="cal-legend-dot lvl-1"></div>1–25%</div>
           <div class="cal-legend-item"><div class="cal-legend-dot lvl-2"></div>25–50%</div>
@@ -2565,7 +2805,6 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
           <div class="cal-legend-item"><div class="cal-legend-dot over"></div>сверх</div>
           <div class="cal-legend-item"><div class="cal-legend-dot frozen"></div>❄</div>
         </div>
-
         <div class="cal-stats" id="calStats"></div>
       </div>
     </div>
@@ -2682,7 +2921,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   </div>
 </div>
 
-<!-- Модалка дня (расширенная) -->
+<!-- Модалка дня -->
 <div class="modal-overlay" id="dayModal">
   <div class="modal-box day-modal-box">
     <div class="day-modal-header">
@@ -2718,6 +2957,76 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
     </div>
     <div class="modal-buttons" style="margin-top:0;">
       <button class="primary" id="achModalClose">Закрыть</button>
+    </div>
+  </div>
+</div>
+
+<!-- Модалка прогрессивной нагрузки -->
+<div class="modal-overlay" id="progressiveModal">
+  <div class="modal-box progressive-modal-box">
+    <div class="modal-title" id="progressiveModalTitle">📈 Прогрессивная нагрузка</div>
+    <div class="modal-subtitle" id="progressiveModalSubtitle">Увеличивай цель автоматически со временем</div>
+    
+    <div class="progressive-current-info" id="progressiveCurrentInfo">
+      <div class="progressive-current-label">Текущая цель</div>
+      <div class="progressive-current-value" id="progressiveCurrentValue">0<span>раз</span></div>
+      <div class="progressive-current-next" id="progressiveCurrentNext">Отключено</div>
+    </div>
+
+    <div class="progressive-step">
+      <div class="progressive-step-label">Как часто повышать?</div>
+      <div class="progressive-presets" id="progressivePeriods">
+        <button class="progressive-preset-btn" data-days="7">
+          <span class="progressive-preset-emoji">📅</span>
+          Неделя
+        </button>
+        <button class="progressive-preset-btn" data-days="10">
+          <span class="progressive-preset-emoji">🔟</span>
+          10 дней
+        </button>
+        <button class="progressive-preset-btn" data-days="14">
+          <span class="progressive-preset-emoji">⚡</span>
+          2 недели
+        </button>
+        <button class="progressive-preset-btn" data-days="30">
+          <span class="progressive-preset-emoji">📆</span>
+          Месяц
+        </button>
+        <button class="progressive-preset-btn" data-days="60">
+          <span class="progressive-preset-emoji">🗓</span>
+          2 месяца
+        </button>
+        <button class="progressive-preset-btn" data-days="90">
+          <span class="progressive-preset-emoji">🎯</span>
+          3 месяца
+        </button>
+      </div>
+    </div>
+
+    <div class="progressive-step">
+      <div class="progressive-step-label">На сколько увеличивать?</div>
+      <div class="progressive-input-row">
+        <div class="progressive-input-group">
+          <button type="button" id="progressiveStepMinus">−</button>
+          <input type="number" id="progressiveStepInput" min="1" max="100" value="1" inputmode="numeric">
+          <button type="button" id="progressiveStepPlus">+</button>
+        </div>
+        <div class="progressive-input-unit">раз</div>
+      </div>
+    </div>
+
+    <div class="progressive-preview" id="progressivePreview">
+      <div class="progressive-preview-label">Пример</div>
+      <div class="progressive-preview-value" id="progressivePreviewValue">
+        Сегодня: <strong>10</strong> → Через 10 дней: <strong>11</strong> → Через 20 дней: <strong>12</strong>
+      </div>
+    </div>
+
+    <button class="progressive-remove-btn" id="progressiveRemoveBtn" style="display:none;">Отключить прогрессию</button>
+
+    <div class="modal-buttons">
+      <button id="progressiveModalCancel">Отмена</button>
+      <button class="primary" id="progressiveModalSave">Сохранить</button>
     </div>
   </div>
 </div>
@@ -2767,7 +3076,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 </nav>
 
 <script>
-var STORAGE_KEY = 'habit-tracker-v5';
+var STORAGE_KEY = 'habit-tracker-v6';
 var STATS_PERIOD_KEY = 'habit-tracker-stats-period';
 var ACTIVE_TAB_KEY = 'habit-tracker-active-tab';
 var NOTIF_KEY = 'habit-tracker-notif';
@@ -2787,8 +3096,10 @@ var achModalId = null;
 var currentWeight = 3;
 var calYear, calMonth;
 var currentShareTheme = localStorage.getItem(SHARE_THEME_KEY) || 'sunset';
-// ← КЛЮЧЕВАЯ ПЕРЕМЕННАЯ: выбранная дата для редактирования (по умолчанию сегодня)
 var selectedDate = todayKey();
+var editingProgressiveHabitId = null;
+var tempProgressiveDays = 0;
+var tempProgressiveStep = 1;
 
 var notifSettings = loadNotifSettings();
 var unlockedAch = loadUnlockedAch();
@@ -2822,6 +3133,13 @@ function shiftKey(key, days) {
   date.setDate(date.getDate() + days);
   return dateKey(date);
 }
+function daysBetween(a, b) {
+  var pa = a.split('-').map(Number);
+  var pb = b.split('-').map(Number);
+  var da = new Date(pa[0], pa[1]-1, pa[2]);
+  var db = new Date(pb[0], pb[1]-1, pb[2]);
+  return Math.floor((db - da) / (1000 * 60 * 60 * 24));
+}
 function weekdayIndex(key) {
   var parts = key.split('-').map(Number);
   var day = new Date(parts[0], parts[1] - 1, parts[2]).getDay();
@@ -2832,7 +3150,7 @@ var MONTH_NAMES_GEN = ['января','февраля','марта','апрел�
 var WEEKDAY_NAMES = ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'];
 
 function loadState() {
-  var keys = ['habit-tracker-v5', 'habit-tracker-v4', 'habit-tracker-v3', 'habit-tracker-v2', 'habit-tracker-v1'];
+  var keys = ['habit-tracker-v6', 'habit-tracker-v5', 'habit-tracker-v4', 'habit-tracker-v3', 'habit-tracker-v2', 'habit-tracker-v1'];
   for (var i = 0; i < keys.length; i++) {
     try {
       var raw = localStorage.getItem(keys[i]);
@@ -2846,6 +3164,8 @@ function loadState() {
           if (h.weight === undefined) h.weight = 3;
           if (!h.progress) h.progress = {};
           if (!h.frozen) h.frozen = {};
+          // progressive
+          if (h.progressive === undefined) h.progressive = null;
         });
         return parsed;
       }
@@ -2894,22 +3214,40 @@ function removeFreeze(habit, dateK) {
 }
 function isFrozen(habit, dateK) { return habit.frozen && habit.frozen[dateK]; }
 
+// ==================== ПРОГРЕССИВНАЯ НАГРУЗКА ====================
+
+function getCurrentGoal(habit, dateK) {
+  // Если есть прогрессия - вычисляем цель на dateK
+  if (habit.progressive && habit.progressive.enabled && habit.progressive.startDate) {
+    var daysPassed = daysBetween(habit.progressive.startDate, dateK);
+    if (daysPassed < 0) daysPassed = 0; // до старта - базовая
+    var increments = Math.floor(daysPassed / habit.progressive.periodDays);
+    return habit.progressive.baseGoal + increments * habit.progressive.step;
+  }
+  return habit.goal || 1;
+}
+
+function getBaseGoal(habit) { return habit.goal || 1; }
+
 function getProgress(habit, key) {
   if (!habit.progress) return 0;
   var v = habit.progress[key];
   return typeof v === 'number' ? v : 0;
 }
-function getGoal(habit) { return habit.goal || 1; }
+// Для отображения и расчёта - текущая цель на дату
+function getGoal(habit, dateK) {
+  return getCurrentGoal(habit, dateK || todayKey());
+}
 function getWeight(habit) { return habit.weight || 3; }
 function getHabitPercent(habit, key) {
-  var goal = getGoal(habit);
+  var goal = getGoal(habit, key);
   if (goal <= 1) return getProgress(habit, key) > 0 ? 1 : 0;
   return getProgress(habit, key) / goal;
 }
 function getHabitPercentCapped(habit, key) { return Math.min(1, getHabitPercent(habit, key)); }
 function wasCompletedOn(habit, key) {
   if (isFrozen(habit, key)) return true;
-  return getProgress(habit, key) >= getGoal(habit);
+  return getProgress(habit, key) >= getGoal(habit, key);
 }
 function setProgress(habit, key, value) {
   if (!habit.progress) habit.progress = {};
@@ -2920,6 +3258,7 @@ function setProgress(habit, key, value) {
     habit.progress[key] = value;
   }
 }
+
 function vibrate(ms) { if (navigator.vibrate) { try { navigator.vibrate(ms); } catch (e) {} } }
 function showToast(msg) {
   var t = document.getElementById('toast');
@@ -2943,8 +3282,6 @@ function pulseCounter(habitId, amount) {
   }
 }
 
-// ============ ДЕЙСТВИЯ С ПРИВЫЧКАМИ (по selectedDate) ============
-
 function incrementHabit(id, amount) {
   amount = amount || 1;
   var habit = state.habits.find(function(h) { return h.id === id; });
@@ -2963,7 +3300,6 @@ function incrementHabit(id, amount) {
   render();
   pulseCounter(id, amount);
   if (!wasComplete && wasCompletedOn(habit, dk) && dk === todayKey()) checkDayCompleted();
-  // Обновить модалку дня, если она открыта
   if (viewingDayKey === dk) refreshDayModalContent();
 }
 
@@ -2991,7 +3327,7 @@ function toggleHabit(id) {
     return;
   }
   var current = getProgress(habit, dk);
-  var goal = getGoal(habit);
+  var goal = getGoal(habit, dk);
   if (current >= goal) setProgress(habit, dk, 0);
   else setProgress(habit, dk, goal);
   saveState();
@@ -3026,10 +3362,115 @@ function toggleFreeze(id, dateK) {
 function isDoneToday(habit) { return wasCompletedOn(habit, todayKey()); }
 function isDoneSelected(habit) { return wasCompletedOn(habit, selectedDate); }
 
-// ============ ВЫБОР ДАТЫ ============
+// ==================== ПРОГРЕССИВНАЯ МОДАЛКА ====================
+
+function openProgressiveModal(habitId) {
+  var habit = state.habits.find(function(h) { return h.id === habitId; });
+  if (!habit) return;
+  editingProgressiveHabitId = habitId;
+
+  var baseGoal = getBaseGoal(habit);
+  var currentGoal = getGoal(habit, todayKey());
+
+  document.getElementById('progressiveModalTitle').textContent = '📈 ' + habit.name;
+  document.getElementById('progressiveCurrentValue').innerHTML = currentGoal + '<span>раз</span>';
+
+  // Инициализация значений
+  if (habit.progressive && habit.progressive.enabled) {
+    tempProgressiveDays = habit.progressive.periodDays;
+    tempProgressiveStep = habit.progressive.step;
+  } else {
+    tempProgressiveDays = 10;
+    tempProgressiveStep = 1;
+  }
+
+  updateProgressiveUI();
+  document.getElementById('progressiveModal').classList.add('active');
+}
+
+function updateProgressiveUI() {
+  // Пресеты периода
+  document.querySelectorAll('#progressivePeriods .progressive-preset-btn').forEach(function(b) {
+    b.classList.toggle('active', parseInt(b.dataset.days, 10) === tempProgressiveDays);
+  });
+  document.getElementById('progressiveStepInput').value = tempProgressiveStep;
+
+  // Превью
+  var habit = state.habits.find(function(h) { return h.id === editingProgressiveHabitId; });
+  if (!habit) return;
+  var baseGoal = getBaseGoal(habit);
+  var isEnabled = habit.progressive && habit.progressive.enabled;
+
+  // Текущая инфо
+  var currentGoal = getGoal(habit, todayKey());
+  document.getElementById('progressiveCurrentValue').innerHTML = currentGoal + '<span>раз</span>';
+
+  if (isEnabled && habit.progressive.startDate) {
+    var daysPassed = daysBetween(habit.progressive.startDate, todayKey());
+    var nextIncrement = tempProgressiveDays - (daysPassed % tempProgressiveDays);
+    document.getElementById('progressiveCurrentNext').innerHTML = 'До следующего повышения: <strong>' + nextIncrement + ' ' + pluralDays(nextIncrement) + '</strong>';
+  } else {
+    document.getElementById('progressiveCurrentNext').textContent = 'Прогрессия отключена';
+  }
+
+  // Превью
+  var p1 = baseGoal;
+  var p2 = baseGoal + tempProgressiveStep;
+  var p3 = baseGoal + tempProgressiveStep * 2;
+  document.getElementById('progressivePreviewValue').innerHTML =
+    'Старт: <strong>' + p1 + '</strong> → Через ' + tempProgressiveDays + ' дн: <strong>' + p2 + '</strong> → Через ' + (tempProgressiveDays * 2) + ' дн: <strong>' + p3 + '</strong>';
+
+  // Кнопка удаления
+  document.getElementById('progressiveRemoveBtn').style.display = isEnabled ? 'block' : 'none';
+}
+
+function saveProgressive() {
+  var habit = state.habits.find(function(h) { return h.id === editingProgressiveHabitId; });
+  if (!habit) return;
+
+  // Если прогрессия уже была включена - обновляем параметры, базовая цель = текущая
+  var baseGoal = habit.goal;
+  if (habit.progressive && habit.progressive.enabled) {
+    baseGoal = getGoal(habit, todayKey()); // фиксируем текущую цель как базу
+  }
+
+  habit.progressive = {
+    enabled: true,
+    periodDays: tempProgressiveDays,
+    step: tempProgressiveStep,
+    baseGoal: baseGoal,
+    startDate: todayKey()
+  };
+  habit.goal = baseGoal;
+
+  saveState();
+  render();
+  closeProgressiveModal();
+  showToast('📈 Прогрессия настроена');
+}
+
+function removeProgressive() {
+  var habit = state.habits.find(function(h) { return h.id === editingProgressiveHabitId; });
+  if (!habit) return;
+  // Фиксируем текущую цель как базовую
+  var currentGoal = getGoal(habit, todayKey());
+  habit.goal = currentGoal;
+  habit.progressive = null;
+  saveState();
+  render();
+  closeProgressiveModal();
+  showToast('📈 Прогрессия отключена');
+}
+
+function closeProgressiveModal() {
+  document.getElementById('progressiveModal').classList.remove('active');
+  editingProgressiveHabitId = null;
+}
+
+// ==================== ВЫБОР ДАТЫ ====================
 
 function selectDate(dk) {
-  if (dk > todayKey()) return; // нельзя в будущее
+  if (dk > todayKey()) return;
   selectedDate = dk;
   updateDateSelector();
   render();
@@ -3059,7 +3500,6 @@ function updateDateSelector() {
     todayBtn.classList.remove('hidden');
   }
 
-  // Обновляем заголовок прогресса
   document.getElementById('progressLabel').textContent = dk === today ? 'Прогресс сегодня' : 'Прогресс за день';
 }
 
@@ -3068,7 +3508,7 @@ function formatDateShort(key) {
   return p[2] + ' ' + MONTH_NAMES_GEN[p[1]-1];
 }
 
-// ============ МОДАЛКА ДНЯ ============
+// ==================== МОДАЛКА ДНЯ ====================
 
 function openDayModal(dateK) {
   viewingDayKey = dateK;
@@ -3101,7 +3541,7 @@ function refreshDayModalContent() {
     list.innerHTML = required.map(function(h) {
       var frozen = isFrozen(h, dk);
       var done = wasCompletedOn(h, dk);
-      var goal = getGoal(h);
+      var goal = getGoal(h, dk);
       var hasCounter = goal > 1;
       var current = getProgress(h, dk);
       var pct = getHabitPercent(h, dk);
@@ -3144,7 +3584,6 @@ function refreshDayModalContent() {
     }).join('');
   }
 
-  // Заметка
   var note = state.notes[dk];
   var noteContainer = document.getElementById('dayNoteContainer');
   noteContainer.innerHTML = note ? '<div class="day-note-display">' + escapeHtml(note) + '</div>' : '';
@@ -3164,7 +3603,6 @@ function closeDayModal() {
   viewingDayKey = null;
 }
 
-// Обработка кнопок в модалке дня
 document.getElementById('dayHabitsList').addEventListener('click', function(e) {
   var btn = e.target.closest('[data-day-action]');
   if (!btn) return;
@@ -3180,7 +3618,7 @@ document.getElementById('dayHabitsList').addEventListener('click', function(e) {
     if (isFrozen(habit, dk)) { removeFreeze(habit, dk); }
     else {
       var current = getProgress(habit, dk);
-      var goal = getGoal(habit);
+      var goal = getGoal(habit, dk);
       if (current >= goal) setProgress(habit, dk, 0);
       else setProgress(habit, dk, goal);
     }
@@ -3210,7 +3648,7 @@ document.getElementById('dayHabitsList').addEventListener('click', function(e) {
   refreshDayModalContent();
 });
 
-// ============ СТРИКИ ============
+// ==================== СТРИКИ ====================
 
 function isHabitRequiredOn(habit, key) {
   var from = habit.mustCompleteFrom || habit.createdAt || '0000-00-00';
@@ -3279,7 +3717,7 @@ function getHabitStreak(habit) {
 }
 function isHabitRequiredToday(habit) { return isHabitRequiredOn(habit, todayKey()); }
 
-// ============ ДОСТИЖЕНИЯ ============
+// ==================== ДОСТИЖЕНИЯ ====================
 
 var ACHIEVEMENTS = [
   { id: 'streak_3', cat: 'streak', icon: '🌱', name: 'Первый росток', desc: '3 дня подряд', check: function(c) { return c.globalStreak >= 3; }, progress: function(c) { return { cur: c.globalStreak, max: 3 }; } },
@@ -3302,6 +3740,8 @@ var ACHIEVEMENTS = [
   { id: 'note_first', cat: 'count', icon: '📝', name: 'Дневник', desc: 'Первая заметка', check: function(c) { return c.totalNotes >= 1; }, progress: function(c) { return { cur: c.totalNotes, max: 1 }; } },
   { id: 'note_30', cat: 'count', icon: '📖', name: 'Летописец', desc: '30 заметок', check: function(c) { return c.totalNotes >= 30; }, progress: function(c) { return { cur: c.totalNotes, max: 30 }; } },
   { id: 'time_travel', cat: 'comeback', icon: '⏰', name: 'Путешественник', desc: 'Отметил прошлый день', check: function(c) { return c.pastEdits >= 1; }, progress: function(c) { return { cur: c.pastEdits, max: 1 }; } },
+  { id: 'progressive_first', cat: 'over', icon: '📈', name: 'Расту', desc: 'Настроил прогрессию', check: function(c) { return c.progressiveActive >= 1; }, progress: function(c) { return { cur: c.progressiveActive, max: 1 }; } },
+  { id: 'progressive_3', cat: 'over', icon: '🚀', name: 'Ракета', desc: '3 привычки с прогрессией', check: function(c) { return c.progressiveActive >= 3; }, progress: function(c) { return { cur: c.progressiveActive, max: 3 }; } },
 ];
 
 function getAchievementContext() {
@@ -3317,14 +3757,9 @@ function getAchievementContext() {
     Object.keys(h.frozen || {}).forEach(function(k) { allDates[k] = true; });
   });
   var dates = Object.keys(allDates).sort();
-  var pastEdits = 0;
-  var today = todayKey();
   dates.forEach(function(key) {
     var required = state.habits.filter(function(h) { return isHabitRequiredOn(h, key); });
     if (required.length === 0) return;
-    if (key < today && required.some(function(h) { return getProgress(h, key) > 0 || isFrozen(h, key); })) {
-      // не считаем автоматически, только если реально отредактировано — упрощённо
-    }
     var dayOver = false;
     required.forEach(function(h) {
       var pct = getHabitPercent(h, key);
@@ -3336,14 +3771,14 @@ function getAchievementContext() {
     });
     if (dayOver) overDays++;
   });
-  // Считаем pastEdits по флагу
-  pastEdits = state.pastEditsCount || 0;
+  var pastEdits = state.pastEditsCount || 0;
+  var progressiveActive = state.habits.filter(function(h) { return h.progressive && h.progressive.enabled; }).length;
 
   var hadBreak = false, comebackCount = 0;
-  var requiredForAll = state.habits.filter(function(h) { return isHabitRequiredOn(h, today); }).length;
+  var requiredForAll = state.habits.filter(function(h) { return isHabitRequiredOn(h, todayKey()); }).length;
   if (requiredForAll > 0) {
     var daysArr = [];
-    var cursor = today;
+    var cursor = todayKey();
     for (var i = 0; i < 730; i++) {
       daysArr.push({ key: cursor, complete: isDayComplete(cursor) });
       cursor = shiftKey(cursor, -1);
@@ -3367,7 +3802,8 @@ function getAchievementContext() {
     comebackCount: comebackCount,
     totalFreezes: totalFreezes,
     totalNotes: totalNotes,
-    pastEdits: pastEdits
+    pastEdits: pastEdits,
+    progressiveActive: progressiveActive
   };
 }
 function checkAchievements() {
@@ -3484,7 +3920,7 @@ function renderAchievementsMini() {
   }).join('');
 }
 
-// ============ КАЛЕНДАРЬ ============
+// ==================== КАЛЕНДАРЬ ====================
 
 function renderCalendar() {
   document.getElementById('calMonth').textContent = MONTH_NAMES[calMonth] + ' ' + calYear;
@@ -3546,7 +3982,7 @@ function escapeHtml(str) {
   });
 }
 
-// ============ СТАТИСТИКА ============
+// ==================== СТАТИСТИКА ====================
 
 function getPeriodKeys(days) {
   var keys = [];
@@ -3586,10 +4022,10 @@ function computeStats(days) {
   });
   var totalOverBonus = 0;
   state.habits.forEach(function(h) {
-    var goal = getGoal(h);
-    if (goal <= 1) return;
     keys.forEach(function(key) {
       if (!isHabitRequiredOn(h, key)) return;
+      var goal = getGoal(h, key);
+      if (goal <= 1) return;
       var current = getProgress(h, key);
       if (current > goal) totalOverBonus += (current - goal) / goal;
     });
@@ -3648,7 +4084,7 @@ function renderStats() {
     '<div class="per-habit"><div class="per-habit-title">По привычкам</div>' + perHabitHtml + '</div>';
 }
 
-// ============ ДЕЙСТВИЯ ============
+// ==================== ДЕЙСТВИЯ ====================
 
 function deleteHabit(id) {
   if (!confirm('Удалить привычку?')) return;
@@ -3669,6 +4105,7 @@ function addHabit(name, goal, weight) {
     weight: weight || 3,
     progress: {},
     frozen: {},
+    progressive: null,
     createdAt: today,
     mustCompleteFrom: mustCompleteFrom
   });
@@ -3700,7 +4137,7 @@ function switchTab(tab) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ============ РЕНДЕР ============
+// ==================== РЕНДЕР ====================
 
 function render() {
   var list = document.getElementById('habitsList');
@@ -3718,7 +4155,6 @@ function render() {
   document.getElementById('gsBest').textContent = 'Рекорд: ' + (state.bestStreak || 0);
   gsEl.classList.remove('active', 'at-risk');
 
-  // Для прогресса дня используем selectedDate (но заголовок стрика - общий)
   var dk = selectedDate;
   var isToday = dk === todayKey();
   var requiredForView = state.habits.filter(function(h) { return isHabitRequiredOn(h, dk); });
@@ -3731,7 +4167,7 @@ function render() {
   var overCount = 0, partialCount = 0, frozenCount = 0;
   requiredForView.forEach(function(h) {
     if (isFrozen(h, dk)) frozenCount++;
-    var goal = getGoal(h);
+    var goal = getGoal(h, dk);
     var cur = getProgress(h, dk);
     if (goal > 1 && cur > goal) overCount++;
     else {
@@ -3783,7 +4219,7 @@ function render() {
       var frozen = isFrozen(habit, dk);
       var done = wasCompletedOn(habit, dk);
       var streak = getHabitStreak(habit);
-      var goal = getGoal(habit);
+      var goal = getGoal(habit, dk);
       var weight = getWeight(habit);
       var hasCounter = goal > 1;
       var current = getProgress(habit, dk);
@@ -3793,6 +4229,7 @@ function render() {
       var required = isHabitRequiredOn(habit, dk);
       var startsTomorrow = !required && habit.mustCompleteFrom === shiftKey(dk, 1);
       var freezeUsedThisMonth = getFreezesUsed(habit, dk) > 0;
+      var hasProgressive = habit.progressive && habit.progressive.enabled;
 
       var topControl;
       if (frozen) {
@@ -3829,20 +4266,37 @@ function render() {
             '</div></div>';
       }
 
+      // Progressive info block
+      var progHtml = '';
+      if (hasProgressive) {
+        var daysPassed = daysBetween(habit.progressive.startDate, dk);
+        var nextIncrement = habit.progressive.periodDays - (daysPassed % habit.progressive.periodDays);
+        progHtml = '<div class="progressive-info">' +
+          '<span class="progressive-info-icon">📈</span>' +
+          '<span class="progressive-info-text">Следующее повышение: <strong>+' + habit.progressive.step + '</strong> через ' + nextIncrement + ' ' + pluralDays(nextIncrement) + '</span>' +
+          '<span class="progressive-info-progress">+' + habit.progressive.step + ' / ' + habit.progressive.periodDays + 'д</span>' +
+        '</div>';
+      }
+
       var habitClass = frozen ? 'frozen' : (isOver ? 'over' : (done ? 'done' : (isPartial ? 'partial' : '')));
+      if (hasProgressive && !done && !isOver && !frozen && !isPartial) habitClass = (habitClass + ' has-progressive').trim();
+      if (hasProgressive && isPartial) habitClass = (habitClass + ' has-progressive').trim();
+
       var weightBadge = weight !== 3 ? '<span class="weight-badge">⚖ ' + weight + '</span>' : '';
+      var progBadge = hasProgressive ? '<span class="progressive-badge">📈 ' + habit.progressive.baseGoal + '+' + habit.progressive.step + '/' + habit.progressive.periodDays + 'д</span>' : '';
       var streakMeta = streak > 0 ? '<span>🔥 ' + streak + ' ' + pluralDays(streak) + ' подряд</span>' : '';
       var overMeta = isOver && !frozen ? '<span style="color:var(--gold);font-weight:700">⚡ ' + Math.round(percent * 100) + '%</span>' : '';
       var freezeMeta = frozen ? '<span style="color:var(--freeze);font-weight:700">❄ Заморожено</span>' : '';
       var freezeBtnClass = 'freeze-btn' + (frozen ? ' active' : '') + (!frozen && freezeUsedThisMonth ? ' used' : '');
+      var progBtnClass = 'progressive-btn' + (hasProgressive ? ' active' : '');
 
       return '<div class="habit ' + habitClass + '" data-id="' + habit.id + '">' +
         '<div class="habit-top">' + topControl +
           '<div class="habit-info">' +
-            '<div class="habit-name">' + escapeHtml(habit.name) + weightBadge + '</div>' +
+            '<div class="habit-name">' + escapeHtml(habit.name) + weightBadge + progBadge + '</div>' +
             '<div class="habit-meta">' +
               (startsTomorrow ? '<span style="color:#6c5ce7">✨ со след. дня</span>' : '') +
-              (hasCounter ? '<span>🎯 ' + goal + '</span>' : '') +
+              (hasCounter ? '<span>🎯 ' + goal + ' раз</span>' : '') +
               freezeMeta + overMeta + streakMeta +
             '</div>' +
           '</div>' +
@@ -3852,10 +4306,11 @@ function render() {
             '<div class="streak-label">дней</div>' +
           '</div>' +
           '<div class="habit-actions">' +
+            '<button class="' + progBtnClass + '" data-action="progressive" title="Прогрессивная нагрузка">📈</button>' +
             '<button class="' + freezeBtnClass + '" data-action="freeze" title="Заморозка">❄</button>' +
             '<button class="delete-btn" data-action="delete">✕</button>' +
           '</div>' +
-        '</div>' + counterHtml +
+        '</div>' + progHtml + counterHtml +
       '</div>';
     }).join('');
   }
@@ -3929,7 +4384,7 @@ setInterval(checkAndSendReminder, 60000);
 setTimeout(checkAndSendReminder, 5000);
 
 function exportData() {
-  var data = { version: 5, exportedAt: new Date().toISOString(), state: state, notifSettings: notifSettings, unlockedAch: unlockedAch };
+  var data = { version: 6, exportedAt: new Date().toISOString(), state: state, notifSettings: notifSettings, unlockedAch: unlockedAch };
   var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   var url = URL.createObjectURL(blob);
   var a = document.createElement('a');
@@ -3953,6 +4408,7 @@ function importData(file) {
       state.habits.forEach(function(h) {
         if (h.weight === undefined) h.weight = 3;
         if (!h.frozen) h.frozen = {};
+        if (h.progressive === undefined) h.progressive = null;
       });
       saveState();
       if (data.notifSettings) { notifSettings = data.notifSettings; saveNotifSettings(); }
@@ -3966,7 +4422,7 @@ function importData(file) {
 function hardReset() {
   if (!confirm('УДАЛИТЬ ВСЕ ДАННЫЕ?')) return;
   if (!confirm('Точно? Это необратимо.')) return;
-  ['habit-tracker-v5','habit-tracker-v4','habit-tracker-v3','habit-tracker-v2','habit-tracker-v1',ACH_KEY,NOTIF_KEY].forEach(function(k) {
+  ['habit-tracker-v6','habit-tracker-v5','habit-tracker-v4','habit-tracker-v3','habit-tracker-v2','habit-tracker-v1',ACH_KEY,NOTIF_KEY].forEach(function(k) {
     localStorage.removeItem(k);
   });
   if ('serviceWorker' in navigator) navigator.serviceWorker.getRegistrations().then(function(r) { r.forEach(function(x) { x.unregister(); }); });
@@ -4141,36 +4597,23 @@ function downloadShareImage() {
   showToast('📥 Картинка сохранена');
 }
 
-// ============ СОБЫТИЯ ============
+// ==================== СОБЫТИЯ ====================
 
 // Выбор даты
 document.getElementById('datePrev').addEventListener('click', function() {
-  var newDate = shiftKey(selectedDate, -1);
-  selectDate(newDate);
+  selectDate(shiftKey(selectedDate, -1));
 });
 document.getElementById('dateNext').addEventListener('click', function() {
   var newDate = shiftKey(selectedDate, 1);
   if (newDate > todayKey()) return;
   selectDate(newDate);
 });
-document.getElementById('dateToday').addEventListener('click', function() {
-  selectDate(todayKey());
-});
-document.getElementById('dateDisplay').addEventListener('click', function() {
-  // Тап по центру — открыть модалку дня
-  openDayModal(selectedDate);
-});
+document.getElementById('dateToday').addEventListener('click', function() { selectDate(todayKey()); });
+document.getElementById('dateDisplay').addEventListener('click', function() { openDayModal(selectedDate); });
 
-// Обновить состояние кнопок навигации по дате
 function updateDateNavButtons() {
-  var today = todayKey();
-  document.getElementById('dateNext').disabled = (selectedDate >= today);
+  document.getElementById('dateNext').disabled = (selectedDate >= todayKey());
 }
-var origSelectDate = selectDate;
-selectDate = function(dk) {
-  origSelectDate(dk);
-  updateDateNavButtons();
-};
 
 // Модалка дня
 document.getElementById('dayModalClose').addEventListener('click', closeDayModal);
@@ -4180,7 +4623,6 @@ document.getElementById('dayModalNote').addEventListener('click', function() {
   openNoteModal(dk);
 });
 document.getElementById('dayModalEdit').addEventListener('click', function() {
-  // Переключаемся на выбранную дату и закрываем модалку
   var dk = viewingDayKey;
   closeDayModal();
   if (dk) {
@@ -4233,7 +4675,7 @@ function openCounterModal(habitId) {
   var habit = state.habits.find(function(h) { return h.id === habitId; });
   if (!habit) return;
   editingHabitId = habitId;
-  var goal = getGoal(habit);
+  var goal = getGoal(habit, selectedDate);
   var current = getProgress(habit, selectedDate);
   document.getElementById('counterModalGoal').textContent = 'Цель: ' + goal + ' (можно больше)';
   document.getElementById('counterModalInput').value = current;
@@ -4262,7 +4704,6 @@ function saveCounterModal() {
   saveState();
   closeCounterModal();
   vibrate(15);
-  // Считаем правки прошлых дней
   if (dk < todayKey() && value > 0) {
     state.pastEditsCount = (state.pastEditsCount || 0) + 1;
     saveState();
@@ -4404,6 +4845,37 @@ document.getElementById('habitsList').addEventListener('click', function(e) {
   if (action === 'minus') decrementHabit(id);
   if (action === 'edit') openCounterModal(id);
   if (action === 'freeze') toggleFreeze(id, selectedDate);
+  if (action === 'progressive') openProgressiveModal(id);
+});
+
+// Прогрессивная модалка
+document.getElementById('progressivePeriods').addEventListener('click', function(e) {
+  var btn = e.target.closest('.progressive-preset-btn');
+  if (!btn) return;
+  tempProgressiveDays = parseInt(btn.dataset.days, 10);
+  updateProgressiveUI();
+  vibrate(10);
+});
+document.getElementById('progressiveStepMinus').addEventListener('click', function() {
+  var i = document.getElementById('progressiveStepInput');
+  var v = parseInt(i.value, 10) || 1;
+  if (v > 1) { i.value = v - 1; tempProgressiveStep = v - 1; updateProgressiveUI(); }
+});
+document.getElementById('progressiveStepPlus').addEventListener('click', function() {
+  var i = document.getElementById('progressiveStepInput');
+  var v = parseInt(i.value, 10) || 0;
+  if (v < 100) { i.value = v + 1; tempProgressiveStep = v + 1; updateProgressiveUI(); }
+});
+document.getElementById('progressiveStepInput').addEventListener('input', function(e) {
+  var v = parseInt(e.target.value, 10) || 1;
+  tempProgressiveStep = v;
+  updateProgressiveUI();
+});
+document.getElementById('progressiveModalCancel').addEventListener('click', closeProgressiveModal);
+document.getElementById('progressiveModalSave').addEventListener('click', saveProgressive);
+document.getElementById('progressiveRemoveBtn').addEventListener('click', removeProgressive);
+document.getElementById('progressiveModal').addEventListener('click', function(e) {
+  if (e.target.id === 'progressiveModal') closeProgressiveModal();
 });
 
 // Достижения
@@ -4493,6 +4965,7 @@ document.addEventListener('backbutton', function(e) {
   if (viewingDayKey) { closeDayModal(); return; }
   if (editingNoteDate) { closeNoteModal(); return; }
   if (editingHabitId) { closeCounterModal(); return; }
+  if (editingProgressiveHabitId) { closeProgressiveModal(); return; }
   if (activeTab !== 'today') switchTab('today');
   else if (navigator.app && navigator.app.exitApp) navigator.app.exitApp();
 }, false);
@@ -4501,10 +4974,7 @@ document.addEventListener('visibilitychange', function() {
   if (!document.hidden) {
     if (todayKey() !== lastDay) {
       lastDay = todayKey();
-      // Если были на прошлой дате — вернуть на сегодня
-      if (selectedDate !== todayKey()) {
-        selectedDate = todayKey();
-      }
+      if (selectedDate !== todayKey()) selectedDate = todayKey();
       render();
     }
     checkAndSendReminder();
