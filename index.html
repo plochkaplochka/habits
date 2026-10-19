@@ -3164,7 +3164,6 @@ function loadState() {
           if (h.weight === undefined) h.weight = 3;
           if (!h.progress) h.progress = {};
           if (!h.frozen) h.frozen = {};
-          // progressive
           if (h.progressive === undefined) h.progressive = null;
         });
         return parsed;
@@ -3217,10 +3216,9 @@ function isFrozen(habit, dateK) { return habit.frozen && habit.frozen[dateK]; }
 // ==================== ПРОГРЕССИВНАЯ НАГРУЗКА ====================
 
 function getCurrentGoal(habit, dateK) {
-  // Если есть прогрессия - вычисляем цель на dateK
   if (habit.progressive && habit.progressive.enabled && habit.progressive.startDate) {
     var daysPassed = daysBetween(habit.progressive.startDate, dateK);
-    if (daysPassed < 0) daysPassed = 0; // до старта - базовая
+    if (daysPassed < 0) daysPassed = 0;
     var increments = Math.floor(daysPassed / habit.progressive.periodDays);
     return habit.progressive.baseGoal + increments * habit.progressive.step;
   }
@@ -3234,7 +3232,6 @@ function getProgress(habit, key) {
   var v = habit.progress[key];
   return typeof v === 'number' ? v : 0;
 }
-// Для отображения и расчёта - текущая цель на дату
 function getGoal(habit, dateK) {
   return getCurrentGoal(habit, dateK || todayKey());
 }
@@ -3375,7 +3372,6 @@ function openProgressiveModal(habitId) {
   document.getElementById('progressiveModalTitle').textContent = '📈 ' + habit.name;
   document.getElementById('progressiveCurrentValue').innerHTML = currentGoal + '<span>раз</span>';
 
-  // Инициализация значений
   if (habit.progressive && habit.progressive.enabled) {
     tempProgressiveDays = habit.progressive.periodDays;
     tempProgressiveStep = habit.progressive.step;
@@ -3389,19 +3385,16 @@ function openProgressiveModal(habitId) {
 }
 
 function updateProgressiveUI() {
-  // Пресеты периода
   document.querySelectorAll('#progressivePeriods .progressive-preset-btn').forEach(function(b) {
     b.classList.toggle('active', parseInt(b.dataset.days, 10) === tempProgressiveDays);
   });
   document.getElementById('progressiveStepInput').value = tempProgressiveStep;
 
-  // Превью
   var habit = state.habits.find(function(h) { return h.id === editingProgressiveHabitId; });
   if (!habit) return;
   var baseGoal = getBaseGoal(habit);
   var isEnabled = habit.progressive && habit.progressive.enabled;
 
-  // Текущая инфо
   var currentGoal = getGoal(habit, todayKey());
   document.getElementById('progressiveCurrentValue').innerHTML = currentGoal + '<span>раз</span>';
 
@@ -3413,14 +3406,12 @@ function updateProgressiveUI() {
     document.getElementById('progressiveCurrentNext').textContent = 'Прогрессия отключена';
   }
 
-  // Превью
   var p1 = baseGoal;
   var p2 = baseGoal + tempProgressiveStep;
   var p3 = baseGoal + tempProgressiveStep * 2;
   document.getElementById('progressivePreviewValue').innerHTML =
     'Старт: <strong>' + p1 + '</strong> → Через ' + tempProgressiveDays + ' дн: <strong>' + p2 + '</strong> → Через ' + (tempProgressiveDays * 2) + ' дн: <strong>' + p3 + '</strong>';
 
-  // Кнопка удаления
   document.getElementById('progressiveRemoveBtn').style.display = isEnabled ? 'block' : 'none';
 }
 
@@ -3428,10 +3419,9 @@ function saveProgressive() {
   var habit = state.habits.find(function(h) { return h.id === editingProgressiveHabitId; });
   if (!habit) return;
 
-  // Если прогрессия уже была включена - обновляем параметры, базовая цель = текущая
   var baseGoal = habit.goal;
   if (habit.progressive && habit.progressive.enabled) {
-    baseGoal = getGoal(habit, todayKey()); // фиксируем текущую цель как базу
+    baseGoal = getGoal(habit, todayKey());
   }
 
   habit.progressive = {
@@ -3452,7 +3442,6 @@ function saveProgressive() {
 function removeProgressive() {
   var habit = state.habits.find(function(h) { return h.id === editingProgressiveHabitId; });
   if (!habit) return;
-  // Фиксируем текущую цель как базовую
   var currentGoal = getGoal(habit, todayKey());
   habit.goal = currentGoal;
   habit.progressive = null;
@@ -4266,7 +4255,6 @@ function render() {
             '</div></div>';
       }
 
-      // Progressive info block
       var progHtml = '';
       if (hasProgressive) {
         var daysPassed = daysBetween(habit.progressive.startDate, dk);
@@ -4599,7 +4587,6 @@ function downloadShareImage() {
 
 // ==================== СОБЫТИЯ ====================
 
-// Выбор даты
 document.getElementById('datePrev').addEventListener('click', function() {
   selectDate(shiftKey(selectedDate, -1));
 });
@@ -4615,7 +4602,6 @@ function updateDateNavButtons() {
   document.getElementById('dateNext').disabled = (selectedDate >= todayKey());
 }
 
-// Модалка дня
 document.getElementById('dayModalClose').addEventListener('click', closeDayModal);
 document.getElementById('dayModalNote').addEventListener('click', function() {
   var dk = viewingDayKey || selectedDate;
@@ -4635,7 +4621,6 @@ document.getElementById('dayModal').addEventListener('click', function(e) {
   if (e.target.id === 'dayModal') closeDayModal();
 });
 
-// Хитмап
 document.getElementById('calPrev').addEventListener('click', function() {
   calMonth--;
   if (calMonth < 0) { calMonth = 11; calYear--; }
@@ -4660,7 +4645,6 @@ document.getElementById('calGrid').addEventListener('click', function(e) {
   openDayModal(dk);
 });
 
-// Счётчик
 document.getElementById('counterModalCancel').addEventListener('click', closeCounterModal);
 document.getElementById('counterModalSave').addEventListener('click', saveCounterModal);
 document.getElementById('counterModal').addEventListener('click', function(e) {
@@ -4714,7 +4698,6 @@ function saveCounterModal() {
   if (viewingDayKey === dk) refreshDayModalContent();
 }
 
-// Заметки
 function openNoteModal(dateK) {
   editingNoteDate = dateK;
   var note = state.notes[dateK] || '';
@@ -4754,7 +4737,6 @@ document.getElementById('noteModal').addEventListener('click', function(e) {
   if (e.target.id === 'noteModal') closeNoteModal();
 });
 
-// Форма добавления
 function updateToggleSub() {
   var on = document.getElementById('counterToggle').checked;
   document.getElementById('toggleSub').textContent = on ? 'Считать количество повторений' : 'Сделал / не сделал';
@@ -4848,7 +4830,6 @@ document.getElementById('habitsList').addEventListener('click', function(e) {
   if (action === 'progressive') openProgressiveModal(id);
 });
 
-// Прогрессивная модалка
 document.getElementById('progressivePeriods').addEventListener('click', function(e) {
   var btn = e.target.closest('.progressive-preset-btn');
   if (!btn) return;
@@ -4878,7 +4859,6 @@ document.getElementById('progressiveModal').addEventListener('click', function(e
   if (e.target.id === 'progressiveModal') closeProgressiveModal();
 });
 
-// Достижения
 document.getElementById('achModalClose').addEventListener('click', closeAchModal);
 document.getElementById('achModal').addEventListener('click', function(e) {
   if (e.target.id === 'achModal') closeAchModal();
