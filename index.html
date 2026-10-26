@@ -853,32 +853,11 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 
 .counter-main { display: flex; align-items: stretch; gap: 8px; height: 48px; }
 
-.counter-minus {
-  flex-shrink: 0;
-  width: 44px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,0.03);
-  color: var(--text);
-  font-size: 20px;
-  font-weight: 600;
-  cursor: pointer;
+.counter-minus-group {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: inherit;
-  transition: all 0.15s;
-  user-select: none;
+  gap: 6px;
+  flex-shrink: 0;
 }
-
-.counter-minus:hover:not(:disabled) {
-  background: rgba(255,107,107,0.12);
-  border-color: rgba(255,107,107,0.4);
-  color: var(--danger);
-}
-
-.counter-minus:active:not(:disabled) { transform: scale(0.94); }
-.counter-minus:disabled { opacity: 0.25; cursor: not-allowed; }
 
 .counter-display {
   flex: 1;
@@ -985,6 +964,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 
 .counter-btn:hover { background: var(--accent); border-color: var(--accent); color: white; }
 .counter-btn:active { transform: scale(0.94); }
+.counter-btn:disabled { opacity: 0.25; cursor: not-allowed; }
 
 .counter-btn.plus5 {
   background: rgba(255,159,67,0.12);
@@ -993,6 +973,14 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 }
 
 .counter-btn.plus5:hover { background: #ff9f43; border-color: #ff9f43; color: white; }
+
+.counter-btn.minus, .counter-btn.minus5 {
+  background: rgba(255,107,107,0.12);
+  border-color: rgba(255,107,107,0.3);
+  color: var(--danger);
+}
+
+.counter-btn.minus:hover, .counter-btn.minus5:hover { background: var(--danger); border-color: var(--danger); color: white; }
 
 .counter-display .plus-popup {
   position: absolute;
@@ -1159,7 +1147,6 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 .habit:hover .delete-btn { opacity: 1; }
 .delete-btn:hover { background: rgba(255,107,107,0.15); color: var(--danger); }
 
-/* ====== ПРОГРЕССИВНАЯ ПАНЕЛЬ В КАРТОЧКЕ ====== */
 .progressive-info {
   display: flex;
   align-items: center;
@@ -1173,10 +1160,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   color: var(--text);
 }
 
-.progressive-info-icon {
-  font-size: 16px;
-  flex-shrink: 0;
-}
+.progressive-info-icon { font-size: 16px; flex-shrink: 0; }
 
 .progressive-info-text {
   flex: 1;
@@ -1185,9 +1169,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   line-height: 1.3;
 }
 
-.progressive-info-text strong {
-  color: var(--progressive);
-}
+.progressive-info-text strong { color: var(--progressive); }
 
 .progressive-info-progress {
   font-size: 11px;
@@ -1794,6 +1776,16 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
 .day-habit-btn.freeze { color: var(--muted); font-size: 14px; }
 .day-habit-btn.freeze:hover { background: rgba(76,201,240,0.15); border-color: var(--freeze); color: var(--freeze); }
 .day-habit-btn.freeze.active { background: rgba(76,201,240,0.2); border-color: var(--freeze); color: var(--freeze); }
+
+.day-habit-btn.minus, .day-habit-btn.minus5 {
+  color: var(--danger);
+  border-color: rgba(255,107,107,0.3);
+}
+.day-habit-btn.minus:hover, .day-habit-btn.minus5:hover {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: white;
+}
 
 .day-modal-actions {
   display: flex;
@@ -2650,9 +2642,10 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   .stats-section { padding: 16px; }
   .counter-current { font-size: 20px; }
   .counter-goal { font-size: 14px; }
-  .counter-btn { min-width: 42px; padding: 4px 6px; font-size: 15px; }
-  .counter-minus { width: 40px; }
-  .counter-main { height: 44px; }
+  .counter-btn { min-width: 38px; padding: 4px 4px; font-size: 15px; }
+  .counter-minus-group { gap: 4px; }
+  .counter-plus-group { gap: 4px; }
+  .counter-main { height: 44px; gap: 4px; }
   .goal-stepper button { width: 40px; height: 44px; font-size: 20px; }
   .goal-stepper input[type="number"] { font-size: 20px; }
   .toggle-box { width: 24px; height: 24px; font-size: 15px; }
@@ -2664,8 +2657,7 @@ h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
   .cal-month { font-size: 14px; }
   .cal-nav button { width: 28px; height: 28px; font-size: 14px; }
   .weight-btn { width: 28px; height: 28px; font-size: 12px; }
-  .freeze-btn { width: 28px; height: 28px; font-size: 12px; }
-  .progressive-btn { width: 28px; height: 28px; font-size: 12px; }
+  .freeze-btn, .progressive-btn { width: 28px; height: 28px; font-size: 12px; }
   .habit-actions { gap: 3px; }
   .cal-stats { gap: 5px; }
   .cal-stat { padding: 8px 4px; }
@@ -3300,13 +3292,17 @@ function incrementHabit(id, amount) {
   if (viewingDayKey === dk) refreshDayModalContent();
 }
 
-function decrementHabit(id) {
+function decrementHabit(id, amount) {
+  amount = amount || 1;
   var habit = state.habits.find(function(h) { return h.id === id; });
   if (!habit) return;
   var current = getProgress(habit, selectedDate);
   if (current <= 0) return;
-  setProgress(habit, selectedDate, current - 1);
+  var newValue = Math.max(0, current - amount);
+  if (newValue === current) return;
+  setProgress(habit, selectedDate, newValue);
   saveState();
+  vibrate(10);
   render();
   if (viewingDayKey === selectedDate) refreshDayModalContent();
 }
@@ -3551,8 +3547,9 @@ function refreshDayModalContent() {
       if (!frozen) {
         if (hasCounter) {
           controls = '<div class="day-habit-controls">' +
-            '<button class="day-habit-btn" data-day-action="minus" data-day-id="' + h.id + '">−</button>' +
-            '<button class="day-habit-btn" data-day-action="plus" data-day-id="' + h.id + '">+</button>' +
+            '<button class="day-habit-btn minus" data-day-action="minus5" data-day-id="' + h.id + '">-5</button>' +
+            '<button class="day-habit-btn minus" data-day-action="minus" data-day-id="' + h.id + '">-1</button>' +
+            '<button class="day-habit-btn" data-day-action="plus" data-day-id="' + h.id + '">+1</button>' +
           '</div>';
         } else {
           controls = '<button class="day-habit-toggle" data-day-action="toggle" data-day-id="' + h.id + '">✓</button>';
@@ -3618,6 +3615,9 @@ document.getElementById('dayHabitsList').addEventListener('click', function(e) {
   } else if (action === 'minus') {
     var cur2 = getProgress(habit, dk);
     if (cur2 > 0) setProgress(habit, dk, cur2 - 1);
+  } else if (action === 'minus5') {
+    var cur3 = getProgress(habit, dk);
+    if (cur3 > 0) setProgress(habit, dk, Math.max(0, cur3 - 5));
   } else if (action === 'freeze') {
     if (isFrozen(habit, dk)) {
       removeFreeze(habit, dk);
@@ -4242,7 +4242,10 @@ function render() {
         var stateClass = isOver ? 'over' : (done ? 'complete' : (isPartial ? 'partial' : ''));
         var hintText = isOver ? '🔥 +' + extra + ' сверх нормы' : done ? '✓ 100%' : isPartial ? Math.round(percent * 100) + '%' : 'нажми';
         counterHtml = '<div class="counter-block"><div class="counter-main">' +
-              '<button class="counter-minus" data-action="minus" ' + (current === 0 ? 'disabled' : '') + '>−</button>' +
+              '<div class="counter-minus-group">' +
+                '<button class="counter-btn minus" data-action="minus" ' + (current === 0 ? 'disabled' : '') + '>-1</button>' +
+                '<button class="counter-btn minus5" data-action="minus5" ' + (current === 0 ? 'disabled' : '') + '>-5</button>' +
+              '</div>' +
               '<div class="counter-display ' + stateClass + '" data-action="edit" data-display-id="' + habit.id + '">' +
                 '<div class="counter-bg"><div class="counter-bg-fill" style="width:' + percentFill + '%"></div></div>' +
                 '<div class="counter-text"><span class="counter-current">' + current + '</span><span class="counter-sep">/</span><span class="counter-goal">' + goal + '</span></div>' +
@@ -4824,7 +4827,8 @@ document.getElementById('habitsList').addEventListener('click', function(e) {
   if (action === 'delete') deleteHabit(id);
   if (action === 'plus') incrementHabit(id, 1);
   if (action === 'plus5') incrementHabit(id, 5);
-  if (action === 'minus') decrementHabit(id);
+  if (action === 'minus') decrementHabit(id, 1);
+  if (action === 'minus5') decrementHabit(id, 5);
   if (action === 'edit') openCounterModal(id);
   if (action === 'freeze') toggleFreeze(id, selectedDate);
   if (action === 'progressive') openProgressiveModal(id);
